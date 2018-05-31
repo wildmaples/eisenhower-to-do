@@ -15,6 +15,10 @@
 		9A77DDD320BF56AB00B4361C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A77DDD120BF56AB00B4361C /* LaunchScreen.storyboard */; };
 		9A77DDDE20BF56AC00B4361C /* EisenhowerToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */; };
 		9A77DDE920BF56AC00B4361C /* EisenhowerToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */; };
+		9A77DDF720BF585A00B4361C /* SampleTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDF620BF585A00B4361C /* SampleTasks.swift */; };
+		9A77DDFD20BF59D700B4361C /* UrImTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDFC20BF59D700B4361C /* UrImTableView.swift */; };
+		9A77DDFF20BF7B0A00B4361C /* OneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDFE20BF7B0A00B4361C /* OneTableViewCell.swift */; };
+		9A77DE0120BF7B6400B4361C /* TwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DE0020BF7B6400B4361C /* TwoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +40,7 @@
 
 /* Begin PBXFileReference section */
 		9A77DDC220BF56AA00B4361C /* EisenhowerToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EisenhowerToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A77DDC520BF56AA00B4361C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9A77DDC520BF56AA00B4361C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A77DDC720BF56AA00B4361C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9A77DDCA20BF56AA00B4361C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A77DDCD20BF56AA00B4361C /* EisenhowerToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EisenhowerToDo.xcdatamodel; sourceTree = "<group>"; };
@@ -49,6 +53,10 @@
 		9A77DDE420BF56AC00B4361C /* EisenhowerToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EisenhowerToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoUITests.swift; sourceTree = "<group>"; };
 		9A77DDEA20BF56AC00B4361C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9A77DDF620BF585A00B4361C /* SampleTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTasks.swift; sourceTree = "<group>"; };
+		9A77DDFC20BF59D700B4361C /* UrImTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrImTableView.swift; sourceTree = "<group>"; };
+		9A77DDFE20BF7B0A00B4361C /* OneTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneTableViewCell.swift; sourceTree = "<group>"; };
+		9A77DE0020BF7B6400B4361C /* TwoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +109,15 @@
 			children = (
 				9A77DDC520BF56AA00B4361C /* AppDelegate.swift */,
 				9A77DDC720BF56AA00B4361C /* ViewController.swift */,
+				9A77DDFC20BF59D700B4361C /* UrImTableView.swift */,
+				9A77DDF620BF585A00B4361C /* SampleTasks.swift */,
 				9A77DDC920BF56AA00B4361C /* Main.storyboard */,
 				9A77DDCF20BF56AB00B4361C /* Assets.xcassets */,
 				9A77DDD120BF56AB00B4361C /* LaunchScreen.storyboard */,
 				9A77DDD420BF56AB00B4361C /* Info.plist */,
 				9A77DDCC20BF56AA00B4361C /* EisenhowerToDo.xcdatamodeld */,
+				9A77DDFE20BF7B0A00B4361C /* OneTableViewCell.swift */,
+				9A77DE0020BF7B6400B4361C /* TwoTableViewCell.swift */,
 			);
 			path = EisenhowerToDo;
 			sourceTree = "<group>";
@@ -259,9 +271,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A77DE0120BF7B6400B4361C /* TwoTableViewCell.swift in Sources */,
+				9A77DDF720BF585A00B4361C /* SampleTasks.swift in Sources */,
 				9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */,
+				9A77DDFD20BF59D700B4361C /* UrImTableView.swift in Sources */,
 				9A77DDCE20BF56AA00B4361C /* EisenhowerToDo.xcdatamodeld in Sources */,
 				9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */,
+				9A77DDFF20BF7B0A00B4361C /* OneTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.EisenhowerToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -460,7 +476,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.EisenhowerToDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

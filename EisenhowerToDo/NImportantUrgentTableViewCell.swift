@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TwoTableViewCell: UITableViewCell {
+class NImportantUrgentTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

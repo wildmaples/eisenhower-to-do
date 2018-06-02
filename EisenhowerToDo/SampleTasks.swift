@@ -12,7 +12,7 @@ import Foundation
 struct Task {
     
     // Properties
-    var name: String
+    var name: String!
     var urgency: Bool = false
     var importantness: Bool = false
     var done: Bool = false

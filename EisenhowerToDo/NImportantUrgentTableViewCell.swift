@@ -10,15 +10,26 @@ import UIKit
 
 class NImportantUrgentTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var FTTaskLabel: UILabel!
+    
+    var task : Task! {
+        didSet {
+            guard let task = task else { return }
+            print("\(task.name)")
+            FTTaskLabel?.text = task.name
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
+
 
 }

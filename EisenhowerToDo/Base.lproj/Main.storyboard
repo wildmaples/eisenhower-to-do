@@ -105,43 +105,96 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
                                 <rect key="frame" x="378" y="20" width="480" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportantUrgentCell" rowHeight="85" id="rE9-9P-snY" customClass="importantUrgentTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="480" height="85"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportantUrgentCell" rowHeight="115" id="rE9-9P-snY" customClass="importantUrgentTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="480" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rE9-9P-snY" id="3DO-w7-0sh">
-                                            <rect key="frame" x="0.0" y="0.0" width="480" height="84.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="480" height="114.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task that is important and urgent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPz-7t-JSs">
+                                                    <rect key="frame" x="84" y="16" width="381" height="36"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHK-e4-VKj">
+                                                    <rect key="frame" x="194" y="63" width="92" height="41"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n32-Av-8JE">
+                                                    <rect key="frame" x="84" y="63" width="92" height="41"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xi4-Wb-HFi">
+                                                    <rect key="frame" x="15" y="21" width="49" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="taskLabel" destination="aPz-7t-JSs" id="f6H-Wf-WH4"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-pX-iTx" customClass="UrImTableView" customModule="EisenhowerToDo" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-pX-iTx">
                                 <rect key="frame" x="866" y="20" width="480" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XiE-PC-Ngs" customClass="UrImTableView" customModule="EisenhowerToDo" customModuleProvider="target">
+                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="XiE-PC-Ngs">
                                     <rect key="frame" x="0.0" y="0.0" width="480" height="497"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <prototypes>
-                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NImportantUrgentCell" rowHeight="85" id="ALY-v4-GTD" customClass="NImportantUrgentTableViewCell" customModule="EisenhowerToDo" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="28" width="480" height="85"/>
+                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NImportantUrgentCell" rowHeight="115" id="ALY-v4-GTD" customClass="NImportantUrgentTableViewCell" customModule="EisenhowerToDo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="28" width="480" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ALY-v4-GTD" id="7gf-yt-OLa">
-                                                <rect key="frame" x="0.0" y="0.0" width="480" height="84.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="480" height="114.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task that is not important but urgent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGE-LU-b2r">
+                                                        <rect key="frame" x="80" y="11" width="385" height="36"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6aB-q3-hmn">
+                                                        <rect key="frame" x="15" y="16" width="49" height="31"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    </switch>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhI-MY-zO3">
+                                                        <rect key="frame" x="80" y="63" width="92" height="41"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                             </tableViewCellContentView>
+                                            <connections>
+                                                <outlet property="FTTaskLabel" destination="TGE-LU-b2r" id="XZR-XJ-mii"/>
+                                            </connections>
                                         </tableViewCell>
                                     </prototypes>
                                 </tableView>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Ho-DqY">
-                                <rect key="frame" x="20" y="20" width="335" height="114"/>
+                                <rect key="frame" x="20" y="20" width="335" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="37"/>
                                 <state key="normal" title="Create a New Task">

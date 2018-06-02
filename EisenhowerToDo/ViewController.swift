@@ -17,15 +17,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Outlets for the four table views
     @IBOutlet weak var newTaskButton: UIButton!
-    @IBOutlet weak var nImportantUrgentTableView: UITableView?
-    @IBOutlet weak var importantUrgentTableView: UITableView?
+    @IBOutlet weak var nImportantUrgentTableView: UITableView!
+    @IBOutlet weak var importantUrgentTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        importantUrgentTableView?.delegate = self
-        importantUrgentTableView?.dataSource = self
-        nImportantUrgentTableView?.delegate = self
-        nImportantUrgentTableView?.dataSource = self
+        importantUrgentTableView.delegate = self
+        importantUrgentTableView.dataSource = self
+        nImportantUrgentTableView.delegate = self
+        nImportantUrgentTableView.dataSource = self
         
         // Do any additional setup after loading the view, typically from a nib.
 
@@ -54,7 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell
+        let cell = UITableViewCell()
         
         // register tableviewcells to cellreuseidentifier
         tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
@@ -62,17 +62,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
-            let quad1 = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
-            quad1.textLabel?.text = task.name
-            cell = quad1
+            cell.task = task
+            //print("\(task)")
         }
     
         else {
-            let quad2 = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
-            quad2.textLabel?.text = task.name
-            cell = quad2
+            cell.task = task
+            //print("\(task)")
+
         }
         
         return cell
@@ -103,8 +104,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
                 }
-
-    
-
 }
 

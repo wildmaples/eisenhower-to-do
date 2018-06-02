@@ -15,8 +15,7 @@ class NImportantUrgentTableViewCell: UITableViewCell {
     var task : Task! {
         didSet {
             guard let task = task else { return }
-            print("\(task.name)")
-            FTTaskLabel?.text = task.name
+            FTTaskLabel.text = task.name
         }
     }
     

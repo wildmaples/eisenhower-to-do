@@ -15,7 +15,7 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     var task : Task! {
         didSet {
             guard let task = task else { return }
-            taskLabel.text = task.name!
+            taskLabel.text = task.name
             print("TaskLabel.text: \(taskLabel?.text)")
             print("task.name : \(task.name)")
 

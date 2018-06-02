@@ -9,33 +9,61 @@
 import Foundation
 
 
-struct Task {
-    
+final class Task {
     // Properties
-    var name: String!
-    var urgency: Bool = false
-    var importantness: Bool = false
-    var done: Bool = false
+    var name: String
+    var importantness: Bool
+    var urgency: Bool
+    var done: Bool
+    
+    init(){
+        self.name = ""
+        self.urgency = false
+        self.importantness = false
+        self.done = false
+    }
 }
 
 
 // Generating sample tasks to populate list
 final class SampleData {
     static func generateTT() -> [Task] {
-        return [
-                Task(name: "Buy broccoli and tape", urgency: true, importantness: true, done: false),
-                Task(name: "Be a vegan", urgency: true, importantness: true, done: false),
-                Task(name: "Watch Deadpool 2", urgency: true, importantness: true, done: false)
-        ]
+        let TT1 = Task()
+        TT1.urgency = true
+        TT1.importantness = true
+        TT1.name = "Buy broccoli and tape"
+        
+        let TT2 = Task()
+        TT2.urgency = true
+        TT2.importantness = true
+        TT2.name = "Be a vegan"
+        
+        let TT3 = Task()
+        TT3.urgency = true
+        TT3.importantness = true
+        TT3.name = "Watch Deadpool 2"
+        
+        return [TT1, TT2, TT3]
     }
     
     static func generateFT() -> [Task] {
-        return [
-                Task(name: "Reply Emails", urgency: true, importantness: false, done: false),
-                Task(name: "Run errand to update address on drivers Li", urgency: true, importantness: false, done: false),
-                Task(name: "Something not important but urgent", urgency: true, importantness: false, done: false)
-        ]
-
+        let FT1 = Task()
+        FT1.urgency = true
+        FT1.importantness = false
+        FT1.name = "Reply Emails"
+        
+        let FT2 = Task()
+        FT2.urgency = true
+        FT2.importantness = false
+        FT2.name = "Run errand to update address on drivers Li"
+        
+        let FT3 = Task()
+        FT3.urgency = true
+        FT3.importantness = false
+        FT3.name = "Something not important but urgent"
+        
+        return [FT1, FT2, FT3]
+        
     }
     
     // To-Do: Add the other two lists

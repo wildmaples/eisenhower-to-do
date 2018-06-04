@@ -10,12 +10,14 @@ import UIKit
 
 class NImportantUrgentTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var FTTaskLabel: UILabel!
+    @IBOutlet weak var FTTaskLabel: UILabel?
     
     var task : Task! {
         didSet {
             guard let task = task else { return }
-            FTTaskLabel.text = task.name
+            //print ("\(task.name)")
+            FTTaskLabel?.text = task.name
+            
         }
     }
     

@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Outlets for the four table views
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
-    @IBOutlet weak var importantUrgentTableView: UITableView!
+    @IBOutlet weak var importantUrgentTableView: ImportantUrgentTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantUrgentTableView.delegate = self
         nImportantUrgentTableView.dataSource = self
         
-        // Do any additional setup after loading the view, typically from a nib.
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,7 +39,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("numberOfRowsInSection called")
         var count = 0
         if tableView == self.importantUrgentTableView {
-            //let found = tasks.filter{$0.importantness == false && $0.urgency == false}
             count = tasksTT.count
                 }
         
@@ -57,22 +54,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = UITableViewCell()
         
         // register tableviewcells to cellreuseidentifier
-        tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
-        tableView.register(NImportantUrgentTableViewCell.self, forCellReuseIdentifier: "NImportantUrgentCell")
+//        tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
+//        tableView.register(NImportantUrgentTableViewCell.self, forCellReuseIdentifier: "NImportantUrgentCell")
         
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
             cell.task = task
-            //print("\(task)")
+            print("\(task.name)")
         }
     
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.task = task
-            //print("\(task)")
+            print("\(task.name)")
 
         }
         

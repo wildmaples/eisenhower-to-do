@@ -82,7 +82,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         
         let vc = segue.source as? AddTaskViewController
-        let createdTask = Task(name: (vc?.name.text!)!, urgency: (vc?.urgentSwitch.isOn)!, importantness: (vc?.importantSwitch.isOn)!, done: false)
+        let createdTask = Task()
+        createdTask.name = (vc?.name.text!)!
+        createdTask.urgency = (vc?.urgentSwitch.isOn)!
+        createdTask.importantness = (vc?.importantSwitch.isOn)!
+        createdTask.done = false
         print ("This is \(createdTask)")
         
         // Append to the appropriate list

@@ -52,10 +52,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // register tableviewcells to cellreuseidentifier
-//        tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
-//        tableView.register(NImportantUrgentTableViewCell.self, forCellReuseIdentifier: "NImportantUrgentCell")
-        
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
@@ -68,7 +64,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
-            cell.task = task
+            cell.setup(task: task)
             //print("\(task.name)")
             return cell
         }
@@ -99,12 +95,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(createdTask.name )
         print(tasksTT)
         
-        func viewDidAppear(_ animated: Bool) {
-            self.importantUrgentTableView?.reloadData()
-        }
-
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        self.importantUrgentTableView?.reloadData()
+    }
+
 
 }
 

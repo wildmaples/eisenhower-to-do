@@ -17,7 +17,6 @@ class NImportantUrgentTableViewCell: UITableViewCell {
             guard let task = task else { return }
             //print ("\(task.name)")
             FTTaskLabel?.text = task.name
-            
         }
     }
     

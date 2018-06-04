@@ -12,16 +12,6 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     
-    var task : Task! {
-        didSet {
-            guard (task) != nil else { return }
-            print("activated!")
-
-            print("task.name : \(task.name)")
-        
-        }
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,5 +22,12 @@ class ImportantUrgentTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
+    
+    func setup(task: Task) {
+        taskLabel.text = task.name
+        print ("Tasklabel :\(taskLabel.text ?? "asds")")
+    }
 
+    
 }
+

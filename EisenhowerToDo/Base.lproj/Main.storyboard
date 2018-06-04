@@ -105,7 +105,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm" customClass="ImportantUrgentTableView" customModule="EisenhowerToDo" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
                                 <rect key="frame" x="378" y="20" width="480" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -155,7 +155,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="taskLabel" destination="aPz-7t-JSs" id="l7V-J6-eBy"/>
+                                            <outlet property="taskLabel" destination="aPz-7t-JSs" id="geF-Ni-ytD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -189,7 +189,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="FTTaskLabel" destination="kr5-tt-itp" id="73x-nl-UAq"/>
+                                            <outlet property="FTTaskLabel" destination="kr5-tt-itp" id="iu7-oa-VA9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

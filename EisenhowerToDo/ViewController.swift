@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Outlets for the four table views
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
-    @IBOutlet weak var importantUrgentTableView: ImportantUrgentTableView!
+    @IBOutlet weak var importantUrgentTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
         
         // register tableviewcells to cellreuseidentifier
 //        tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
@@ -61,19 +60,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
-            cell.task = task
-            print("\(task.name)")
+            cell.setup(task: task)
+            //print("\(task.name)")
+            return cell
         }
     
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.task = task
-            print("\(task.name)")
-
+            //print("\(task.name)")
+            return cell
         }
         
-        return cell
     }
     
     // receiving newtask to categorize
@@ -100,10 +99,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(createdTask.name )
         print(tasksTT)
         
+        func viewDidAppear(_ animated: Bool) {
+            self.importantUrgentTableView?.reloadData()
+        }
+
+        
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        self.importantUrgentTableView?.reloadData()
-                }
 }
 

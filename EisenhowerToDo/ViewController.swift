@@ -53,19 +53,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = tasksTT.count
-                }
-        
-        else if tableView == self.nImportantUrgentTableView {
+        } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
-        }
-        
-        else if tableView == self.completedTasksTableView {
+        } else if tableView == self.completedTasksTableView {
             count = all_done_tasks.count
         }
-
-        
         return count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

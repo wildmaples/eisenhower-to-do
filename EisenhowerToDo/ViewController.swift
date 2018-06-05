@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
 
     // sample data gen
     var tasksTT = SampleData.generateTT()
@@ -31,7 +31,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantUrgentTableView.dataSource = self
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
-        
         
         for list in [tasksTT, tasksFT] {
             for task in list {
@@ -77,19 +76,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
             cell.task = task
+            cell.delegate = self
             print("1. \(task.name)")
             return cell
-        }
-    
-        else if tableView == self.nImportantUrgentTableView {
+            
+        } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
             print("2: \(task.name)")
             return cell
-        }
-        
-        else {
+            
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
             let task = all_done_tasks[indexPath.row]
             cell.textLabel?.text = task.name
@@ -99,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    // receiving newtask to categorize
+    // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         
         let vc = segue.source as? AddTaskViewController
@@ -113,9 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
             tasksTT.append(createdTask)
-        }
-            
-        else if createdTask.urgency == true && createdTask.importantness == false {
+        } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
         }
         
@@ -125,48 +121,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
-    // reload view to view newly created task
+    // Reload view to view newly created task
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
     
+    // Delegate function
+    func didUpdate(sender: Any) {
+        
+        // reset all done tasks
+        all_done_tasks = []
+        
+        // update list view
+        for list in [tasksTT, tasksFT] {
+            for task in list {
+                if task.done == true {
+                    all_done_tasks.append(task)
+                }
+            }
+        }
+        
+        // reload completedTasksTV
+        self.completedTasksTableView.reloadData()
+        print ("UpdateDelegate worked!")
+    }
     
-//    @IBAction func doneToggle (_ segue: UIStoryboardSegue) {
-//        let vc = segue.source as? ImportantUrgentTableViewCell
-//        let toggledTask = vc?.task
-//        if toggledTask?.done == true {
-//            toggledTask?.done = false
-//        }
-//        else {
-//            toggledTask?.done = true
-//        }
-//        all_done_tasks.append(toggledTask!)
-//        print("Test: \(String(describing: toggledTask))")
-//
-//    }
-
-
-    
-//    // done-toggle
-//    @IBAction func doneToggle(_ sender: Any) {
-//        if task.done == true {
-//            task.done = false
-//        }
-//        else {
-//            task.done = true
-//        }
-//        print("\(task.done)")
-//    }
-//
-
-//    func didUpdate(sender: ImportantUrgentTableViewCell) {
-//        self.completedTasksTableView.reloadData()
-//        print ("UpdateDelegate worked!")
-//    }
-
 }
 
-//protocol UpdateDelegate: AnyObject {
-//    func didUpdate(sender: ImportantUrgentTableViewCell)
-//}
+// Protocol for delegation 
+@objc protocol UpdateDelegate: class {
+    func didUpdate(sender: Any)
+}
 

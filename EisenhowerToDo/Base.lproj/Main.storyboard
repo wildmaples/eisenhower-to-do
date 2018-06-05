@@ -133,6 +133,8 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xi4-Wb-HFi">
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
                                                     <connections>
+                                                        <action selector="doneToggle:" destination="rE9-9P-snY" eventType="valueChanged" id="91w-D1-wMt"/>
+                                                        <action selector="refreshTV:" destination="rE9-9P-snY" eventType="valueChanged" id="SBm-zr-bL6"/>
                                                         <segue destination="Ypy-wM-eEz" kind="unwind" unwindAction="doneToggle:" id="89Q-SW-kn3"/>
                                                     </connections>
                                                 </switch>
@@ -156,7 +158,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="doneButton" destination="xi4-Wb-HFi" id="hgi-ql-CwZ"/>
+                                            <outlet property="doneButton" destination="xi4-Wb-HFi" id="ycG-j3-RQQ"/>
                                             <outlet property="taskLabel" destination="aPz-7t-JSs" id="geF-Ni-ytD"/>
                                         </connections>
                                     </tableViewCell>

@@ -12,7 +12,7 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
-    //weak var delegate: UpdateDelegate?
+    weak var delegate: UpdateDelegate?
 
     var task : Task!
     var toggledTask :Task!
@@ -41,10 +41,10 @@ class ImportantUrgentTableViewCell: UITableViewCell {
             task.done = true
         }
         print("\(task.done)")
-        toggledTask = task
-        
-//    }
-//    
+    }
+    
+    @IBAction func refreshTV(_ sender: Any) {
+        self.delegate?.didUpdate(sender: self)
+    }
+    
 }
-
-

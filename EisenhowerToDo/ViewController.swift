@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    // sample data gen
+    // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var createdTask: Task?
@@ -26,15 +26,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         importantUrgentTableView?.dataSource = self
         nImportantUrgentTableView?.delegate = self
         nImportantUrgentTableView?.dataSource = self
-        
-        // Do any additional setup after loading the view, typically from a nib.
-
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,12 +36,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if tableView == self.importantUrgentTableView {
             //let found = tasks.filter{$0.importantness == false && $0.urgency == false}
             count = tasksTT.count
-                }
-        
-        else if tableView == self.nImportantUrgentTableView {
+        } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
         }
-        
         return count
         
     }
@@ -56,29 +46,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : UITableViewCell
         
-        // register tableviewcells to cellreuseidentifier
-        tableView.register(ImportantUrgentTableViewCell.self, forCellReuseIdentifier: "ImportantUrgentCell")
-        tableView.register(NImportantUrgentTableViewCell.self, forCellReuseIdentifier: "NImportantUrgentCell")
-        
-        // for each tableview, load cells
+        // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let quad1 = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath)
             let task = tasksTT[indexPath.row]
             quad1.textLabel?.text = task.name
             cell = quad1
-        }
-    
-        else {
+        } else {
             let quad2 = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath)
             let task = tasksFT[indexPath.row]
             quad2.textLabel?.text = task.name
             cell = quad2
         }
-        
         return cell
     }
     
-    // receiving newtask to categorize
+    // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         
         let vc = segue.source as? AddTaskViewController
@@ -92,22 +75,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
             tasksTT.append(createdTask)
-        }
             
-        else if createdTask.urgency == true && createdTask.importantness == false {
+        } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
         }
         
-        // Check if name is appended to the list
+        // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
-                }
-
+    }
+    
     
 
 }

@@ -12,14 +12,14 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
-    weak var delegate: UpdateDelegate?
+    //weak var delegate: UpdateDelegate?
 
     var task : Task!
+    var toggledTask :Task!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,10 +41,10 @@ class ImportantUrgentTableViewCell: UITableViewCell {
             task.done = true
         }
         print("\(task.done)")
-        delegate?.didUpdate(sender: self)
-
-    }
-    
+        toggledTask = task
+        
+//    }
+//    
 }
 
 

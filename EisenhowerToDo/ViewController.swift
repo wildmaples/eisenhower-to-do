@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tasksFT = SampleData.generateFT()
     var createdTask: Task?
     var all_done_tasks: [Task] = []
-    
+    var toggledTask: Task!
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -32,7 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
         
-        //
+        
         for list in [tasksTT, tasksFT] {
             for task in list {
                 if task.done == true {
@@ -40,7 +40,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
-        print (all_done_tasks[0].name)
 
     }
 
@@ -130,7 +129,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
+    
+    
+//    @IBAction func doneToggle (_ segue: UIStoryboardSegue) {
+//        let vc = segue.source as? ImportantUrgentTableViewCell
+//        let toggledTask = vc?.task
+//        if toggledTask?.done == true {
+//            toggledTask?.done = false
+//        }
+//        else {
+//            toggledTask?.done = true
+//        }
+//        all_done_tasks.append(toggledTask!)
+//        print("Test: \(String(describing: toggledTask))")
+//
+//    }
 
+
+    
 //    // done-toggle
 //    @IBAction func doneToggle(_ sender: Any) {
 //        if task.done == true {
@@ -143,17 +159,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    }
 //
 
+//    func didUpdate(sender: ImportantUrgentTableViewCell) {
+//        self.completedTasksTableView.reloadData()
+//        print ("UpdateDelegate worked!")
+//    }
+
 }
 
-protocol UpdateDelegate: class {
-    func didUpdate(sender: Any)
-}
-
-extension ViewController: UpdateDelegate {
-    func didUpdate(sender: Any) {
-        completedTasksTableView.reloadData()
-        print ("UpdateDelegate worked!")
-    }
-}
-
+//protocol UpdateDelegate: AnyObject {
+//    func didUpdate(sender: ImportantUrgentTableViewCell)
+//}
 

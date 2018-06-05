@@ -133,7 +133,7 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xi4-Wb-HFi">
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
                                                     <connections>
-                                                        <action selector="doneToggle:" destination="rE9-9P-snY" eventType="valueChanged" id="hb7-Fb-aFa"/>
+                                                        <segue destination="Ypy-wM-eEz" kind="unwind" unwindAction="doneToggle:" id="89Q-SW-kn3"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n32-Av-8JE">
@@ -156,7 +156,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="doneButton" destination="xi4-Wb-HFi" id="2UW-sm-zvd"/>
+                                            <outlet property="doneButton" destination="xi4-Wb-HFi" id="hgi-ql-CwZ"/>
                                             <outlet property="taskLabel" destination="aPz-7t-JSs" id="geF-Ni-ytD"/>
                                         </connections>
                                     </tableViewCell>
@@ -252,6 +252,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="Ypy-wM-eEz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="205.56368960468521" y="-16.40625"/>
         </scene>

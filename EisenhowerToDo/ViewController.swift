@@ -14,8 +14,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var createdTask: Task?
+    var all_done_tasks: [Task] = []
+    
     
     // Outlets for the four table views
+    @IBOutlet weak var completedTasksTableView: UITableView!
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
     @IBOutlet weak var importantUrgentTableView: UITableView!
@@ -26,7 +29,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         importantUrgentTableView.dataSource = self
         nImportantUrgentTableView.delegate = self
         nImportantUrgentTableView.dataSource = self
+        completedTasksTableView.delegate = self
+        completedTasksTableView.dataSource = self
         
+        //
+        for list in [tasksTT, tasksFT] {
+            for task in list {
+                if task.done == true {
+                    all_done_tasks.append(task)
+                }
+            }
+        }
+        print (all_done_tasks[0].name)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,6 +61,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             count = tasksFT.count
         }
         
+        else if tableView == self.completedTasksTableView {
+            count = all_done_tasks.count
+        }
+
+        
         return count
         
     }
@@ -57,15 +77,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
-            //print("\(task.name)")
+            cell.task = task
+            print("1. \(task.name)")
             return cell
         }
     
-        else {
+        else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
-            //print("\(task.name)")
+            print("2: \(task.name)")
+            return cell
+        }
+        
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
+            let task = all_done_tasks[indexPath.row]
+            cell.textLabel?.text = task.name
+            print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }
         
@@ -97,10 +126,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
+    // reload view to view newly created task
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
 
+//    // done-toggle
+//    @IBAction func doneToggle(_ sender: Any) {
+//        if task.done == true {
+//            task.done = false
+//        }
+//        else {
+//            task.done = true
+//        }
+//        print("\(task.done)")
+//    }
+//
 
 }
+
+protocol UpdateDelegate: class {
+    func didUpdate(sender: Any)
+}
+
+extension ViewController: UpdateDelegate {
+    func didUpdate(sender: Any) {
+        completedTasksTableView.reloadData()
+        print ("UpdateDelegate worked!")
+    }
+}
+
 

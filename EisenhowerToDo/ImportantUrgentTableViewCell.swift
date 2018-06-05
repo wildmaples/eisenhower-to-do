@@ -11,6 +11,10 @@ import UIKit
 class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var doneButton: UISwitch!
+    weak var delegate: UpdateDelegate?
+
+    var task : Task!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,11 +27,24 @@ class ImportantUrgentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(task: Task) {
+    func setup(task: Task)  {
         taskLabel.text = task.name
+        doneButton.isOn = task.done
         print ("Tasklabel :\(taskLabel.text ?? "asds")")
     }
+    
+    @IBAction func doneToggle(_ sender: Any) {
+        if self.task.done == true {
+            task.done = false
+        }
+        else {
+            task.done = true
+        }
+        print("\(task.done)")
+        delegate?.didUpdate(sender: self)
 
+    }
     
 }
+
 

@@ -32,6 +32,7 @@ final class SampleData {
         TT1.urgency = true
         TT1.importantness = true
         TT1.name = "Buy broccoli and tape"
+        TT1.done = true
         
         let TT2 = Task()
         TT2.urgency = true

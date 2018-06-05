@@ -29,23 +29,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("numberOfRowsInSection called")
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = tasksTT.count
-                }
-        
-        else if tableView == self.nImportantUrgentTableView {
+        } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
         }
-        
         return count
         
     }
@@ -59,9 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             //print("\(task.name)")
             return cell
-        }
-    
-        else {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
@@ -85,9 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
             tasksTT.append(createdTask)
-        }
-            
-        else if createdTask.urgency == true && createdTask.importantness == false {
+        } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
         }
         
@@ -100,7 +88,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
-
-
+    
+    
 }
 

@@ -77,21 +77,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
-            print("1. \(task.name)")
+            //print("1. \(task.name)")
             return cell
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
-            print("2: \(task.name)")
+            cell.task = task
+            cell.delegate = self
+            //print("2: \(task.name)")
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
             let task = all_done_tasks[indexPath.row]
             cell.textLabel?.text = task.name
-            print("3. \(String(describing: cell.textLabel?.text))")
+            //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }
         

@@ -184,6 +184,10 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zEw-fd-9fk">
                                                     <rect key="frame" x="15" y="13.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="doneToggle:" destination="k3t-cp-HZT" eventType="valueChanged" id="44a-YD-Xyr"/>
+                                                        <action selector="refreshTV:" destination="k3t-cp-HZT" eventType="valueChanged" id="AS3-QJ-mz1"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sny-KL-cVf">
                                                     <rect key="frame" x="84" y="56" width="92" height="25.5"/>
@@ -206,6 +210,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="FTTaskLabel" destination="kr5-tt-itp" id="wu2-hp-l11"/>
+                                            <outlet property="doneButton" destination="zEw-fd-9fk" id="JIK-eq-EGb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

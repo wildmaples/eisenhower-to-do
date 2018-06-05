@@ -11,21 +11,28 @@ import UIKit
 class NImportantUrgentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var FTTaskLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
+    @IBOutlet weak var doneButton: UISwitch!
+    weak var delegate: UpdateDelegate?
+    var task : Task!
+
     func setup(task: Task) {
         FTTaskLabel.text = task.name
+        doneButton.isOn = task.done
     }
     
+    @IBAction func doneToggle(_ sender: Any) {
+        if self.task.done == true {
+            task.done = false
+        }
+        else {
+            task.done = true
+        }
+        print("\(task.done)")
+    }
+    
+    @IBAction func refreshTV(_ sender: Any) {
+        self.delegate?.didUpdate(sender: self)
+    }
     
 }
+

@@ -13,20 +13,8 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
     weak var delegate: UpdateDelegate?
-
     var task : Task!
-    var toggledTask :Task!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
-    
+
     func setup(task: Task)  {
         taskLabel.text = task.name
         doneButton.isOn = task.done

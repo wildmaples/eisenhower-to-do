@@ -13,7 +13,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
-    var createdTask: Task?
     
     // Outlets for the four table views
     @IBOutlet weak var newTaskButton: UIButton!
@@ -31,10 +30,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection called")
         var count = 0
         if tableView == self.importantUrgentTableView {
-            //let found = tasks.filter{$0.importantness == false && $0.urgency == false}
             count = tasksTT.count
         } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count

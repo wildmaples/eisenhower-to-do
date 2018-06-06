@@ -148,6 +148,9 @@
                                                     <rect key="frame" x="422" y="56" width="43" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="deleteButton" image="deletebutton"/>
+                                                    <connections>
+                                                        <action selector="deleteButton:" destination="rE9-9P-snY" eventType="touchUpInside" id="hLu-Cd-8y6"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -207,6 +210,9 @@
                                                     <rect key="frame" x="422" y="62" width="43" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button" image="deletebutton"/>
+                                                    <connections>
+                                                        <action selector="deleteButton:" destination="k3t-cp-HZT" eventType="touchUpInside" id="9YC-Ox-KqE"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

@@ -49,7 +49,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection called")
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = tasksTT.count
@@ -70,6 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
+            cell.index = indexPath.row
             //print("1. \(task.name)")
             return cell
             
@@ -79,6 +79,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
+            cell.index = indexPath.row
             //print("2: \(task.name)")
             return cell
             
@@ -121,7 +122,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.importantUrgentTableView?.reloadData()
     }
     
-    // Delegate function
+    // Functions (used in delegation)
     func didUpdate(sender: Any) {
         
         // reset all done tasks
@@ -141,28 +142,47 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print ("UpdateDelegate worked!")
     }
     
-    // Allow tasks to be deleted
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    func removeTask(sender: Any, task: Task, row: IndexPath) {
+        
+        // check which task it is
+        if task.urgency == true && task.importantness == true {
+            let indexPath = row
+            tasksTT.remove(at: indexPath.row)
+            importantUrgentTableView.reloadData()
+            
+            } else if task.urgency == true && task.importantness == false {
+            let indexPath = row
+            tasksFT.remove(at: indexPath.row)
+            nImportantUrgentTableView.reloadData()
+        }
+        
+        // updates completed task tableview
+        didUpdate(sender: self)
     }
     
-    // Delete Task
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            if tableView == self.importantUrgentTableView {
-                tasksTT.remove(at: indexPath.row)
-                self.importantUrgentTableView?.reloadData()
-            } else if tableView == self.nImportantUrgentTableView {
-                tasksFT.remove(at: indexPath.row)
-                self.importantUrgentTableView?.reloadData()
-            }
-        }
-    }
+// Allow tasks to be deleted
+//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//
+// Delete Task
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if (editingStyle == UITableViewCellEditingStyle.delete) {
+//            if tableView == self.importantUrgentTableView {
+//                tasksTT.remove(at: indexPath.row)
+//                self.importantUrgentTableView?.reloadData()
+//            } else if tableView == self.nImportantUrgentTableView {
+//                tasksFT.remove(at: indexPath.row)
+//                self.importantUrgentTableView?.reloadData()
+//            }
+//        }
+//    }
 
 }
 
-// Protocol for delegation 
-@objc protocol UpdateDelegate: class {
+// Protocol for delegation
+protocol UpdateDelegate: class {
     func didUpdate(sender: Any)
+    func removeTask(sender: Any, task: Task, row: IndexPath)
 }
 

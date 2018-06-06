@@ -14,6 +14,7 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     @IBOutlet weak var doneButton: UISwitch!
     weak var delegate: UpdateDelegate?
     var task : Task!
+    var index : Int!
 
     func setup(task: Task)  {
         taskLabel.text = task.name
@@ -35,4 +36,8 @@ class ImportantUrgentTableViewCell: UITableViewCell {
         self.delegate?.didUpdate(sender: self)
     }
     
+    @IBAction func deleteButton(_ sender: Any) {
+        let indexPath = IndexPath(row: index, section:0)
+        self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+    }
 }

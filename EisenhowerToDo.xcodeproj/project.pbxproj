@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9A6D1B9120C6085000284117 /* CompletedTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D1B9020C6085000284117 /* CompletedTasksTableViewController.swift */; };
+		9A6D1B9520C758B000284117 /* CompletedTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D1B9420C758B000284117 /* CompletedTasksTableViewController.swift */; };
 		9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDC520BF56AA00B4361C /* AppDelegate.swift */; };
 		9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDC720BF56AA00B4361C /* ViewController.swift */; };
 		9A77DDCB20BF56AA00B4361C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A77DDC920BF56AA00B4361C /* Main.storyboard */; };
@@ -39,7 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9A6D1B9020C6085000284117 /* CompletedTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksTableViewController.swift; sourceTree = "<group>"; };
+		9A6D1B9420C758B000284117 /* CompletedTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksTableViewController.swift; sourceTree = "<group>"; };
 		9A77DDC220BF56AA00B4361C /* EisenhowerToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EisenhowerToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A77DDC520BF56AA00B4361C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A77DDC720BF56AA00B4361C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 				9A77DDF620BF585A00B4361C /* SampleTasks.swift */,
 				9A77DDC520BF56AA00B4361C /* AppDelegate.swift */,
 				9A77DDC720BF56AA00B4361C /* ViewController.swift */,
+				9A6D1B9420C758B000284117 /* CompletedTasksTableViewController.swift */,
 				9A77DDFE20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift */,
 				9A77DE0020BF7B6400B4361C /* NImportantUrgentTableViewCell.swift */,
 				9A77DDC920BF56AA00B4361C /* Main.storyboard */,
@@ -117,7 +118,6 @@
 				9A77DDCF20BF56AB00B4361C /* Assets.xcassets */,
 				9A77DDD120BF56AB00B4361C /* LaunchScreen.storyboard */,
 				9A77DDD420BF56AB00B4361C /* Info.plist */,
-				9A6D1B9020C6085000284117 /* CompletedTasksTableViewController.swift */,
 			);
 			path = EisenhowerToDo;
 			sourceTree = "<group>";
@@ -274,7 +274,7 @@
 				9A77DE0120BF7B6400B4361C /* NImportantUrgentTableViewCell.swift in Sources */,
 				9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */,
 				9A77DDF720BF585A00B4361C /* SampleTasks.swift in Sources */,
-				9A6D1B9120C6085000284117 /* CompletedTasksTableViewController.swift in Sources */,
+				9A6D1B9520C758B000284117 /* CompletedTasksTableViewController.swift in Sources */,
 				9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */,
 				9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */,
 				9A77DDFF20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift in Sources */,

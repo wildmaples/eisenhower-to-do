@@ -12,6 +12,7 @@ class NImportantUrgentTableViewCell: UITableViewCell {
 
     @IBOutlet weak var FTTaskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
+    
     weak var delegate: UpdateDelegate?
     var task : Task!
 
@@ -34,5 +35,7 @@ class NImportantUrgentTableViewCell: UITableViewCell {
         self.delegate?.didUpdate(sender: self)
     }
     
+
 }
+
 

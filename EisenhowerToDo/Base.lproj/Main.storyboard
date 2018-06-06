@@ -144,6 +144,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8B-m8-hXq">
+                                                    <rect key="frame" x="422" y="56" width="43" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="deleteButton" image="deletebutton"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="n32-Av-8JE" firstAttribute="top" secondItem="aPz-7t-JSs" secondAttribute="bottom" constant="11" id="1QU-im-uMw"/>
@@ -198,6 +203,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fEw-bA-b53">
+                                                    <rect key="frame" x="422" y="62" width="43" height="42"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button" image="deletebutton"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="kr5-tt-itp" firstAttribute="top" secondItem="gM2-BD-Nlm" secondAttribute="top" constant="14" id="8MT-og-JXk"/>
@@ -264,4 +274,7 @@
             <point key="canvasLocation" x="205.56368960468521" y="-16.40625"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="deletebutton" width="512" height="512"/>
+    </resources>
 </document>

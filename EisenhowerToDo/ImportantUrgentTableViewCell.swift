@@ -27,10 +27,8 @@ class ImportantUrgentTableViewCell: UITableViewCell {
             task.done = true
         }
         print("\(task.done)")
-    }
-    
-    @IBAction func refreshTV(_ sender: Any) {
         self.delegate?.didUpdate()
     }
+    
     
 }

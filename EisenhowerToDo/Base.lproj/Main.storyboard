@@ -129,7 +129,6 @@
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="doneToggle:" destination="rE9-9P-snY" eventType="valueChanged" id="91w-D1-wMt"/>
-                                                        <action selector="refreshTV:" destination="rE9-9P-snY" eventType="valueChanged" id="SBm-zr-bL6"/>
                                                         <segue destination="Ypy-wM-eEz" kind="unwind" unwindAction="doneToggle:" id="89Q-SW-kn3"/>
                                                     </connections>
                                                 </switch>
@@ -199,7 +198,6 @@
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="doneToggle:" destination="ALY-v4-GTD" eventType="valueChanged" id="e0h-Cx-XOy"/>
-                                                        <action selector="refreshTV:" destination="ALY-v4-GTD" eventType="valueChanged" id="ill-1q-zeJ"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNt-lm-KSg">

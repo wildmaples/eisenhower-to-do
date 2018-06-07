@@ -24,7 +24,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var importantUrgentTableView: UITableView!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
         nImportantUrgentTableView.delegate = self
@@ -39,6 +41,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }
+
+        importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
 
     }
 
@@ -64,7 +70,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
             cell.task = task
@@ -74,7 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell
             
         } else if tableView == self.nImportantUrgentTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
             cell.task = task
@@ -84,9 +90,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = all_done_tasks[indexPath.row]
-            cell.textLabel?.text = task.name
+            cell.setup(task: task)
+            cell.task = task
+            cell.delegate = self
+            cell.index = indexPath.row
             //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }

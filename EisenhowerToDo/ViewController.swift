@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
 
-    // sample data gen
+    // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var createdTask: Task?
@@ -42,14 +42,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("numberOfRowsInSection called")
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = tasksTT.count
@@ -63,7 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // for each tableview, load cells
+        // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
@@ -89,7 +84,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }
-        
     }
     
     // Receiving newtask to categorize
@@ -98,23 +92,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
         createdTask.name = (vc?.name.text!)!
-        createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
+        createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
         print ("This is \(createdTask)")
         
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
             tasksTT.append(createdTask)
+            
         } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
         }
         
-        // Check if name is appended to the list
+        // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
-        
-        
+
     }
     // Reload view to view newly created task
     override func viewDidAppear(_ animated: Bool) {

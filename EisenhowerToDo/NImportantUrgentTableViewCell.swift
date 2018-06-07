@@ -34,5 +34,6 @@ class NImportantUrgentTableViewCell: UITableViewCell {
         self.delegate?.didUpdate(sender: self)
     }
     
-}
 
+
+}

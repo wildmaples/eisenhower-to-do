@@ -16,8 +16,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Outlets for the four table views
     @IBOutlet weak var newTaskButton: UIButton!
-    @IBOutlet weak var nImportantUrgentTableView: UITableView?
-    @IBOutlet weak var importantUrgentTableView: UITableView?
+    @IBOutlet weak var nImportantUrgentTableView: UITableView!
+    @IBOutlet weak var importantUrgentTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,21 +41,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell : UITableViewCell
         
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
-            let quad1 = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
-            quad1.textLabel?.text = task.name
-            cell = quad1
+            cell.setup(task: task)
+            return cell
+
         } else {
-            let quad2 = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
-            quad2.textLabel?.text = task.name
-            cell = quad2
+            cell.setup(task: task)
+            return cell
         }
-        return cell
     }
     
     // Receiving newtask to categorize
@@ -80,13 +79,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
-    }
 
+    }
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
     
     
-
 }
 

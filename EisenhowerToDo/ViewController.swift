@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var createdTask: Task?
     var all_done_tasks: [Task] = []
     var toggledTask: Task!
+    var selectedIndex: Int!
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -130,7 +131,47 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
+
+    @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
+        
+        let vc = segue.source as? ModifyTaskViewController
+        let task = Task()
+        task.name = (vc?.name.text!)!
+        task.importantness = (vc?.importantSwitch.isOn)!
+        task.urgency = (vc?.urgentSwitch.isOn)!
+        task.done = false
+        print ("This is \(task)")
+        
+        // Edit task in appropriate list
+        if task.urgency == true && task.importantness == true {
+            tasksTT.append(task)
+        } else if task.urgency == true && task.importantness == false {
+            tasksFT.append(task)
+        }
+        
+        // Check if name is appended to the list
+        print(task.name )
+        print(tasksTT)
+        
+        
+    }
+
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedIndex = indexPath.row
+        self.performSegue(withIdentifier: "ModifySegue", sender: indexPath)
+        print(selectedIndex)
+    }
+//
+//
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ModifySegue"{
+            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+            vc.task = tasksTT[selectedIndex]
+            navigationController?.pushViewController(vc, animated: true)
+}
+    }
+
     // Functions (used in delegation)
     func didUpdate(sender: Any) {
         

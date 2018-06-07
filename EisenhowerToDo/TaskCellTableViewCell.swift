@@ -53,4 +53,6 @@ class TaskCellTableViewCell: UITableViewCell {
         self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
     }
     
+
+    
 }

@@ -57,9 +57,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if tableView == self.importantUrgentTableView {
-            count = tasksTT.count
+            count = (omitDone(task_list: tasksTT)).count
         } else if tableView == self.nImportantUrgentTableView {
-            count = tasksFT.count
+            count = (omitDone(task_list: tasksFT)).count
         } else if tableView == self.completedTasksTableView {
             count = all_done_tasks.count
         }
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksTT[indexPath.row]
+            let task = (omitDone(task_list: tasksTT))[indexPath.row]
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
@@ -81,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksFT[indexPath.row]
+            let task = (omitDone(task_list: tasksFT))[indexPath.row]
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
@@ -169,6 +169,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // updates completed task tableview
         didUpdate(sender: self)
+    }
+    
+    // function to create a list that contains items that are not done
+    func omitDone(task_list: [Task]) -> [Task] {
+        var notdone : [Task] = []
+        for task in task_list {
+            if task.done == false {
+            notdone.append(task)
+            }
+        }
+        return notdone
     }
     
 }

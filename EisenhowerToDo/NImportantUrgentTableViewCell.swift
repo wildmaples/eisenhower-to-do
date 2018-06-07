@@ -10,7 +10,7 @@ import UIKit
 
 class NImportantUrgentTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var FTTaskLabel: UILabel!
+    @IBOutlet weak var taskLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +23,7 @@ class NImportantUrgentTableViewCell: UITableViewCell {
     }
     
     func setup(task: Task) {
-        FTTaskLabel.text = task.name
+        taskLabel.text = task.name
     }
     
     

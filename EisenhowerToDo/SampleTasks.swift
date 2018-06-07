@@ -63,7 +63,6 @@ final class SampleData {
         FT3.name = "Something not important but urgent"
         
         return [FT1, FT2, FT3]
-        
     }
     
     // To-Do: Add the other two lists

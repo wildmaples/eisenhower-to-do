@@ -10,7 +10,7 @@ import UIKit
 
 // Protocol for delegation
 @objc protocol TaskCellDelegate: class {
-    func didUpdate(sender: Any)
+    func didUpdate()
 }
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
@@ -117,7 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // Delegate function
-    func didUpdate(sender: Any) {
+    func didUpdate() {
         
         // reset all done tasks
         all_done_tasks = []

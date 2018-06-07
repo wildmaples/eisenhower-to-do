@@ -30,7 +30,7 @@ class NImportantUrgentTableViewCell: UITableViewCell {
     }
     
     @IBAction func refreshTV(_ sender: Any) {
-        self.delegate?.didUpdate(sender: self)
+        self.delegate?.didUpdate()
     }
 
 }

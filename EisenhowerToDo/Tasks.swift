@@ -10,6 +10,7 @@ import Foundation
 
 
 final class Task {
+    
     // Properties
     var name: String
     var importantness: Bool

@@ -9,22 +9,21 @@
 import UIKit
 
 class NImportantUrgentTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var FTTaskLabel: UILabel!
+    
+    @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
-    weak var delegate: UpdateDelegate?
+    weak var delegate: TaskCellDelegate?
     var task : Task!
-
+    
     func setup(task: Task) {
-        FTTaskLabel.text = task.name
+        taskLabel.text = task.name
         doneButton.isOn = task.done
     }
     
     @IBAction func doneToggle(_ sender: Any) {
         if self.task.done == true {
             task.done = false
-        }
-        else {
+        } else {
             task.done = true
         }
         print("\(task.done)")
@@ -33,7 +32,5 @@ class NImportantUrgentTableViewCell: UITableViewCell {
     @IBAction func refreshTV(_ sender: Any) {
         self.delegate?.didUpdate(sender: self)
     }
-    
-
 
 }

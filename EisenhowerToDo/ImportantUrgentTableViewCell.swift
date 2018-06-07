@@ -12,20 +12,18 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
-    weak var delegate: UpdateDelegate?
+    weak var delegate: TaskCellDelegate?
     var task : Task!
-
-    func setup(task: Task)  {
+    
+    func setup(task: Task) {
         taskLabel.text = task.name
         doneButton.isOn = task.done
-        print ("Tasklabel :\(taskLabel.text ?? "asds")")
     }
     
     @IBAction func doneToggle(_ sender: Any) {
         if self.task.done == true {
             task.done = false
-        }
-        else {
+        } else {
             task.done = true
         }
         print("\(task.done)")

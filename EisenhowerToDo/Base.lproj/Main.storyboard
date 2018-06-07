@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="117" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
                                 <rect key="frame" x="378" y="20" width="480" height="497"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -197,6 +197,10 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zEw-fd-9fk">
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="doneToggle:" destination="ALY-v4-GTD" eventType="valueChanged" id="e0h-Cx-XOy"/>
+                                                        <action selector="refreshTV:" destination="ALY-v4-GTD" eventType="valueChanged" id="ill-1q-zeJ"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sNt-lm-KSg">
                                                     <rect key="frame" x="229" y="60" width="79" height="26"/>
@@ -225,8 +229,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.81966838430851063" green="0.62332638799882312" blue="0.39971867819192397" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
-                                            <outlet property="FTTaskLabel" destination="kr5-tt-itp" id="wu2-hp-l11"/>
                                             <outlet property="doneButton" destination="zEw-fd-9fk" id="JIK-eq-EGb"/>
+                                            <outlet property="taskLabel" destination="kr5-tt-itp" id="4Z2-k2-pNR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

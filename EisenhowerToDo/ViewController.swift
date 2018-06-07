@@ -8,7 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
+// Protocol for delegation
+@objc protocol TaskCellDelegate: class {
+    func didUpdate(sender: Any)
+}
+
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
 
     // Sample data gen
     var tasksTT = SampleData.generateTT()
@@ -65,7 +70,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
-            //print("1. \(task.name)")
             return cell
             
         } else if tableView == self.nImportantUrgentTableView {
@@ -74,14 +78,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
-            //print("2: \(task.name)")
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
             let task = all_done_tasks[indexPath.row]
             cell.textLabel?.text = task.name
-            //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }
     }
@@ -95,7 +97,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
-        print ("This is \(createdTask)")
         
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
@@ -130,15 +131,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-        // reload completedTasksTV
+        // Reload completedTasksTV
         self.completedTasksTableView.reloadData()
-        print ("UpdateDelegate worked!")
     }
     
 }
 
-// Protocol for delegation 
-@objc protocol UpdateDelegate: class {
-    func didUpdate(sender: Any)
-}
 

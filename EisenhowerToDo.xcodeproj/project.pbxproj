@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9A4169AA20C8AC8900728829 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9A4169A920C8AC8900728829 /* TaskCell.xib */; };
 		9A4169AC20C8AD4C00728829 /* TaskCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */; };
+		9A4169B120C9AD2A00728829 /* ImportantUrgentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4169AF20C9AD2A00728829 /* ImportantUrgentTableViewCell.swift */; };
+		9A4169B220C9AD2A00728829 /* NImportantUrgentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4169B020C9AD2A00728829 /* NImportantUrgentTableViewCell.swift */; };
 		9A6D1B9520C758B000284117 /* CompletedTasksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6D1B9420C758B000284117 /* CompletedTasksTableViewController.swift */; };
 		9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDC520BF56AA00B4361C /* AppDelegate.swift */; };
 		9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDC720BF56AA00B4361C /* ViewController.swift */; };
@@ -18,8 +20,6 @@
 		9A77DDDE20BF56AC00B4361C /* EisenhowerToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */; };
 		9A77DDE920BF56AC00B4361C /* EisenhowerToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */; };
 		9A77DDF720BF585A00B4361C /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDF620BF585A00B4361C /* Tasks.swift */; };
-		9A77DDFF20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDFE20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift */; };
-		9A77DE0120BF7B6400B4361C /* NImportantUrgentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DE0020BF7B6400B4361C /* NImportantUrgentTableViewCell.swift */; };
 		9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +43,8 @@
 /* Begin PBXFileReference section */
 		9A4169A920C8AC8900728829 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellTableViewCell.swift; sourceTree = "<group>"; };
+		9A4169AF20C9AD2A00728829 /* ImportantUrgentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportantUrgentTableViewCell.swift; sourceTree = "<group>"; };
+		9A4169B020C9AD2A00728829 /* NImportantUrgentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NImportantUrgentTableViewCell.swift; sourceTree = "<group>"; };
 		9A6D1B9420C758B000284117 /* CompletedTasksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedTasksTableViewController.swift; sourceTree = "<group>"; };
 		9A77DDC220BF56AA00B4361C /* EisenhowerToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EisenhowerToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A77DDC520BF56AA00B4361C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,8 +60,6 @@
 		9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoUITests.swift; sourceTree = "<group>"; };
 		9A77DDEA20BF56AC00B4361C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A77DDF620BF585A00B4361C /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
-		9A77DDFE20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantUrgentTableViewCell.swift; sourceTree = "<group>"; };
-		9A77DE0020BF7B6400B4361C /* NImportantUrgentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NImportantUrgentTableViewCell.swift; sourceTree = "<group>"; };
 		9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,12 +111,12 @@
 		9A77DDC420BF56AA00B4361C /* EisenhowerToDo */ = {
 			isa = PBXGroup;
 			children = (
+				9A4169AF20C9AD2A00728829 /* ImportantUrgentTableViewCell.swift */,
+				9A4169B020C9AD2A00728829 /* NImportantUrgentTableViewCell.swift */,
 				9A77DDF620BF585A00B4361C /* Tasks.swift */,
 				9A77DDC520BF56AA00B4361C /* AppDelegate.swift */,
 				9A77DDC720BF56AA00B4361C /* ViewController.swift */,
 				9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */,
-				9A77DDFE20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift */,
-				9A77DE0020BF7B6400B4361C /* NImportantUrgentTableViewCell.swift */,
 				9A77DDC920BF56AA00B4361C /* Main.storyboard */,
 				9A4169A920C8AC8900728829 /* TaskCell.xib */,
 				9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */,
@@ -278,14 +278,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A77DE0120BF7B6400B4361C /* NImportantUrgentTableViewCell.swift in Sources */,
 				9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */,
 				9A77DDF720BF585A00B4361C /* Tasks.swift in Sources */,
+				9A4169B220C9AD2A00728829 /* NImportantUrgentTableViewCell.swift in Sources */,
+				9A4169B120C9AD2A00728829 /* ImportantUrgentTableViewCell.swift in Sources */,
 				9A6D1B9520C758B000284117 /* CompletedTasksTableViewController.swift in Sources */,
 				9A4169AC20C8AD4C00728829 /* TaskCellTableViewCell.swift in Sources */,
 				9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */,
 				9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */,
-				9A77DDFF20BF7B0A00B4361C /* ImportantUrgentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

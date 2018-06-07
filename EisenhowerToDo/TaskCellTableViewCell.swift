@@ -12,7 +12,6 @@ class TaskCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
-    
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
     
@@ -41,6 +40,8 @@ class TaskCellTableViewCell: UITableViewCell {
             task.done = true
         }
         print("\(task.done)")
+        self.delegate?.didUpdate(sender: self)
+
     }
     
     @IBAction func refreshTV(_ sender: Any) {

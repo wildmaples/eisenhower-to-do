@@ -146,8 +146,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-        // reload completedTasksTV
+        // reload all views
         self.completedTasksTableView.reloadData()
+        self.importantUrgentTableView.reloadData()
+        self.nImportantUrgentTableView.reloadData()
         print ("UpdateDelegate worked!")
     }
     
@@ -169,24 +171,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         didUpdate(sender: self)
     }
     
-// Allow tasks to be deleted
-//    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-// Delete Task
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if (editingStyle == UITableViewCellEditingStyle.delete) {
-//            if tableView == self.importantUrgentTableView {
-//                tasksTT.remove(at: indexPath.row)
-//                self.importantUrgentTableView?.reloadData()
-//            } else if tableView == self.nImportantUrgentTableView {
-//                tasksFT.remove(at: indexPath.row)
-//                self.importantUrgentTableView?.reloadData()
-//            }
-//        }
-//    }
-
 }
 
 // Protocol for delegation

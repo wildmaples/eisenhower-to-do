@@ -48,7 +48,7 @@ final class SampleData {
         TT3.done = false
 
         
-        return [TT1, TT2, TT3]
+        return [TT2, TT3]
     }
     
     static func generateFT() -> [Task] {

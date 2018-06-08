@@ -8,6 +8,15 @@
 
 import UIKit
 
+// Protocol for delegation
+protocol UpdateDelegate: class {
+    func didUpdate(sender: Any)
+    func removeTask(sender: Any, task: Task, row: IndexPath)
+    func mark(task: Task, asDone done: Bool)
+    func categorizeTask(task: Task)
+}
+
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
 
     // sample data gen
@@ -34,7 +43,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantUrgentTableView.dataSource = self
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
-        
 
         importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
@@ -51,9 +59,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if tableView == self.importantUrgentTableView {
-            count = (omitDone(task_list: tasksTT)).count
+            count = tasksTT.count
         } else if tableView == self.nImportantUrgentTableView {
-            count = (omitDone(task_list: tasksFT)).count
+            count = tasksFT.count
         } else if tableView == self.completedTasksTableView {
             count = all_done_tasks.count
         }
@@ -138,8 +146,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Edit task in appropriate list
         if task.urgency == true && task.importantness == true {
             tasksTT.append(task)
+            self.importantUrgentTableView.reloadData()
+            
         } else if task.urgency == true && task.importantness == false {
             tasksFT.append(task)
+            self.nImportantUrgentTableView.reloadData()
         }
         
         // Check if name is appended to the list
@@ -152,42 +163,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "ModifySegueTT", sender: indexPath)
-        self.performSegue(withIdentifier: "ModifySegueFT", sender: indexPath)
-
+        
+        if tableView == self.importantUrgentTableView {
+            self.performSegue(withIdentifier: "ModifySegueTT", sender: indexPath)
+        } else if tableView == self.nImportantUrgentTableView{
+            self.performSegue(withIdentifier: "ModifySegueFT", sender: indexPath)
+        }
+        
         print(selectedIndex)
     }
-//
-//
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let indexPath = IndexPath(row: selectedIndex, section:0)
+        
         if segue.identifier == "ModifySegueTT"{
             let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-            vc.task = omitDone(task_list:tasksTT)[selectedIndex]
+            vc.task = tasksTT[selectedIndex]
+            removeTask(sender: (Any).self, task: tasksTT[selectedIndex], row: indexPath as IndexPath)
             navigationController?.pushViewController(vc, animated: true)
+            
         } else if segue.identifier == "ModifySegueFT" {
             let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-            vc.task = omitDone(task_list:tasksFT)[selectedIndex]
+            vc.task = tasksFT[selectedIndex]
+            removeTask(sender: (Any).self, task: tasksFT[selectedIndex], row: indexPath as IndexPath)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     // Functions (used in delegation)
     func didUpdate(sender: Any) {
-        
-        
-        // update list view
-        for list in [tasksTT, tasksFT] {
-            for task in list {
-                if task.done == true {
-                    all_done_tasks.append(task)
-                    
-                }
-            }
-        }
-        
         // reload all views
         self.completedTasksTableView.reloadData()
-        print ("UpdateDelegate worked!")
+        self.importantUrgentTableView.reloadData()
+        self.nImportantUrgentTableView.reloadData()
+        print ("tables refreshed!")
     }
     
     func removeTask(sender: Any, task: Task, row: IndexPath) {
@@ -203,11 +213,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksFT.remove(at: indexPath.row)
             nImportantUrgentTableView.reloadData()
         }
+        print(tasksTT)
         
-//        // updates completed task tableview
-//        didUpdate(sender: self)
     }
     
+    // appends a done task to all_done list
+    func mark(task: Task, asDone done: Bool) {
+        if task.done {
+            all_done_tasks.append(task)
+        } else {
+            all_done_tasks.remove2(task)
+        }
+    }
+
     // function to create a list that contains items that are not done
     func omitDone(task_list: [Task]) -> [Task] {
         var notdone : [Task] = []
@@ -219,11 +237,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return notdone
     }
     
+    func categorizeTask(task: Task) {
+        if task.urgency == true && task.importantness == true {
+            tasksTT.append(task)
+        } else if task.urgency == true && task.importantness == false {
+            tasksFT.append(task)
+        }
+    }
 }
 
-// Protocol for delegation
-protocol UpdateDelegate: class {
-    func didUpdate(sender: Any)
-    func removeTask(sender: Any, task: Task, row: IndexPath)
+
+extension Array where Element: AnyObject {
+    mutating func remove2(_ object: AnyObject) {
+        if let index = index(where: { $0 === object }) {
+            remove(at: index)
+        }
+    }
 }
 

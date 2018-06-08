@@ -20,6 +20,7 @@ class TaskCellTableViewCell: UITableViewCell {
     var index : Int!
     
     func setup(task: Task) {
+        
         // base edit
         taskLabel.text = task.name
         doneButton.isOn = task.done
@@ -34,18 +35,24 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func doneToggle(_ sender: Any) {
         if self.task.done == true {
+            
+            // make the task undone
             task.done = false
-        }
-        else {
+            self.delegate?.categorizeTask(task: task)
+            self.delegate?.mark(task: task, asDone: task.done)
+            self.delegate?.didUpdate(sender: self)
+            
+        } else {
+            
+            // this only happens in the completed task tableView
             task.done = true
+            let indexPath = IndexPath(row: index, section:0)
+            self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+            self.delegate?.mark(task: task, asDone: task.done)
+            self.delegate?.didUpdate(sender: self)
+
         }
         print("\(task.done)")
-        self.delegate?.didUpdate(sender: self)
-        
-        if self.task.done {
-        let indexPath = IndexPath(row: index, section:0)
-        self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
-        }
 
     }
     

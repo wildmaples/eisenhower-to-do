@@ -16,6 +16,7 @@ class ImportantUrgentTableViewCell: UITableViewCell {
     var task : Task!
     
     func setup(task: Task) {
+        self.task = task
         taskLabel.text = task.name
         doneButton.isOn = task.done
     }

@@ -18,9 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
-    var createdTask: Task?
     var all_done_tasks: [Task] = []
-    var toggledTask: Task!
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!

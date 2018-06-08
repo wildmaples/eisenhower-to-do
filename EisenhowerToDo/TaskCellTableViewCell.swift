@@ -29,7 +29,8 @@ class TaskCellTableViewCell: UITableViewCell {
             // insert other styling edits here
             
         } else if task.importantness == false && task.urgency == true {
-            importantLabel.isHidden = true
+            importantLabel.text = "Urgent"
+            urgentLabel.isHidden = true
         }
     }
     

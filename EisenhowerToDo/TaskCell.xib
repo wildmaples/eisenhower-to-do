@@ -35,7 +35,6 @@
                         <rect key="frame" x="15" y="14" width="51" height="31"/>
                         <connections>
                             <action selector="doneToggle:" destination="0nm-2Z-hsN" eventType="valueChanged" id="P6v-RN-fvj"/>
-                            <action selector="refreshTV:" destination="0nm-2Z-hsN" eventType="valueChanged" id="Dhe-mS-9vP"/>
                         </connections>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6n-yd-hom">

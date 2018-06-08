@@ -24,5 +24,10 @@ class ModifyTaskViewController: UIViewController {
         importantSwitch.isOn = task.importantness
     }
     
+    // Cancel Action
+    @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     
 }

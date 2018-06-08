@@ -41,12 +41,14 @@ class TaskCellTableViewCell: UITableViewCell {
         }
         print("\(task.done)")
         self.delegate?.didUpdate(sender: self)
+        
+        if self.task.done {
+        let indexPath = IndexPath(row: index, section:0)
+        self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+        }
 
     }
     
-    @IBAction func refreshTV(_ sender: Any) {
-        self.delegate?.didUpdate(sender: self)
-    }
     
     @IBAction func deleteButton(_ sender: Any) {
         let indexPath = IndexPath(row: index, section:0)

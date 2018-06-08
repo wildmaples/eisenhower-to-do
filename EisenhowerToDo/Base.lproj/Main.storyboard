@@ -134,7 +134,6 @@
                                                     <rect key="frame" x="15" y="14" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="doneToggle:" destination="rE9-9P-snY" eventType="valueChanged" id="91w-D1-wMt"/>
-                                                        <action selector="refreshTV:" destination="rE9-9P-snY" eventType="valueChanged" id="SBm-zr-bL6"/>
                                                         <segue destination="Ypy-wM-eEz" kind="unwind" unwindAction="doneToggle:" id="89Q-SW-kn3"/>
                                                     </connections>
                                                 </switch>
@@ -168,7 +167,7 @@
                                         <connections>
                                             <outlet property="doneButton" destination="xi4-Wb-HFi" id="ycG-j3-RQQ"/>
                                             <outlet property="taskLabel" destination="aPz-7t-JSs" id="geF-Ni-ytD"/>
-                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegue" id="IJo-j4-mJS"/>
+                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegueTT" id="IJo-j4-mJS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -195,7 +194,6 @@
                                                     <rect key="frame" x="15" y="13.5" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="doneToggle:" destination="k3t-cp-HZT" eventType="valueChanged" id="44a-YD-Xyr"/>
-                                                        <action selector="refreshTV:" destination="k3t-cp-HZT" eventType="valueChanged" id="AS3-QJ-mz1"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sny-KL-cVf">
@@ -228,6 +226,7 @@
                                         <connections>
                                             <outlet property="FTTaskLabel" destination="kr5-tt-itp" id="wu2-hp-l11"/>
                                             <outlet property="doneButton" destination="zEw-fd-9fk" id="JIK-eq-EGb"/>
+                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegueFT" id="PGq-eg-w5S"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -340,7 +339,7 @@
                                                 </barButtonItem>
                                                 <barButtonItem key="rightBarButtonItem" title="Update" id="RLQ-6m-TQt">
                                                     <connections>
-                                                        <segue destination="Gjq-DB-4ij" kind="unwind" unwindAction="createTaskSegue:" id="tlF-Pg-oGM"/>
+                                                        <segue destination="Gjq-DB-4ij" kind="unwind" unwindAction="modifyTaskSegue:" id="P2i-Vf-IlM"/>
                                                     </connections>
                                                 </barButtonItem>
                                             </navigationItem>
@@ -371,4 +370,7 @@
     <resources>
         <image name="deletebutton" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="IJo-j4-mJS"/>
+    </inferredMetricsTieBreakers>
 </document>

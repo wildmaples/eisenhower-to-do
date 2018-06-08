@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var createdTask: Task?
     var all_done_tasks: [Task] = []
     var toggledTask: Task!
-    var selectedIndex: Int!
+    var selectedIndex = Int()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -35,13 +35,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
         
-        for list in [tasksTT, tasksFT] {
-            for task in list {
-                if task.done == true {
-                    all_done_tasks.append(task)
-                }
-            }
-        }
 
         importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
@@ -158,39 +151,42 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedIndex = indexPath.row
-        self.performSegue(withIdentifier: "ModifySegue", sender: indexPath)
+        self.selectedIndex = indexPath.row
+        self.performSegue(withIdentifier: "ModifySegueTT", sender: indexPath)
+        self.performSegue(withIdentifier: "ModifySegueFT", sender: indexPath)
+
         print(selectedIndex)
     }
 //
 //
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ModifySegue"{
+        if segue.identifier == "ModifySegueTT"{
             let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-            vc.task = tasksTT[selectedIndex]
+            vc.task = omitDone(task_list:tasksTT)[selectedIndex]
             navigationController?.pushViewController(vc, animated: true)
-}
+        } else if segue.identifier == "ModifySegueFT" {
+            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+            vc.task = omitDone(task_list:tasksFT)[selectedIndex]
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
-
+    
     // Functions (used in delegation)
     func didUpdate(sender: Any) {
         
-        // reset all done tasks
-        all_done_tasks = []
         
         // update list view
         for list in [tasksTT, tasksFT] {
             for task in list {
                 if task.done == true {
                     all_done_tasks.append(task)
+                    
                 }
             }
         }
         
         // reload all views
         self.completedTasksTableView.reloadData()
-        self.importantUrgentTableView.reloadData()
-        self.nImportantUrgentTableView.reloadData()
         print ("UpdateDelegate worked!")
     }
     
@@ -208,8 +204,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             nImportantUrgentTableView.reloadData()
         }
         
-        // updates completed task tableview
-        didUpdate(sender: self)
+//        // updates completed task tableview
+//        didUpdate(sender: self)
     }
     
     // function to create a list that contains items that are not done

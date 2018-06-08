@@ -16,15 +16,16 @@ protocol UpdateDelegate: class {
     func categorizeTask(task: Task)
 }
 
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
 
     // sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
+    var tasksTF = SampleData.generateTF()
+    var tasksFF = SampleData.generateFF()
+
     var createdTask: Task?
     var all_done_tasks: [Task] = []
-    var toggledTask: Task!
     var selectedIndex = Int()
     
     // Outlets for the four table views
@@ -32,6 +33,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
     @IBOutlet weak var importantUrgentTableView: UITableView!
+    @IBOutlet weak var nImportantNUrgentTableView: UITableView!
+    @IBOutlet weak var importantNUrgentTableView: UITableView!
     
     override func viewDidLoad() {
         
@@ -41,11 +44,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         importantUrgentTableView.dataSource = self
         nImportantUrgentTableView.delegate = self
         nImportantUrgentTableView.dataSource = self
+        nImportantNUrgentTableView.delegate = self
+        nImportantNUrgentTableView.dataSource = self
+        importantNUrgentTableView.delegate = self
+        importantNUrgentTableView.dataSource = self
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
 
         importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        importantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        nImportantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
 
     }
@@ -62,6 +71,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             count = tasksTT.count
         } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
+        } else if tableView == self.importantNUrgentTableView {
+            count = tasksTF.count
+        } else if tableView == self.nImportantNUrgentTableView {
+            count = tasksFF.count
         } else if tableView == self.completedTasksTableView {
             count = all_done_tasks.count
         }
@@ -73,24 +86,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // for each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = (omitDone(task_list: tasksTT))[indexPath.row]
+            let task = tasksTT[indexPath.row]
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
-            //print("1. \(task.name)")
             return cell
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = (omitDone(task_list: tasksFT))[indexPath.row]
+            let task = tasksFT[indexPath.row]
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
-            //print("2: \(task.name)")
             return cell
             
+        } else if tableView == self.importantNUrgentTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
+            let task = tasksTF[indexPath.row]
+            cell.setup(task: task)
+            cell.task = task
+            cell.delegate = self
+            cell.index = indexPath.row
+            return cell
+            
+        } else if tableView == self.nImportantNUrgentTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
+            let task = tasksFF[indexPath.row]
+            cell.setup(task: task)
+            cell.task = task
+            cell.delegate = self
+            cell.index = indexPath.row
+            return cell
+        
+        // Completed task tableview
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = all_done_tasks[indexPath.row]
@@ -120,6 +150,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksTT.append(createdTask)
         } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
+        } else if createdTask.urgency == false && createdTask.importantness == true {
+            tasksTF.append(createdTask)
+        } else if createdTask.urgency == false && createdTask.importantness == false {
+            tasksFF.append(createdTask)
         }
         
         // Check if name is appended to the list
@@ -132,6 +166,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
         self.nImportantUrgentTableView?.reloadData()
+        self.importantNUrgentTableView?.reloadData()
+        self.nImportantNUrgentTableView?.reloadData()
         self.completedTasksTableView?.reloadData()
 
     }
@@ -154,8 +190,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if task.urgency == true && task.importantness == false {
             tasksFT.append(task)
             self.nImportantUrgentTableView.reloadData()
+            
+        } else if task.urgency == false && task.importantness == true {
+            tasksTF.append(task)
+            self.importantNUrgentTableView.reloadData()
+            
+        } else if task.urgency == false && task.importantness == false {
+            tasksFF.append(task)
+            self.nImportantNUrgentTableView.reloadData()
         }
         
+
         // Check if name is appended to the list
         print(task.name )
         print(tasksTT)
@@ -169,11 +214,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if tableView == self.importantUrgentTableView {
             self.performSegue(withIdentifier: "ModifySegueTT", sender: indexPath)
-        } else if tableView == self.nImportantUrgentTableView{
+        } else if tableView == self.nImportantUrgentTableView {
             self.performSegue(withIdentifier: "ModifySegueFT", sender: indexPath)
+        } else if tableView == self.importantNUrgentTableView {
+            self.performSegue(withIdentifier: "ModifySegueTF", sender: indexPath)
+        } else if tableView == self.nImportantNUrgentTableView {
+            self.performSegue(withIdentifier: "ModifySegueFF", sender: indexPath)
         }
-        
-        print(selectedIndex)
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -191,7 +239,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             vc.task = tasksFT[selectedIndex]
             removeTask(sender: (Any).self, task: tasksFT[selectedIndex], row: indexPath as IndexPath)
             navigationController?.pushViewController(vc, animated: true)
+            
+        } else if segue.identifier == "ModifySegueTF" {
+            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+            vc.task = tasksTF[selectedIndex]
+            removeTask(sender: (Any).self, task: tasksTF[selectedIndex], row: indexPath as IndexPath)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        } else if segue.identifier == "ModifySegueFF" {
+            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+            vc.task = tasksFF[selectedIndex]
+            removeTask(sender: (Any).self, task: tasksFF[selectedIndex], row: indexPath as IndexPath)
+            navigationController?.pushViewController(vc, animated: true)
         }
+
     }
     
     // Functions (used in delegation)
@@ -199,6 +260,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // reload all views
         self.completedTasksTableView.reloadData()
         self.importantUrgentTableView.reloadData()
+        self.importantNUrgentTableView.reloadData()
+        self.nImportantNUrgentTableView.reloadData()
+
         self.nImportantUrgentTableView.reloadData()
         print ("tables refreshed!")
     }
@@ -211,13 +275,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksTT.remove(at: indexPath.row)
             importantUrgentTableView.reloadData()
             
-            } else if task.urgency == true && task.importantness == false {
+        } else if task.urgency == true && task.importantness == false {
             let indexPath = row
             tasksFT.remove(at: indexPath.row)
             nImportantUrgentTableView.reloadData()
+        } else if task.urgency == false && task.importantness == true {
+            let indexPath = row
+            tasksTF.remove(at: indexPath.row)
+            importantNUrgentTableView.reloadData()
+        } else if task.urgency == false && task.importantness == false {
+            let indexPath = row
+            tasksFF.remove(at: indexPath.row)
+            nImportantNUrgentTableView.reloadData()
         }
-        print(tasksTT)
-        
     }
     
     // appends a done task to all_done list
@@ -245,6 +315,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksTT.append(task)
         } else if task.urgency == true && task.importantness == false {
             tasksFT.append(task)
+        } else if task.urgency == false && task.importantness == true {
+            tasksTF.append(task)
+        } else if task.urgency == false && task.importantness == false {
+            tasksFF.append(task)
         }
     }
 }

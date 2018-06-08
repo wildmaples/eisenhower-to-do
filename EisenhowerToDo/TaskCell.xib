@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just any task that is blagasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
-                        <rect key="frame" x="84" y="16" width="291.5" height="29"/>
+                        <rect key="frame" x="84" y="16" width="376" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,9 +43,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-gv-NDg">
-                        <rect key="frame" x="422" y="56" width="43" height="42"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-gv-NDg">
+                        <rect key="frame" x="417" y="62" width="43" height="42"/>
                         <state key="normal" title="deleteButton" image="deletebutton"/>
                         <connections>
                             <action selector="deleteButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="X5j-l4-hQ7"/>
@@ -56,11 +55,16 @@
                     <constraint firstItem="J6n-yd-hom" firstAttribute="baseline" secondItem="nnM-dq-eHm" secondAttribute="baseline" id="0AV-gS-gt9"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="leading" id="23z-kw-e3I"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="KAY-aN-Ij3" secondAttribute="trailing" constant="20" id="2Qv-oE-d1H"/>
+                    <constraint firstItem="MpJ-gv-NDg" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="62" id="8oQ-Ic-TZF"/>
+                    <constraint firstItem="MpJ-gv-NDg" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="417" id="FZu-ig-ysn"/>
                     <constraint firstItem="KAY-aN-Ij3" firstAttribute="bottom" secondItem="kMg-mc-2dU" secondAttribute="bottom" id="Hbz-8V-qAo"/>
                     <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="18" id="VDk-63-NmH"/>
+                    <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="10.5" id="Wpg-dZ-X4k"/>
                     <constraint firstItem="KAY-aN-Ij3" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="15" id="cN3-Rr-5UG"/>
+                    <constraint firstAttribute="trailing" secondItem="MpJ-gv-NDg" secondAttribute="trailing" constant="20" id="cmi-wr-K9K"/>
                     <constraint firstItem="J6n-yd-hom" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="11" id="f8V-th-cdz"/>
                     <constraint firstItem="J6n-yd-hom" firstAttribute="firstBaseline" secondItem="nnM-dq-eHm" secondAttribute="firstBaseline" id="oJX-ni-bzu"/>
+                    <constraint firstAttribute="trailing" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="20" id="tSM-st-vT7"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="16" id="v3w-zo-45h"/>
                 </constraints>
             </tableViewCellContentView>
@@ -70,7 +74,7 @@
                 <outlet property="taskLabel" destination="kMg-mc-2dU" id="VLa-pd-QTT"/>
                 <outlet property="urgentLabel" destination="nnM-dq-eHm" id="wJF-fu-hvU"/>
             </connections>
-            <point key="canvasLocation" x="-1955" y="330"/>
+            <point key="canvasLocation" x="-1953" y="338.5"/>
         </tableViewCell>
     </objects>
     <resources>

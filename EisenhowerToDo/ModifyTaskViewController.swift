@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModifyTaskViewController: UIViewController {
+class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     
     var task: Task!
     
@@ -19,6 +19,7 @@ class ModifyTaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.name.delegate = self
         name.text = task.name
         urgentSwitch.isOn = task.urgency
         importantSwitch.isOn = task.importantness
@@ -28,6 +29,14 @@ class ModifyTaskViewController: UIViewController {
     @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    // make keyboard go away
+    func textFieldShouldReturn(_ name: UITextField) -> Bool {
+        self.view.endEditing(true)
+        name.resignFirstResponder()
+        return false
+    }
+
 
     
 }

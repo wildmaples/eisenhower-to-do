@@ -19,6 +19,11 @@ class TaskCellTableViewCell: UITableViewCell {
     var task : Task!
     var index : Int!
     
+     func viewDidLoad() {
+        _ = UITableViewCell()
+        self.backgroundColor = .blue
+
+    }
     func setup(task: Task) {
         
         // base edit
@@ -31,7 +36,14 @@ class TaskCellTableViewCell: UITableViewCell {
         } else if task.importantness == false && task.urgency == true {
             importantLabel.text = "Urgent"
             urgentLabel.isHidden = true
+            
+        } else if task.importantness == true && task.urgency == false {
+            urgentLabel.isHidden = true
+        } else if task.importantness == false && task.urgency == false {
+            urgentLabel.isHidden = true
+            importantLabel.isHidden = true
         }
+        
     }
     
     @IBAction func doneToggle(_ sender: Any) {

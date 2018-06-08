@@ -128,9 +128,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
-    // Reload view to view newly created task
+    // Reload views to view newly created task
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
+        self.nImportantUrgentTableView?.reloadData()
+        self.completedTasksTableView?.reloadData()
+
     }
 
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
@@ -222,7 +225,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if task.done {
             all_done_tasks.append(task)
         } else {
-            all_done_tasks.remove2(task)
+            all_done_tasks.remove(task)
         }
     }
 
@@ -247,8 +250,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 
+// To remove Class from a list
 extension Array where Element: AnyObject {
-    mutating func remove2(_ object: AnyObject) {
+    mutating func remove(_ object: AnyObject) {
         if let index = index(where: { $0 === object }) {
             remove(at: index)
         }

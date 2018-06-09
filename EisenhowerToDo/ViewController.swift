@@ -156,6 +156,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksFF.append(createdTask)
         }
         
+        self.didUpdate(sender: self)
         // Check if name is appended to the list
         print(createdTask.name )
         print(tasksTT)

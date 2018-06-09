@@ -88,7 +88,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             return cell
@@ -97,7 +96,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             return cell
@@ -106,7 +104,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksTF[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             return cell
@@ -115,7 +112,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = tasksFF[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             return cell
@@ -125,7 +121,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = all_done_tasks[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             //print("3. \(String(describing: cell.textLabel?.text))")

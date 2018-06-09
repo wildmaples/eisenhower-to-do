@@ -25,39 +25,36 @@ class TaskCellTableViewCell: UITableViewCell {
     }
     
     func setup(task: Task) {
-        
+        self.task = task
         // base edit
         radioButton.setImage(UIImage(named: "uncheckButton"), for: .normal)
         radioButton.setImage(UIImage(named: "checkButton"), for: .selected)
         taskLabel.text = task.name
         radioButton.isSelected = task.done
-        
+    
         if task.importantness == true && task.urgency == true {
             // insert other styling edits here
-            
         } else if task.importantness == false && task.urgency == true {
             importantLabel.text = "Urgent"
             urgentLabel.isHidden = true
-            
         } else if task.importantness == true && task.urgency == false {
             urgentLabel.isHidden = true
         } else if task.importantness == false && task.urgency == false {
             urgentLabel.isHidden = true
             importantLabel.isHidden = true
         }
-        
     }
     
 
     @IBAction func radioButton(_ sender: Any) {
         if self.task.done == true {
+    
             // make the task undone
             radioButton.isSelected = false
             task.done = false
             self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task, asDone: task.done)
             self.delegate?.didUpdate(sender: self)
-
             
         } else {
             
@@ -71,7 +68,6 @@ class TaskCellTableViewCell: UITableViewCell {
 
         }
         print("\(task.done)")
-
     }
         
     
@@ -79,7 +75,4 @@ class TaskCellTableViewCell: UITableViewCell {
         let indexPath = IndexPath(row: index, section:0)
         self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
     }
-    
-
-    
 }

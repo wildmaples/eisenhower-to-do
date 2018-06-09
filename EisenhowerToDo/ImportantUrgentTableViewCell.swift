@@ -11,21 +11,25 @@ import UIKit
 class ImportantUrgentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var taskLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
+    @IBOutlet weak var doneButton: UISwitch!
+    weak var delegate: TaskCellDelegate?
+    var task : Task!
     
     func setup(task: Task) {
+        self.task = task
         taskLabel.text = task.name
+        doneButton.isOn = task.done
     }
-
+    
+    @IBAction func doneToggle(_ sender: Any) {
+        if self.task.done == true {
+            task.done = false
+        } else {
+            task.done = true
+        }
+        print("\(task.done)")
+        self.delegate?.didUpdate()
+    }
+    
     
 }
-

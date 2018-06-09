@@ -8,23 +8,41 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+// Protocol for delegation
+@objc protocol TaskCellDelegate: class {
+    func didUpdate()
+}
+
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
 
     // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
+    var all_done_tasks: [Task] = []
     
     // Outlets for the four table views
+    @IBOutlet weak var completedTasksTableView: UITableView!
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
     @IBOutlet weak var importantUrgentTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        importantUrgentTableView?.delegate = self
-        importantUrgentTableView?.dataSource = self
-        nImportantUrgentTableView?.delegate = self
-        nImportantUrgentTableView?.dataSource = self
+        importantUrgentTableView.delegate = self
+        importantUrgentTableView.dataSource = self
+        nImportantUrgentTableView.delegate = self
+        nImportantUrgentTableView.dataSource = self
+        completedTasksTableView.delegate = self
+        completedTasksTableView.dataSource = self
+        
+        for list in [tasksTT, tasksFT] {
+            for task in list {
+                if task.done == true {
+                    all_done_tasks.append(task)
+                }
+            }
+        }
+
     }
 
 
@@ -35,9 +53,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             count = tasksTT.count
         } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
+        } else if tableView == self.completedTasksTableView {
+            count = all_done_tasks.count
         }
         return count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -47,12 +66,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "ImportantUrgentCell", for: indexPath) as! ImportantUrgentTableViewCell
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
+            cell.delegate = self
             return cell
-
-        } else {
+            
+        } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NImportantUrgentCell", for: indexPath) as! NImportantUrgentTableViewCell
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
+            cell.delegate = self
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DoneCell", for: indexPath)
+            let task = all_done_tasks[indexPath.row]
+            cell.textLabel?.text = task.name
             return cell
         }
     }
@@ -66,7 +93,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
-        print ("This is \(createdTask)")
         
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
@@ -81,10 +107,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print(tasksTT)
 
     }
+    // Reload view to view newly created task
     override func viewDidAppear(_ animated: Bool) {
         self.importantUrgentTableView?.reloadData()
     }
     
+    // Delegate function
+    func didUpdate() {
+        
+        // reset all done tasks
+        all_done_tasks = []
+        
+        // update list view
+        for list in [tasksTT, tasksFT] {
+            for task in list {
+                if task.done == true {
+                    all_done_tasks.append(task)
+                }
+            }
+        }
+        
+        // Reload completedTasksTV
+        self.completedTasksTableView.reloadData()
+    }
     
 }
+
 

@@ -90,6 +90,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
+            
+            // cell color formatting/ style
+            cell.backgroundColor = UIColor(rgb: 0x009E0F)
             return cell
             
         } else if tableView == self.nImportantUrgentTableView {
@@ -98,6 +101,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
+            
+            // cell color formatting/style
+            cell.backgroundColor = UIColor(rgb: 0xFF9900)
+
             return cell
             
         } else if tableView == self.importantNUrgentTableView {
@@ -106,6 +113,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
+            
+            // cell color formatting/style
+            cell.backgroundColor = UIColor(rgb: 0x2b78e4)
+            
             return cell
             
         } else if tableView == self.nImportantNUrgentTableView {
@@ -114,6 +125,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
+            
+            // cell color formatting/style
+            cell.backgroundColor = UIColor(rgb: 0x999999)
+            
             return cell
         
         // Completed task tableview
@@ -123,10 +138,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
-            //print("3. \(String(describing: cell.textLabel?.text))")
+            
+            // cell color formatting/style
+            let color = disabledColor(task: task)
+            cell.backgroundColor = UIColor(rgb: color)
+
             return cell
         }
         
+    }
+    
+    func disabledColor(task: Task) -> Int {
+        if task.importantness == true && task.urgency == true {
+            return 0x6aa84f
+        } else if task.urgency == true {
+            return 0xf6b26b
+        } else if task.importantness == true {
+            return 0x6fa8dc
+        } else {
+            return 0xcccccc
+        }
     }
     
     // Receiving newtask to categorize
@@ -326,6 +357,25 @@ extension Array where Element: AnyObject {
         if let index = index(where: { $0 === object }) {
             remove(at: index)
         }
+    }
+}
+
+// Extension for UIColor
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
     }
 }
 

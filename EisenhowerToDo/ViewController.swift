@@ -35,6 +35,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var importantUrgentTableView: UITableView!
     @IBOutlet weak var nImportantNUrgentTableView: UITableView!
     @IBOutlet weak var importantNUrgentTableView: UITableView!
+    @IBOutlet weak var arrowIcon: UIImageView!
     
     override func viewDidLoad() {
         
@@ -148,18 +149,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func disabledColor(task: Task) -> Int {
-        if task.importantness == true && task.urgency == true {
-            return 0x6aa84f
-        } else if task.urgency == true {
-            return 0xf6b26b
-        } else if task.importantness == true {
-            return 0x6fa8dc
-        } else {
-            return 0xcccccc
-        }
-    }
-    
     // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         
@@ -200,7 +189,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
-        
         let vc = segue.source as? ModifyTaskViewController
         let task = Task()
         task.name = (vc?.name.text!)!
@@ -231,8 +219,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Check if name is appended to the list
         print(task.name )
         print(tasksTT)
-        
-        
+    }
+
+    // shows completed tasks tableview on click
+    @IBAction func completedTasksButton(_ sender: Any) {
+        if completedTasksTableView.isHidden {
+            completedTasksTableView.isHidden = false
+            self.arrowIcon.image = UIImage(named: "arrowDown")
+        } else {
+            completedTasksTableView.isHidden = true
+            self.arrowIcon.image = UIImage(named: "arrowUp")
+        }
     }
 
     
@@ -348,6 +345,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             tasksFF.append(task)
         }
     }
+    
+    // returns color for completed tasks table based on task type
+    func disabledColor(task: Task) -> Int {
+        if task.importantness == true && task.urgency == true {
+            return 0x6aa84f
+        } else if task.urgency == true {
+            return 0xf6b26b
+        } else if task.importantness == true {
+            return 0x6fa8dc
+        } else {
+            return 0xcccccc
+        }
+    }
+    
+
 }
 
 

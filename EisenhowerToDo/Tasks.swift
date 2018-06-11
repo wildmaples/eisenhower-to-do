@@ -10,6 +10,7 @@ import Foundation
 
 
 final class Task {
+    
     // Properties
     var name: String
     var importantness: Bool
@@ -73,7 +74,6 @@ final class SampleData {
         FT3.done = false
 
         return [FT1, FT2, FT3]
-        
     }
     
     // To-Do: Add the other two lists

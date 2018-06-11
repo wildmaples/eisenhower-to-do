@@ -21,12 +21,12 @@ class TaskCellTableViewCell: UITableViewCell {
     
     func setup(task: Task) {
         
-        // base edit
+        self.task = task
         taskLabel.text = task.name
         doneButton.isOn = task.done
 
         if task.importantness == true && task.urgency == true {
-            // insert other styling edits here
+            // insert other styling edits here later
             
         } else if task.importantness == false && task.urgency == true {
             importantLabel.isHidden = true

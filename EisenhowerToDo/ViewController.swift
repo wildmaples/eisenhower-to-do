@@ -19,10 +19,9 @@ protocol UpdateDelegate: class {
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
 
-    // sample data gen
+    // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
-    var createdTask: Task?
     var all_done_tasks: [Task] = []
     var toggledTask: Task!
     var selectedIndex = Int()
@@ -50,10 +49,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,12 +65,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // for each tableview, load cells
+        // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = (omitDone(task_list: tasksTT))[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             //print("1. \(task.name)")
@@ -85,7 +79,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = (omitDone(task_list: tasksFT))[indexPath.row]
             cell.setup(task: task)
-            cell.task = task
             cell.delegate = self
             cell.index = indexPath.row
             //print("2: \(task.name)")
@@ -101,7 +94,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }
-        
     }
     
     // Receiving newtask to categorize
@@ -110,23 +102,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
         createdTask.name = (vc?.name.text!)!
-        createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
+        createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
-        print ("This is \(createdTask)")
         
         // Append to the appropriate list
         if createdTask.urgency == true && createdTask.importantness == true {
             tasksTT.append(createdTask)
+            
         } else if createdTask.urgency == true && createdTask.importantness == false {
             tasksFT.append(createdTask)
         }
         
-        // Check if name is appended to the list
+        // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
-        
-        
+
     }
     // Reload views to view newly created task
     override func viewDidAppear(_ animated: Bool) {
@@ -204,7 +195,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func removeTask(sender: Any, task: Task, row: IndexPath) {
-        
+    
         // check which task it is
         if task.urgency == true && task.importantness == true {
             let indexPath = row
@@ -249,7 +240,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 }
 
-
 // To remove Class from a list
 extension Array where Element: AnyObject {
     mutating func remove(_ object: AnyObject) {
@@ -258,4 +248,3 @@ extension Array where Element: AnyObject {
         }
     }
 }
-

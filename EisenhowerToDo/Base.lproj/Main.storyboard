@@ -141,12 +141,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Ho-DqY">
-                                <rect key="frame" x="20" y="33" width="420" height="57"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Ho-DqY">
+                                <rect key="frame" x="30" y="33" width="410" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="420" id="ga5-Kt-jE1"/>
+                                    <constraint firstAttribute="width" constant="410" id="Z3p-a7-yXA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="37"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                 <state key="normal" title="Create a New Task">
                                     <color key="titleColor" red="0.36862745098039218" green="0.58823529411764708" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -156,10 +156,10 @@
                                 </connections>
                             </button>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-4k-c1N">
-                                <rect key="frame" x="20" y="165" width="420" height="839"/>
+                                <rect key="frame" x="20" y="147" width="420" height="857"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="420" id="JRl-u5-DvA"/>
+                                    <constraint firstAttribute="width" constant="420" id="acs-u9-Hex"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="100" id="la6-xC-f9G">
@@ -209,9 +209,9 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOS-Z1-0c4">
-                                <rect key="frame" x="33" y="116" width="407" height="41"/>
+                                <rect key="frame" x="30" y="93" width="410" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="407" id="v4v-hG-Wgn"/>
+                                    <constraint firstAttribute="width" constant="410" id="jSL-q8-Qma"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Completed Tasks">
@@ -222,42 +222,41 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowDown" translatesAutoresizingMaskIntoConstraints="NO" id="EVp-Zo-0n6">
-                                <rect key="frame" x="340" y="124" width="37" height="24"/>
+                                <rect key="frame" x="385" y="102" width="33" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="37" id="J0f-Wp-5Jj"/>
-                                    <constraint firstAttribute="height" constant="24" id="lFr-bc-zQA"/>
+                                    <constraint firstAttribute="height" constant="22" id="WnW-PC-2y0"/>
+                                    <constraint firstAttribute="width" constant="33" id="gNL-DF-utA"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="1Pe-tP-jhG"/>
                             <constraint firstItem="UPP-E4-jJm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="3tR-QV-Voe"/>
-                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="top" secondItem="EVp-Zo-0n6" secondAttribute="bottom" constant="-32" id="7HU-lf-hGq"/>
                             <constraint firstItem="qIn-RV-TbG" firstAttribute="width" secondItem="UPP-E4-jJm" secondAttribute="width" id="CIA-KZ-9Qb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ck2-4k-c1N" secondAttribute="bottom" constant="20" id="DQB-SS-5XU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ie6-pX-iTx" secondAttribute="trailing" constant="20" id="Dgi-3L-hwv"/>
-                            <constraint firstItem="EVp-Zo-0n6" firstAttribute="leading" secondItem="JOS-Z1-0c4" secondAttribute="trailing" constant="-100" id="FiL-6z-7gT"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="GCI-5v-qcM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qIn-RV-TbG" secondAttribute="bottom" constant="20" id="GgU-Bf-5yV"/>
+                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="top" secondItem="CjQ-Ho-DqY" secondAttribute="bottom" constant="8" id="Jka-FV-JMy"/>
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="top" secondItem="UPP-E4-jJm" secondAttribute="bottom" constant="8" id="LN0-uh-sfO"/>
-                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="MLe-dl-QHA"/>
-                            <constraint firstItem="pUD-ra-0gk" firstAttribute="leading" secondItem="ck2-4k-c1N" secondAttribute="trailing" constant="8" id="OW9-hE-T46"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="width" secondItem="UPP-E4-jJm" secondAttribute="width" id="UF7-GR-g9L"/>
                             <constraint firstItem="qIn-RV-TbG" firstAttribute="leading" secondItem="pUD-ra-0gk" secondAttribute="trailing" constant="8" id="UdS-LV-hM6"/>
-                            <constraint firstItem="ck2-4k-c1N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aOt-Lb-ZGC"/>
-                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="top" secondItem="CjQ-Ho-DqY" secondAttribute="bottom" constant="26" id="e4A-ep-z8I"/>
-                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="13" id="ecw-uv-0d5"/>
+                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Wpr-yO-vsc"/>
+                            <constraint firstItem="pUD-ra-0gk" firstAttribute="leading" secondItem="ck2-4k-c1N" secondAttribute="trailing" constant="8" id="Yl2-Ik-18Q"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="height" secondItem="UPP-E4-jJm" secondAttribute="height" id="fIQ-ho-WrG"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="leading" secondItem="UPP-E4-jJm" secondAttribute="trailing" constant="8" id="g32-EP-dMe"/>
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="width" secondItem="UPP-E4-jJm" secondAttribute="width" id="gri-Iq-vcZ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ck2-4k-c1N" secondAttribute="bottom" constant="20" id="hRh-e7-53x"/>
+                            <constraint firstItem="EVp-Zo-0n6" firstAttribute="leading" secondItem="JOS-Z1-0c4" secondAttribute="trailing" constant="-55" id="h1F-yO-8xS"/>
+                            <constraint firstItem="ck2-4k-c1N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="i7W-Fs-QAl"/>
+                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="top" secondItem="EVp-Zo-0n6" secondAttribute="bottom" constant="-31" id="k8e-gx-ryD"/>
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="height" secondItem="UPP-E4-jJm" secondAttribute="height" id="mwl-02-WE8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pUD-ra-0gk" secondAttribute="bottom" constant="20" id="my0-No-27b"/>
-                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="33" id="nsY-Lr-wIR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qIn-RV-TbG" secondAttribute="trailing" constant="20" id="rGY-wF-zDG"/>
-                            <constraint firstItem="UPP-E4-jJm" firstAttribute="leading" secondItem="CjQ-Ho-DqY" secondAttribute="trailing" constant="8" id="v89-fr-P7s"/>
+                            <constraint firstItem="JOS-Z1-0c4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="uzD-AM-kMV"/>
                             <constraint firstItem="qIn-RV-TbG" firstAttribute="height" secondItem="UPP-E4-jJm" secondAttribute="height" id="xiT-yC-7ou"/>
-                            <constraint firstItem="UPP-E4-jJm" firstAttribute="leading" secondItem="ck2-4k-c1N" secondAttribute="trailing" constant="8" id="yJX-VW-X2y"/>
-                            <constraint firstItem="ck2-4k-c1N" firstAttribute="top" secondItem="JOS-Z1-0c4" secondAttribute="bottom" constant="8" id="ybh-qt-GRX"/>
+                            <constraint firstItem="UPP-E4-jJm" firstAttribute="leading" secondItem="ck2-4k-c1N" secondAttribute="trailing" constant="8" id="yf9-mP-2KL"/>
+                            <constraint firstItem="ck2-4k-c1N" firstAttribute="top" secondItem="JOS-Z1-0c4" secondAttribute="bottom" constant="13" id="ynT-yX-tlR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -273,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="98" y="-77"/>
+            <point key="canvasLocation" x="97.950219619326489" y="-77.34375"/>
         </scene>
         <!--Modify Task View Controller-->
         <scene sceneID="yf0-n2-ab0">
@@ -384,6 +383,6 @@
         <image name="arrowDown" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="czu-dF-g3k"/>
+        <segue reference="XSS-kC-BCd"/>
     </inferredMetricsTieBreakers>
 </document>

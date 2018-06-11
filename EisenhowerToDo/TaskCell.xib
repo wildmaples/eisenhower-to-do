@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,12 +22,6 @@
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just any task that is blagasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
                         <rect key="frame" x="55" y="14" width="298" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
-                        <rect key="frame" x="179" y="57" width="62.5" height="25.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -60,22 +53,25 @@
                             <action selector="deleteButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="X5j-l4-hQ7"/>
                         </connections>
                     </button>
+                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
+                        <rect key="frame" x="151" y="57" width="62.5" height="25.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="J6n-yd-hom" firstAttribute="baseline" secondItem="nnM-dq-eHm" secondAttribute="baseline" id="0AV-gS-gt9"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="55" id="0Oa-Tj-dg6"/>
-                    <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="leading" id="23z-kw-e3I"/>
-                    <constraint firstItem="MpJ-gv-NDg" firstAttribute="leading" secondItem="nnM-dq-eHm" secondAttribute="trailing" constant="122.5" id="7Oz-hQ-cXX"/>
+                    <constraint firstItem="J6n-yd-hom" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="55" id="8Mq-0F-B8G"/>
                     <constraint firstAttribute="trailing" secondItem="MpJ-gv-NDg" secondAttribute="trailing" constant="20" id="A37-vI-AvJ"/>
                     <constraint firstItem="t02-aY-FPA" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="12" id="G8I-gf-HTK"/>
-                    <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="36" id="VDk-63-NmH"/>
                     <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="22.5" id="WIE-j2-Mpr"/>
-                    <constraint firstItem="nnM-dq-eHm" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="Xnw-oI-0cA"/>
+                    <constraint firstItem="nnM-dq-eHm" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="XUM-b9-uOu"/>
                     <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="aYu-hU-MRe"/>
-                    <constraint firstItem="J6n-yd-hom" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="f8V-th-cdz"/>
                     <constraint firstAttribute="bottom" secondItem="t02-aY-FPA" secondAttribute="bottom" constant="65.5" id="iUO-NA-ACv"/>
-                    <constraint firstItem="J6n-yd-hom" firstAttribute="firstBaseline" secondItem="nnM-dq-eHm" secondAttribute="firstBaseline" id="oJX-ni-bzu"/>
+                    <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="8" id="pBN-WB-wPh"/>
                     <constraint firstAttribute="trailing" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="67" id="tSM-st-vT7"/>
+                    <constraint firstItem="J6n-yd-hom" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="uaU-Qm-xaZ"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="v3w-zo-45h"/>
                     <constraint firstItem="MpJ-gv-NDg" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="57" id="zhL-Ml-3n8"/>
                 </constraints>

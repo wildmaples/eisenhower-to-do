@@ -36,7 +36,5 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
         name.resignFirstResponder()
         return false
     }
-
-
     
 }

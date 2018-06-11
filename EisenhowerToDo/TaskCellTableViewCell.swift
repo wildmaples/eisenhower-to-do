@@ -47,25 +47,33 @@ class TaskCellTableViewCell: UITableViewCell {
     
 
     @IBAction func radioButton(_ sender: Any) {
+        
+        // if task is done
         if self.task.done == true {
-    
-            // make the task undone
+            
+            // make it not done
             radioButton.isSelected = false
             task.done = false
+            // push task back into 1/4 tableviews
             self.delegate?.categorizeTask(task: task)
+            // remove task from done list
             self.delegate?.mark(task: task, asDone: task.done)
+            // refresh
             self.delegate?.didUpdate(sender: self)
             
+        // if task is not done
         } else {
             
-            // this only happens in the completed task tableView
+            // make task done
             radioButton.isSelected = true
             task.done = true
+            
             let indexPath = IndexPath(row: index, section:0)
+            
+            // remove task from respective list 
             self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
             self.delegate?.mark(task: task, asDone: task.done)
             self.delegate?.didUpdate(sender: self)
-
         }
         print("\(task.done)")
     }

@@ -225,10 +225,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func completedTasksButton(_ sender: Any) {
         if completedTasksTableView.isHidden {
             completedTasksTableView.isHidden = false
-            self.arrowIcon.image = UIImage(named: "arrowDown")
+            self.arrowIcon.image = UIImage(named: "arrowUp")
         } else {
             completedTasksTableView.isHidden = true
-            self.arrowIcon.image = UIImage(named: "arrowUp")
+            self.arrowIcon.image = UIImage(named: "arrowDown")
         }
     }
 
@@ -294,25 +294,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func removeTask(sender: Any, task: Task, row: IndexPath) {
         
         // check which task it is
-        if task.urgency == true && task.importantness == true {
-            let indexPath = row
-            tasksTT.remove(at: indexPath.row)
-            importantUrgentTableView.reloadData()
-            
-        } else if task.urgency == true && task.importantness == false {
-            let indexPath = row
-            tasksFT.remove(at: indexPath.row)
-            nImportantUrgentTableView.reloadData()
-        } else if task.urgency == false && task.importantness == true {
-            let indexPath = row
-            tasksTF.remove(at: indexPath.row)
-            importantNUrgentTableView.reloadData()
-        } else if task.urgency == false && task.importantness == false {
-            let indexPath = row
-            tasksFF.remove(at: indexPath.row)
-            nImportantNUrgentTableView.reloadData()
+            if task.urgency == true && task.importantness == true {
+                let indexPath = row
+                tasksTT.remove(at: indexPath.row)
+                importantUrgentTableView.reloadData()
+                
+            } else if task.urgency == true && task.importantness == false {
+                let indexPath = row
+                tasksFT.remove(at: indexPath.row)
+                nImportantUrgentTableView.reloadData()
+            } else if task.urgency == false && task.importantness == true {
+                let indexPath = row
+                tasksTF.remove(at: indexPath.row)
+                importantNUrgentTableView.reloadData()
+            } else if task.urgency == false && task.importantness == false {
+                let indexPath = row
+                tasksFF.remove(at: indexPath.row)
+                nImportantNUrgentTableView.reloadData()
+            }
         }
-    }
+    
     
     // appends a done task to all_done list
     func mark(task: Task, asDone done: Bool) {

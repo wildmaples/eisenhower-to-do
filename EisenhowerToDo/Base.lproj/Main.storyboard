@@ -144,7 +144,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Ho-DqY">
                                 <rect key="frame" x="30" y="33" width="410" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="410" id="Z3p-a7-yXA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="410" id="Z3p-a7-yXA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                 <state key="normal" title="Create a New Task">
@@ -211,7 +211,7 @@
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOS-Z1-0c4">
                                 <rect key="frame" x="30" y="93" width="410" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="410" id="jSL-q8-Qma"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="410" id="jSL-q8-Qma"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Completed Tasks">
@@ -250,6 +250,7 @@
                             <constraint firstItem="EVp-Zo-0n6" firstAttribute="leading" secondItem="JOS-Z1-0c4" secondAttribute="trailing" constant="-55" id="h1F-yO-8xS"/>
                             <constraint firstItem="ck2-4k-c1N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="i7W-Fs-QAl"/>
                             <constraint firstItem="JOS-Z1-0c4" firstAttribute="top" secondItem="EVp-Zo-0n6" secondAttribute="bottom" constant="-31" id="k8e-gx-ryD"/>
+                            <constraint firstItem="UPP-E4-jJm" firstAttribute="leading" secondItem="CjQ-Ho-DqY" secondAttribute="trailing" constant="8" id="mE1-z4-k3Z"/>
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="height" secondItem="UPP-E4-jJm" secondAttribute="height" id="mwl-02-WE8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pUD-ra-0gk" secondAttribute="bottom" constant="20" id="my0-No-27b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qIn-RV-TbG" secondAttribute="trailing" constant="20" id="rGY-wF-zDG"/>

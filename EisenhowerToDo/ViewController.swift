@@ -8,23 +8,14 @@
 
 import UIKit
 
-// Protocol for delegation
-protocol UpdateDelegate: class {
-    func didUpdate(sender: Any)
-    func removeTask(sender: Any, task: Task, row: IndexPath)
-    func mark(task: Task, asDone done: Bool)
-    func categorizeTask(task: Task)
-}
-
-
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UpdateDelegate {
-
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
+    
     // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
-    var all_done_tasks: [Task] = []
-    var toggledTask: Task!
+    var allDoneTasks: [Task] = []
     var selectedIndex = Int()
+    var selectedTableView = UITableView()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -42,14 +33,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantUrgentTableView.dataSource = self
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
-
+        
         importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
-
+        
     }
-
-
+    
+    
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
@@ -58,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if tableView == self.nImportantUrgentTableView {
             count = tasksFT.count
         } else if tableView == self.completedTasksTableView {
-            count = all_done_tasks.count
+            count = allDoneTasks.count
         }
         return count
     }
@@ -68,7 +59,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = (omitDone(task_list: tasksTT))[indexPath.row]
+            let task = tasksTT[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
@@ -77,7 +68,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = (omitDone(task_list: tasksFT))[indexPath.row]
+            let task = tasksFT[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.index = indexPath.row
@@ -86,7 +77,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = all_done_tasks[indexPath.row]
+            let task = allDoneTasks[indexPath.row]
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
@@ -117,16 +108,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
-
+        
     }
     // Reload views to view newly created task
     override func viewDidAppear(_ animated: Bool) {
-        self.importantUrgentTableView?.reloadData()
-        self.nImportantUrgentTableView?.reloadData()
-        self.completedTasksTableView?.reloadData()
-
+        importantUrgentTableView?.reloadData()
+        nImportantUrgentTableView?.reloadData()
+        completedTasksTableView?.reloadData()
+        
     }
-
+    
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         
         let vc = segue.source as? ModifyTaskViewController
@@ -153,98 +144,74 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedIndex = indexPath.row
-        
-        if tableView == self.importantUrgentTableView {
-            self.performSegue(withIdentifier: "ModifySegueTT", sender: indexPath)
-        } else if tableView == self.nImportantUrgentTableView{
-            self.performSegue(withIdentifier: "ModifySegueFT", sender: indexPath)
-        }
-        
-        print(selectedIndex)
+        selectedIndex = indexPath.row
+        selectedTableView = tableView
+        performSegue(withIdentifier: "ModifySegue", sender: self)
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let indexPath = IndexPath(row: selectedIndex, section:0)
-        
-        if segue.identifier == "ModifySegueTT"{
-            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-            vc.task = tasksTT[selectedIndex]
-            removeTask(sender: (Any).self, task: tasksTT[selectedIndex], row: indexPath as IndexPath)
-            navigationController?.pushViewController(vc, animated: true)
-            
-        } else if segue.identifier == "ModifySegueFT" {
-            let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-            vc.task = tasksFT[selectedIndex]
-            removeTask(sender: (Any).self, task: tasksFT[selectedIndex], row: indexPath as IndexPath)
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    // Functions (used in delegation)
-    func didUpdate(sender: Any) {
-        // reload all views
-        self.completedTasksTableView.reloadData()
-        self.importantUrgentTableView.reloadData()
-        self.nImportantUrgentTableView.reloadData()
-        print ("tables refreshed!")
-    }
-    
-    func removeTask(sender: Any, task: Task, row: IndexPath) {
-    
-        // check which task it is
-        if task.urgency == true && task.importantness == true {
-            let indexPath = row
-            tasksTT.remove(at: indexPath.row)
-            importantUrgentTableView.reloadData()
-            
-            } else if task.urgency == true && task.importantness == false {
-            let indexPath = row
-            tasksFT.remove(at: indexPath.row)
-            nImportantUrgentTableView.reloadData()
-        }
-        print(tasksTT)
-        
-    }
-    
-    // appends a done task to all_done list
-    func mark(task: Task, asDone done: Bool) {
-        if task.done {
-            all_done_tasks.append(task)
-        } else {
-            all_done_tasks.remove(task)
-        }
-    }
-
-    // function to create a list that contains items that are not done
-    func omitDone(task_list: [Task]) -> [Task] {
-        var notdone : [Task] = []
-        for task in task_list {
-            if task.done == false {
-            notdone.append(task)
+        if segue.identifier == "ModifySegue" {
+            if selectedTableView == self.importantUrgentTableView {
+                let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+                vc.task = tasksTT[selectedIndex]
+                removeTask(task: tasksTT[selectedIndex])
+                navigationController?.pushViewController(vc, animated: true)
+                
+            } else if selectedTableView == self.nImportantUrgentTableView {
+                let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
+                vc.task = tasksFT[selectedIndex]
+                removeTask(task: tasksFT[selectedIndex])
+                navigationController?.pushViewController(vc, animated: true)
             }
         }
-        return notdone
+    }
+    
+    // remove task for non-done tasks
+    func removeTask(task: Task) {
+        if task.urgency == true && task.importantness == true {
+            if let index = tasksTT.index(of: task) {
+                tasksTT.remove(at: index)
+            }
+            importantUrgentTableView.reloadData()
+        } else if task.urgency == true && task.importantness == false {
+            if let index = tasksFT.index(of: task) {
+                tasksFT.remove(at: index)
+            }
+            nImportantUrgentTableView.reloadData()
+        }
+    }
+    
+    // remove task for done tasks
+    func removeDoneTask(task: Task) {
+        if let index = allDoneTasks.index(of: task) {
+            allDoneTasks.remove(at: index)
+        }
+        completedTasksTableView.reloadData()
+    }
+    
+    // appends a done task to allDoneTasks list
+    func mark(task: Task, asDone done: Bool) {
+        if task.done {
+            task.done = false
+        } else {
+            task.done = true
+            allDoneTasks.append(task)
+            completedTasksTableView.reloadData()
+        }
     }
     
     func categorizeTask(task: Task) {
         if task.urgency == true && task.importantness == true {
             tasksTT.append(task)
+            importantUrgentTableView.reloadData()
         } else if task.urgency == true && task.importantness == false {
             tasksFT.append(task)
+            nImportantUrgentTableView.reloadData()
         }
     }
+    
 }
 
-// To remove Class from a list
-extension Array where Element: AnyObject {
-    mutating func remove(_ object: AnyObject) {
-        if let index = index(where: { $0 === object }) {
-            remove(at: index)
-        }
-    }
-}

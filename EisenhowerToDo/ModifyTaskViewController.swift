@@ -15,7 +15,7 @@ class ModifyTaskViewController: UIViewController {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var urgentSwitch: UISwitch!
     @IBOutlet weak var importantSwitch: UISwitch!
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

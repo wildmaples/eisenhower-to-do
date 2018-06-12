@@ -12,19 +12,24 @@ import Foundation
 final class Task {
     
     // Properties
-    var name: String
+    var name: String!
     var importantness: Bool
     var urgency: Bool
     var done: Bool
     
     init(){
-        self.name = ""
         self.urgency = false
         self.importantness = false
         self.done = false
     }
+    
 }
 
+extension Task: Equatable {
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        return lhs === rhs
+    }
+}
 
 // Generating sample tasks to populate list
 final class SampleData {
@@ -33,7 +38,7 @@ final class SampleData {
         TT1.urgency = true
         TT1.importantness = true
         TT1.name = "Buy broccoli and tape"
-        TT1.done = true
+        TT1.done = false
         
         let TT2 = Task()
         TT2.urgency = true
@@ -49,7 +54,7 @@ final class SampleData {
         TT3.done = false
 
         
-        return [TT2, TT3]
+        return [TT1, TT2, TT3]
     }
     
     static func generateFT() -> [Task] {

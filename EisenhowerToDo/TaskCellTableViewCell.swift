@@ -8,14 +8,22 @@
 
 import UIKit
 
-class TaskCellTableViewCell: UITableViewCell {
+// Protocol for delegation
+protocol TaskCellDelegate: class {
+    func removeTask(task: Task)
+    func removeDoneTask(task: Task)
+    func mark(task: Task, asDone done: Bool)
+    func categorizeTask(task: Task)
+}
 
+class TaskCellTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var doneButton: UISwitch!
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
     
-    weak var delegate: UpdateDelegate?
+    weak var delegate: TaskCellDelegate?
     var task : Task!
     var index : Int!
     
@@ -24,7 +32,7 @@ class TaskCellTableViewCell: UITableViewCell {
         self.task = task
         taskLabel.text = task.name
         doneButton.isOn = task.done
-
+        
         if task.importantness == true && task.urgency == true {
             // insert other styling edits here later
             
@@ -34,34 +42,27 @@ class TaskCellTableViewCell: UITableViewCell {
     }
     
     @IBAction func doneToggle(_ sender: Any) {
+        
         if self.task.done == true {
-            
-            // make the task undone
-            task.done = false
             self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task, asDone: task.done)
-            self.delegate?.didUpdate(sender: self)
+            self.delegate?.removeDoneTask(task: task)
             
-        } else {
-            
-            // this only happens in the completed task tableView
-            task.done = true
-            let indexPath = IndexPath(row: index, section:0)
-            self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+        } else if self.task.done == false {
             self.delegate?.mark(task: task, asDone: task.done)
-            self.delegate?.didUpdate(sender: self)
-
+            self.delegate?.removeTask(task: task)
         }
         print("\(task.done)")
-
+        
     }
     
     
     @IBAction func deleteButton(_ sender: Any) {
-        let indexPath = IndexPath(row: index, section:0)
-        self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+        if self.task.done == true {
+            self.delegate?.removeTask(task: task)
+        } else {
+            self.delegate?.removeTask(task: task)
+        }
     }
-    
-
     
 }

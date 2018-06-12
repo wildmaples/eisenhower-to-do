@@ -59,7 +59,6 @@ class TaskCellTableViewCell: UITableViewCell {
             
             // make it not done
             radioButton.isSelected = false
-            task.done = false
             // push task back into 1/4 tableviews
             self.delegate?.categorizeTask(task: task)
             // remove task from done list
@@ -67,12 +66,10 @@ class TaskCellTableViewCell: UITableViewCell {
             // refresh
             self.delegate?.didUpdate(sender: self)
             
+            task.done = false
+            
         // if task is not done
         } else {
-            
-            // make task done
-            radioButton.isSelected = true
-            task.done = true
             
             let indexPath = IndexPath(row: index, section:0)
             
@@ -80,6 +77,8 @@ class TaskCellTableViewCell: UITableViewCell {
             self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
             self.delegate?.mark(task: task, asDone: task.done)
             self.delegate?.didUpdate(sender: self)
+            
+            task.done = true
         }
         print("\(task.done)")
     }
@@ -87,15 +86,6 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func deleteButton(_ sender: Any) {
         let indexPath = IndexPath(row: index, section:0)
-        
-        // if task is from the completed list
-        if task.done == true {
-            task.done = false
-            self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
-            
-        // if task is anywhere else
-        } else {
         self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
-        }
     }
 }

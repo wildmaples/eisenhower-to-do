@@ -294,7 +294,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func removeTask(sender: Any, task: Task, row: IndexPath) {
         
         // check which task it is
-        if task.done == false {
+        if task.done == true {
             all_done_tasks.remove(task)
             completedTasksTableView.reloadData()
         } else {
@@ -323,9 +323,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // appends a done task to all_done list
     func mark(task: Task, asDone done: Bool) {
         if task.done {
-            all_done_tasks.append(task)
-        } else {
             all_done_tasks.remove(task)
+        } else {
+            all_done_tasks.append(task)
         }
     }
 

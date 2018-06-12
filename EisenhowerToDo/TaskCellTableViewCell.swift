@@ -31,7 +31,13 @@ class TaskCellTableViewCell: UITableViewCell {
         radioButton.setImage(UIImage(named: "checkButton"), for: .selected)
         taskLabel.text = task.name
         radioButton.isSelected = task.done
-    
+        
+        // label boxing style
+        importantLabel.layer.borderColor = UIColor.black.cgColor
+        importantLabel.layer.borderWidth = 1.0
+        urgentLabel.layer.borderColor = UIColor.black.cgColor
+        urgentLabel.layer.borderWidth = 1.0
+
         if task.importantness == true && task.urgency == true {
             // insert other styling edits here
         } else if task.importantness == false && task.urgency == true {

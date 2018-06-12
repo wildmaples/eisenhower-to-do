@@ -156,7 +156,6 @@
                         <outlet property="importantUrgentTableView" destination="UPP-E4-jJm" id="6Ya-wt-e9z"/>
                         <outlet property="nImportantUrgentTableView" destination="ie6-pX-iTx" id="qwC-hr-br1"/>
                         <outlet property="newTaskButton" destination="CjQ-Ho-DqY" id="yGT-71-Bqe"/>
-                        <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegue" id="fWz-wQ-I4q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -166,7 +165,7 @@
         <!--Modify Task View Controller-->
         <scene sceneID="yf0-n2-ab0">
             <objects>
-                <viewController id="jyM-tk-IPR" customClass="ModifyTaskViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModifyTaskViewController" id="jyM-tk-IPR" customClass="ModifyTaskViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="egT-Is-GHT">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

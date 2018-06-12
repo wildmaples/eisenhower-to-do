@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate, ModifyTaskDelegate {
     
     // Sample data gen
     var tasksTT = SampleData.generateTT()
@@ -16,12 +16,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var allDoneTasks: [Task] = []
     var selectedIndex = Int()
     var selectedTableView = UITableView()
+    var selectedTask = Task()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var nImportantUrgentTableView: UITableView!
     @IBOutlet weak var importantUrgentTableView: UITableView!
+    
+    // MARK: - VC Stuff
     
     override func viewDidLoad() {
         
@@ -40,6 +43,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    // Reload views to view newly created sample task
+    override func viewDidAppear(_ animated: Bool) {
+        importantUrgentTableView?.reloadData()
+        nImportantUrgentTableView?.reloadData()
+        completedTasksTableView?.reloadData()
+    }
+    
+    // MARK: - tableView for VC
     
     // returns # of rows in each tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,6 +98,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
+        if tableView == self.importantUrgentTableView {
+            vc.task = tasksTT[selectedIndex]
+            selectedTask = tasksTT[selectedIndex]
+        } else if tableView == self.nImportantUrgentTableView {
+            vc.task = tasksFT[selectedIndex]
+            selectedTask = tasksFT[selectedIndex]
+        }
+        present(vc, animated: true, completion: nil)
+        
+    }
+    
+    // MARK: - IBActions
+    
     // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         
@@ -97,77 +124,45 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
         
-        // Append to the appropriate list
-        if createdTask.urgency == true && createdTask.importantness == true {
-            tasksTT.append(createdTask)
-            
-        } else if createdTask.urgency == true && createdTask.importantness == false {
-            tasksFT.append(createdTask)
-        }
+        categorizeTask(task: createdTask)
         
         // Check if new task's name is appended to the list
         print(createdTask.name )
         print(tasksTT)
         
     }
-    // Reload views to view newly created task
-    override func viewDidAppear(_ animated: Bool) {
-        importantUrgentTableView?.reloadData()
-        nImportantUrgentTableView?.reloadData()
-        completedTasksTableView?.reloadData()
-        
-    }
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         
         let vc = segue.source as? ModifyTaskViewController
-        let task = Task()
-        task.name = (vc?.name.text!)!
-        task.importantness = (vc?.importantSwitch.isOn)!
-        task.urgency = (vc?.urgentSwitch.isOn)!
-        task.done = false
-        print ("This is \(task)")
+        let modTask = Task()
+        modTask.name = (vc?.name.text!)!
+        modTask.importantness = (vc?.importantSwitch.isOn)!
+        modTask.urgency = (vc?.urgentSwitch.isOn)!
+        modTask.done = false
+        print ("This is \(modTask.name)")
+        print ("This is \(modTask.importantness)")
         
-        // Edit task in appropriate list
-        if task.urgency == true && task.importantness == true {
-            tasksTT.append(task)
-            self.importantUrgentTableView.reloadData()
+        
+        let oldTask = Task()
+        oldTask.name = (vc?.task.name!)!
+        oldTask.importantness = (vc?.task.importantness)!
+        oldTask.urgency = (vc?.task.urgency)!
+        oldTask.done = false
+        print ("This is \(oldTask.name)")
+        
+        if modTask.importantness != oldTask.importantness || modTask.urgency != oldTask.urgency {
+            removeTask(task: selectedTask)
+            categorizeTask(task: modTask)
             
-        } else if task.urgency == true && task.importantness == false {
-            tasksFT.append(task)
-            self.nImportantUrgentTableView.reloadData()
-        }
-        
-        // Check if name is appended to the list
-        print(task.name )
-        print(tasksTT)
-        
-        
-    }
-    
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        selectedTableView = tableView
-        performSegue(withIdentifier: "ModifySegue", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ModifySegue" {
-            if selectedTableView == self.importantUrgentTableView {
-                let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-                vc.task = tasksTT[selectedIndex]
-                removeTask(task: tasksTT[selectedIndex])
-                navigationController?.pushViewController(vc, animated: true)
-                
-            } else if selectedTableView == self.nImportantUrgentTableView {
-                let vc : ModifyTaskViewController = segue.destination as! ModifyTaskViewController
-                vc.task = tasksFT[selectedIndex]
-                removeTask(task: tasksFT[selectedIndex])
-                navigationController?.pushViewController(vc, animated: true)
-            }
+            // this works
+        } else {
+            selectedTask.name = modTask.name
+            didUpdate()
         }
     }
+    
+    // MARK: - TableView Delegate Functions
     
     // remove task for non-done tasks
     func removeTask(task: Task) {
@@ -213,5 +208,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // MARK: - Other functions
+    
+    // to refresh when misc is updated
+    func didUpdate() {
+        importantUrgentTableView.reloadData()
+        nImportantUrgentTableView.reloadData()
+        completedTasksTableView.reloadData()
+    }
 }
 

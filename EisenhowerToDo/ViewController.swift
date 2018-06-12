@@ -294,11 +294,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func removeTask(sender: Any, task: Task, row: IndexPath) {
         
         // check which task it is
+        if task.done == false {
+            all_done_tasks.remove(task)
+            completedTasksTableView.reloadData()
+        } else {
             if task.urgency == true && task.importantness == true {
                 let indexPath = row
                 tasksTT.remove(at: indexPath.row)
                 importantUrgentTableView.reloadData()
-                
             } else if task.urgency == true && task.importantness == false {
                 let indexPath = row
                 tasksFT.remove(at: indexPath.row)
@@ -313,6 +316,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 nImportantNUrgentTableView.reloadData()
             }
         }
+        
+    }
     
     
     // appends a done task to all_done list

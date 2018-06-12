@@ -87,6 +87,15 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func deleteButton(_ sender: Any) {
         let indexPath = IndexPath(row: index, section:0)
+        
+        // if task is from the completed list
+        if task.done == true {
+            task.done = false
+            self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+            
+        // if task is anywhere else
+        } else {
         self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+        }
     }
 }

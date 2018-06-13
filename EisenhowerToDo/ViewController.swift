@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
     
     // MARK: - Outlets and sample data variables
-
+    
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var tasksTF = SampleData.generateTF()
@@ -180,34 +180,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // remove task for non-done tasks
     func removeTask(task: Task) {
-        if task.urgency == true && task.importantness == true {
-            if let index = tasksTT.index(of: task) {
-                tasksTT.remove(at: index)
-                importantUrgentTableView.reloadData()
-            }
-        } else if task.urgency == true {
-            if let index = tasksFT.index(of: task) {
-                tasksFT.remove(at: index)
-                nImportantUrgentTableView.reloadData()
-            }
-        } else if task.importantness == true {
-            if let index = tasksTF.index(of: task) {
-                tasksTF.remove(at: index)
-                importantNUrgentTableView.reloadData()
-            }
-        } else {
-            if let index = tasksFF.index(of: task) {
-                tasksFF.remove(at: index)
-                nImportantNUrgentTableView.reloadData()
-            }
-        }
-    }
-    
-    // remove task for done tasks (to be removed in future)
-    func removeDoneTask(task: Task) {
         if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
             allDoneTasks.remove(at: index)
             completedTasksTableView.reloadData()
+        } else {
+            if task.urgency == true && task.importantness == true {
+                if let index = tasksTT.index(of: task) {
+                    tasksTT.remove(at: index)
+                    importantUrgentTableView.reloadData()
+                }
+            } else if task.urgency == true {
+                if let index = tasksFT.index(of: task) {
+                    tasksFT.remove(at: index)
+                    nImportantUrgentTableView.reloadData()
+                }
+            } else if task.importantness == true {
+                if let index = tasksTF.index(of: task) {
+                    tasksTF.remove(at: index)
+                    importantNUrgentTableView.reloadData()
+                }
+            } else {
+                if let index = tasksFF.index(of: task) {
+                    tasksFF.remove(at: index)
+                    nImportantNUrgentTableView.reloadData()
+                }
+            }
+            
         }
     }
     

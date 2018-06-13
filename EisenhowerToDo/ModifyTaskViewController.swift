@@ -33,7 +33,7 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ name: UITextField) -> Bool {
         self.view.endEditing(true)
         name.resignFirstResponder()
-        return false
+        return true
     }
     
 }

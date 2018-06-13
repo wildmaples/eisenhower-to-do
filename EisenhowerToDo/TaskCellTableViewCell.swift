@@ -11,7 +11,6 @@ import UIKit
 // Protocol for delegation
 protocol TaskCellDelegate: class {
     func removeTask(task: Task)
-    func removeDoneTask(task: Task)
     func mark(task: Task)
     func categorizeTask(task: Task)
 }
@@ -65,18 +64,16 @@ class TaskCellTableViewCell: UITableViewCell {
         if self.task.done == true {
             self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task)
-            self.delegate?.removeDoneTask(task: task)
+            self.delegate?.removeTask(task: task)
             
         } else {
-            self.delegate?.mark(task: task)
             self.delegate?.removeTask(task: task)
+            self.delegate?.mark(task: task)
         }
     }
     
     
     @IBAction func deleteButton(_ sender: Any) {
         self.delegate?.removeTask(task: task)
-        // temp: just to make deleting a donetask work this PR
-        self.delegate?.removeDoneTask(task: task)
     }
 }

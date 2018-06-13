@@ -137,6 +137,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             vc.task = tasksTF[selectedIndex]
         } else if tableView == self.nImportantNUrgentTableView {
             vc.task = tasksFF[selectedIndex]
+        } else {
+            vc.task = allDoneTasks[selectedIndex]
         }
         present(vc, animated: true, completion: nil)
     }
@@ -151,7 +153,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         createdTask.name = (vc?.name.text!)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
-        createdTask.done = false
         categorizeTask(task: createdTask)
     }
     
@@ -205,7 +206,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     nImportantNUrgentTableView.reloadData()
                 }
             }
-            
         }
     }
     
@@ -221,25 +221,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func categorizeTask(task: Task) {
-        if task.urgency == true && task.importantness == true {
-            if tasksTT.contains(task) == false {
-                tasksTT.append(task)
-                importantUrgentTableView.reloadData()
-            }
-        } else if task.urgency == true {
-            if tasksFT.contains(task) == false {
-                tasksFT.append(task)
-                nImportantUrgentTableView.reloadData()
-            }
-        } else if task.importantness == true {
-            if tasksTF.contains(task) == false {
-                tasksTF.append(task)
-                importantNUrgentTableView.reloadData()
+        if task.done == true {
+            if allDoneTasks.contains(task) == false {
+                allDoneTasks.append(task)
+                completedTasksTableView.reloadData()
             }
         } else {
-            if tasksFF.contains(task) == false {
-                tasksFF.append(task)
-                nImportantNUrgentTableView.reloadData()
+            if task.urgency == true && task.importantness == true {
+                if tasksTT.contains(task) == false {
+                    tasksTT.append(task)
+                    importantUrgentTableView.reloadData()
+                }
+            } else if task.urgency == true {
+                if tasksFT.contains(task) == false {
+                    tasksFT.append(task)
+                    nImportantUrgentTableView.reloadData()
+                }
+            } else if task.importantness == true {
+                if tasksTF.contains(task) == false {
+                    tasksTF.append(task)
+                    importantNUrgentTableView.reloadData()
+                }
+            } else {
+                if tasksFF.contains(task) == false {
+                    tasksFF.append(task)
+                    nImportantNUrgentTableView.reloadData()
+                }
             }
         }
     }
@@ -258,7 +265,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return 0xcccccc
         }
     }
-    
     
 }
 

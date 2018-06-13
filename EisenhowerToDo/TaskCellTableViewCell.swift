@@ -60,7 +60,6 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func deleteButton(_ sender: Any) {
         self.delegate?.removeTask(task: task)
-
     }
     
 }

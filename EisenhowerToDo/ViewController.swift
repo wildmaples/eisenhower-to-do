@@ -8,14 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate, ModifyTaskDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
     
     // Sample data gen
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var allDoneTasks: [Task] = []
     var selectedTableView = UITableView()
-    var selectedTask = Task()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -102,10 +101,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
         if tableView == self.importantUrgentTableView {
             vc.task = tasksTT[selectedIndex]
-            selectedTask = tasksTT[selectedIndex]
         } else if tableView == self.nImportantUrgentTableView {
             vc.task = tasksFT[selectedIndex]
-            selectedTask = tasksFT[selectedIndex]
         }
         present(vc, animated: true, completion: nil)
         
@@ -132,33 +129,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
-        
         let vc = segue.source as? ModifyTaskViewController
-        let modTask = Task()
-        modTask.name = (vc?.name.text!)!
-        modTask.importantness = (vc?.importantSwitch.isOn)!
-        modTask.urgency = (vc?.urgentSwitch.isOn)!
-        modTask.done = false
-        print ("This is \(modTask.name)")
-        print ("This is \(modTask.importantness)")
-        
-        
-        let oldTask = Task()
-        oldTask.name = (vc?.task.name!)!
-        oldTask.importantness = (vc?.task.importantness)!
-        oldTask.urgency = (vc?.task.urgency)!
-        oldTask.done = false
-        print ("This is \(oldTask.name)")
-        
-        if modTask.importantness != oldTask.importantness || modTask.urgency != oldTask.urgency {
-            removeTask(task: selectedTask)
-            categorizeTask(task: modTask)
-            
-            // this works
-        } else {
-            selectedTask.name = modTask.name
-            didUpdate()
-        }
+        let task = vc?.task
+        removeTask(task: task!)
+        task?.importantness = (vc?.importantSwitch.isOn)!
+        task?.urgency = (vc?.urgentSwitch.isOn)!
+        task?.name = vc?.name.text
+        categorizeTask(task: task!)
     }
     
     // MARK: - TableView Delegate Functions
@@ -211,13 +188,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    // MARK: - Other functions
-    
-    // to refresh when misc is updated
-    func didUpdate() {
-        importantUrgentTableView.reloadData()
-        nImportantUrgentTableView.reloadData()
-        completedTasksTableView.reloadData()
-    }
 }
 

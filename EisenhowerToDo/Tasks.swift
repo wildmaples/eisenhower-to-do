@@ -10,20 +10,26 @@ import Foundation
 
 
 final class Task {
+    
     // Properties
-    var name: String
+    var name: String!
     var importantness: Bool
     var urgency: Bool
     var done: Bool
     
     init(){
-        self.name = ""
         self.urgency = false
         self.importantness = false
         self.done = false
     }
+    
 }
 
+extension Task: Equatable {
+    static func == (lhs: Task, rhs: Task) -> Bool {
+        return lhs === rhs
+    }
+}
 
 // Generating sample tasks to populate list
 final class SampleData {
@@ -32,7 +38,7 @@ final class SampleData {
         TT1.urgency = true
         TT1.importantness = true
         TT1.name = "Buy broccoli and tape"
-        TT1.done = true
+        TT1.done = false
         
         let TT2 = Task()
         TT2.urgency = true
@@ -48,7 +54,7 @@ final class SampleData {
         TT3.done = false
 
         
-        return [TT2, TT3]
+        return [TT1, TT2, TT3]
     }
     
     static func generateFT() -> [Task] {
@@ -73,7 +79,6 @@ final class SampleData {
         FT3.done = false
 
         return [FT1, FT2, FT3]
-        
     }
     
     static func generateTF() -> [Task] {
@@ -97,24 +102,6 @@ final class SampleData {
     }
     
     static func generateFF() -> [Task] {
-        let FF1 = Task()
-        FF1.urgency = false
-        FF1.importantness = false
-        FF1.name = "Watch Deadpool"
-        
-        let FF2 = Task()
-        FF2.urgency = false
-        FF2.importantness = false
-        FF2.name = "Do something dumb "
-        
-        let FF3 = Task()
-        FF3.urgency = false
-        FF3.importantness = false
-        FF3.name = "Ask Fred about that one thing"
-        
-        return [FF1, FF2, FF3]
-    }
-    static func generate_done() -> [Task] {
         let FF1 = Task()
         FF1.urgency = false
         FF1.importantness = false

@@ -95,7 +95,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwD-ph-qO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DdM-qU-kGT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1089" y="-21"/>
+            <point key="canvasLocation" x="783" y="-77"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -106,107 +106,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-E4-jJm">
-                                <rect key="frame" x="448" y="33" width="445" height="482"/>
+                                <rect key="frame" x="448" y="33" width="445" height="481.5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" id="Hoc-F7-xQY">
-                                        <rect key="frame" x="0.0" y="55.5" width="445" height="115"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hoc-F7-xQY" id="arG-Sc-d6G">
-                                            <rect key="frame" x="0.0" y="0.0" width="445" height="115"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="jyM-tk-IPR" kind="presentation" identifier="ModifySegueTT" id="gMu-Cq-zVK"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ie6-pX-iTx">
-                                <rect key="frame" x="901" y="33" width="445" height="482"/>
+                                <rect key="frame" x="901" y="33" width="445" height="481.5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" id="2Kd-2b-Ief">
-                                        <rect key="frame" x="0.0" y="55.5" width="445" height="115"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Kd-2b-Ief" id="1E7-5C-kX5">
-                                            <rect key="frame" x="0.0" y="0.0" width="445" height="115"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegueFT" id="00N-sD-Ab2"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjQ-Ho-DqY">
-                                <rect key="frame" x="30" y="33" width="410" height="52"/>
+                                <rect key="frame" x="20" y="33" width="420" height="52"/>
+                                <color key="backgroundColor" red="0.36862745098039218" green="0.58823529411764708" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="410" id="Z3p-a7-yXA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <state key="normal" title="Create a New Task">
-                                    <color key="titleColor" red="0.36862745098039218" green="0.58823529411764708" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title=" Create a New Task">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="aZ1-4h-0g8" kind="presentation" identifier="addTaskSegue" id="qxt-mq-Hmr"/>
                                 </connections>
                             </button>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-4k-c1N">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ck2-4k-c1N">
                                 <rect key="frame" x="20" y="147" width="420" height="857"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="420" id="acs-u9-Hex"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" rowHeight="100" id="la6-xC-f9G">
-                                        <rect key="frame" x="0.0" y="28" width="420" height="100"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="la6-xC-f9G" id="BfY-o0-M9b">
-                                            <rect key="frame" x="0.0" y="0.0" width="420" height="99.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pUD-ra-0gk">
-                                <rect key="frame" x="448" y="522" width="445" height="482"/>
+                                <rect key="frame" x="448" y="522.5" width="445" height="481.5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" id="gts-39-ALo">
-                                        <rect key="frame" x="0.0" y="55.5" width="445" height="115"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gts-39-ALo" id="yLB-Qc-Tx8">
-                                            <rect key="frame" x="0.0" y="0.0" width="445" height="115"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegueTF" id="XSS-kC-BCd"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="115" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="qIn-RV-TbG">
-                                <rect key="frame" x="901" y="522" width="445" height="482"/>
+                                <rect key="frame" x="901" y="522.5" width="445" height="481.5"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TaskCell" id="3dr-ek-JkN">
-                                        <rect key="frame" x="0.0" y="55.5" width="445" height="115"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3dr-ek-JkN" id="OPN-1q-m0l">
-                                            <rect key="frame" x="0.0" y="0.0" width="445" height="115"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="jyM-tk-IPR" kind="show" identifier="ModifySegueFF" id="czu-dF-g3k"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JOS-Z1-0c4">
                                 <rect key="frame" x="30" y="93" width="410" height="41"/>
@@ -242,7 +181,7 @@
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="top" secondItem="UPP-E4-jJm" secondAttribute="bottom" constant="8" id="LN0-uh-sfO"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="width" secondItem="UPP-E4-jJm" secondAttribute="width" id="UF7-GR-g9L"/>
                             <constraint firstItem="qIn-RV-TbG" firstAttribute="leading" secondItem="pUD-ra-0gk" secondAttribute="trailing" constant="8" id="UdS-LV-hM6"/>
-                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Wpr-yO-vsc"/>
+                            <constraint firstItem="CjQ-Ho-DqY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Wpr-yO-vsc"/>
                             <constraint firstItem="pUD-ra-0gk" firstAttribute="leading" secondItem="ck2-4k-c1N" secondAttribute="trailing" constant="8" id="Yl2-Ik-18Q"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="height" secondItem="UPP-E4-jJm" secondAttribute="height" id="fIQ-ho-WrG"/>
                             <constraint firstItem="ie6-pX-iTx" firstAttribute="leading" secondItem="UPP-E4-jJm" secondAttribute="trailing" constant="8" id="g32-EP-dMe"/>
@@ -278,7 +217,7 @@
         <!--Modify Task View Controller-->
         <scene sceneID="yf0-n2-ab0">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="jyM-tk-IPR" customClass="ModifyTaskViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModifyTaskViewController" modalPresentationStyle="overCurrentContext" id="jyM-tk-IPR" customClass="ModifyTaskViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="egT-Is-GHT">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,7 +272,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                         <items>
                                                             <navigationItem id="jjp-WS-da0">
-                                                                <barButtonItem key="leftBarButtonItem" title="Delete" id="9QE-s9-QoC">
+                                                                <barButtonItem key="leftBarButtonItem" title="Cancel" id="9QE-s9-QoC">
                                                                     <connections>
                                                                         <action selector="cancelToWorkoutViewController:" destination="IV2-br-zTo" id="fgX-q0-KOw"/>
                                                                     </connections>
@@ -383,7 +322,4 @@
     <resources>
         <image name="arrowDown" width="64" height="64"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="XSS-kC-BCd"/>
-    </inferredMetricsTieBreakers>
 </document>

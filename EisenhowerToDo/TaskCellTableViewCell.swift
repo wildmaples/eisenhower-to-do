@@ -8,16 +8,23 @@
 
 import UIKit
 
+// Protocol for delegation
+protocol TaskCellDelegate: class {
+    func removeTask(task: Task)
+    func removeDoneTask(task: Task)
+    func mark(task: Task)
+    func categorizeTask(task: Task)
+}
+
 class TaskCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
     @IBOutlet weak var radioButton: UIButton!
-
-    weak var delegate: UpdateDelegate?
+    
+    weak var delegate: TaskCellDelegate?
     var task : Task!
-    var index : Int!
     
     func viewDidLoad() {
         let radioButton = UIButton(type: .custom)
@@ -25,21 +32,23 @@ class TaskCellTableViewCell: UITableViewCell {
     }
     
     func setup(task: Task) {
+        
         self.task = task
-        // base edit
+        
+        // Radio button setup
         radioButton.setImage(UIImage(named: "uncheckButton"), for: .normal)
         radioButton.setImage(UIImage(named: "checkButton"), for: .selected)
         taskLabel.text = task.name
         radioButton.isSelected = task.done
         
-        // label boxing style
+        // Label box styling
         importantLabel.layer.borderColor = UIColor.black.cgColor
         importantLabel.layer.borderWidth = 1.0
         urgentLabel.layer.borderColor = UIColor.black.cgColor
         urgentLabel.layer.borderWidth = 1.0
-
+        
         if task.importantness == true && task.urgency == true {
-            // insert other styling edits here
+            // insert other potential styling edits here
         } else if task.importantness == false && task.urgency == true {
             importantLabel.text = "Urgent"
             urgentLabel.isHidden = true
@@ -51,41 +60,23 @@ class TaskCellTableViewCell: UITableViewCell {
         }
     }
     
-
+    
     @IBAction func radioButton(_ sender: Any) {
-        
-        // if task is done
         if self.task.done == true {
-            
-            // make it not done
-            radioButton.isSelected = false
-            // push task back into 1/4 tableviews
             self.delegate?.categorizeTask(task: task)
-            // remove task from done list
-            self.delegate?.mark(task: task, asDone: task.done)
-            // refresh
-            self.delegate?.didUpdate(sender: self)
+            self.delegate?.mark(task: task)
+            self.delegate?.removeDoneTask(task: task)
             
-            task.done = false
-            
-        // if task is not done
         } else {
-            
-            let indexPath = IndexPath(row: index, section:0)
-            
-            // remove task from respective list 
-            self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
-            self.delegate?.mark(task: task, asDone: task.done)
-            self.delegate?.didUpdate(sender: self)
-            
-            task.done = true
+            self.delegate?.mark(task: task)
+            self.delegate?.removeTask(task: task)
         }
-        print("\(task.done)")
     }
-        
+    
     
     @IBAction func deleteButton(_ sender: Any) {
-        let indexPath = IndexPath(row: index, section:0)
-        self.delegate?.removeTask(sender: self, task: task, row: indexPath as IndexPath)
+        self.delegate?.removeTask(task: task)
+        // temp: just to make deleting a donetask work this PR
+        self.delegate?.removeDoneTask(task: task)
     }
 }

@@ -15,8 +15,7 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var urgentSwitch: UISwitch!
     @IBOutlet weak var importantSwitch: UISwitch!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.name.delegate = self
@@ -24,13 +23,13 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
         urgentSwitch.isOn = task.urgency
         importantSwitch.isOn = task.importantness
     }
-    
+
     // Cancel Action
     @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // make keyboard go away
+    // Make keyboard go away when Enter is pressed
     func textFieldShouldReturn(_ name: UITextField) -> Bool {
         self.view.endEditing(true)
         name.resignFirstResponder()

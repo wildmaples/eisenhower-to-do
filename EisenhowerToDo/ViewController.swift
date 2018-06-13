@@ -281,6 +281,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantUrgentTableView.reloadData()
         importantNUrgentTableView.reloadData()
         nImportantNUrgentTableView.reloadData()
+        completedTasksTableView.reloadData()
     }
     
 }

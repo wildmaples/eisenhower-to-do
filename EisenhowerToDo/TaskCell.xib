@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -28,13 +27,12 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-aY-FPA">
                         <rect key="frame" x="12" y="14" width="35" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="t02-aY-FPA" secondAttribute="height" multiplier="35:36" id="53s-q1-GiC"/>
                             <constraint firstAttribute="width" constant="35" id="5EC-sE-20N"/>
                             <constraint firstAttribute="height" constant="35" id="PQQ-kM-rHe"/>
                         </constraints>
-                        <state key="normal" title="checkButton" image="uncheckButton"/>
+                        <state key="normal" title="doneButton" image="uncheckButton"/>
                         <connections>
-                            <action selector="radioButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="f3M-TM-XBa"/>
+                            <action selector="doneButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="S2r-Ha-i31"/>
                         </connections>
                     </button>
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6n-yd-hom">
@@ -50,7 +48,8 @@
                     <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-gv-NDg">
                         <rect key="frame" x="364" y="57" width="36" height="35"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="MpJ-gv-NDg" secondAttribute="height" multiplier="36:35" id="NFd-wR-RjK"/>
+                            <constraint firstAttribute="width" constant="36" id="SCC-d8-4tN"/>
+                            <constraint firstAttribute="height" constant="35" id="ees-TA-ACQ"/>
                         </constraints>
                         <state key="normal" title="deleteButton" image="deletebutton"/>
                         <connections>
@@ -77,16 +76,14 @@
                     <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="aYu-hU-MRe"/>
                     <constraint firstItem="J6n-yd-hom" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="cYQ-dD-8a4"/>
                     <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="10" id="ctc-hu-cn4"/>
-                    <constraint firstAttribute="bottom" secondItem="t02-aY-FPA" secondAttribute="bottom" constant="65.5" id="iUO-NA-ACv"/>
                     <constraint firstItem="J6n-yd-hom" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="55" id="skE-ct-DFU"/>
                     <constraint firstAttribute="trailing" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="67" id="tSM-st-vT7"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="v3w-zo-45h"/>
-                    <constraint firstItem="MpJ-gv-NDg" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="57" id="zhL-Ml-3n8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="doneButton" destination="t02-aY-FPA" id="AVq-3J-1gd"/>
                 <outlet property="importantLabel" destination="J6n-yd-hom" id="fkH-Lp-XEM"/>
-                <outlet property="radioButton" destination="t02-aY-FPA" id="OqQ-ua-CVs"/>
                 <outlet property="taskLabel" destination="kMg-mc-2dU" id="VLa-pd-QTT"/>
                 <outlet property="urgentLabel" destination="nnM-dq-eHm" id="wJF-fu-hvU"/>
             </connections>

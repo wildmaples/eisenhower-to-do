@@ -31,9 +31,8 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     
     // Make keyboard go away when Enter is pressed
     func textFieldShouldReturn(_ name: UITextField) -> Bool {
-        self.view.endEditing(true)
         name.resignFirstResponder()
-        return false
+        return true
     }
     
 }

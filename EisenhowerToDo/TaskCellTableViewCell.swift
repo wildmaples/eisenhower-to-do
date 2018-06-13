@@ -49,7 +49,7 @@ class TaskCellTableViewCell: UITableViewCell {
             self.delegate?.mark(task: task)
             self.delegate?.removeDoneTask(task: task)
             
-        } else if self.task.done == false {
+        } else {
             self.delegate?.mark(task: task)
             self.delegate?.removeTask(task: task)
         }

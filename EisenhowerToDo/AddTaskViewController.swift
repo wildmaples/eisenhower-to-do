@@ -14,14 +14,14 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var urgentSwitch: UISwitch!
     @IBOutlet weak var name: UITextField!
     
-    // Cancel Action
-    @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.name.delegate = self
+    }
+
+    // Cancel Action
+    @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     // Make keyboard go away when Enter is pressed

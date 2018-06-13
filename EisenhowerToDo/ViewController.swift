@@ -170,11 +170,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         let vc = segue.source as? ModifyTaskViewController
         let task = vc?.task
-        removeTask(task: task!)
-        task?.importantness = (vc?.importantSwitch.isOn)!
-        task?.urgency = (vc?.urgentSwitch.isOn)!
-        task?.name = vc?.name.text
-        categorizeTask(task: task!)
+        
+        // if modified task has changed
+        if task?.importantness != (vc?.importantSwitch.isOn)! || (task?.urgency)! != (vc?.urgentSwitch.isOn)! {
+            removeTask(task: task!)
+            task?.importantness = (vc?.importantSwitch.isOn)!
+            task?.urgency = (vc?.urgentSwitch.isOn)!
+            task?.name = vc?.name.text
+            categorizeTask(task: task!)
+            
+        // if it hasn't changed just update the text
+        } else {
+            task?.name = vc?.name.text
+            didUpdate()
+        }
     }
     
     // MARK: - TableView Delegate Functions
@@ -186,7 +195,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             completedTasksTableView.reloadData()
         } else {
             if task.urgency == true && task.importantness == true {
-                if let index = tasksTT.index(of: task) {
+                if let index = tasksTT.index(of: task){
                     tasksTT.remove(at: index)
                     importantUrgentTableView.reloadData()
                 }
@@ -264,6 +273,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             return 0xcccccc
         }
+    }
+    
+    // refresh all tableviews
+    func didUpdate() {
+        importantUrgentTableView.reloadData()
+        nImportantUrgentTableView.reloadData()
+        importantNUrgentTableView.reloadData()
+        nImportantNUrgentTableView.reloadData()
     }
     
 }

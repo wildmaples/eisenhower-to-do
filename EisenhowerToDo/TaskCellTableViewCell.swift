@@ -25,7 +25,6 @@ class TaskCellTableViewCell: UITableViewCell {
     
     weak var delegate: TaskCellDelegate?
     var task : Task!
-    var index : Int!
     
     func setup(task: Task) {
         

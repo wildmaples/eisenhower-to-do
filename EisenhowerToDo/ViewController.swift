@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var allDoneTasks: [Task] = []
-    var selectedTableView = UITableView()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -71,7 +70,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let task = tasksTT[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
-            cell.index = indexPath.row
             //print("1. \(task.name)")
             return cell
             
@@ -80,7 +78,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let task = tasksFT[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
-            cell.index = indexPath.row
             //print("2: \(task.name)")
             return cell
             
@@ -90,7 +87,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.setup(task: task)
             cell.task = task
             cell.delegate = self
-            cell.index = indexPath.row
             //print("3. \(String(describing: cell.textLabel?.text))")
             return cell
         }

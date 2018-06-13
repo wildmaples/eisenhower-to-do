@@ -12,7 +12,7 @@ import UIKit
 protocol TaskCellDelegate: class {
     func removeTask(task: Task)
     func removeDoneTask(task: Task)
-    func mark(task: Task, asDone done: Bool)
+    func mark(task: Task)
     func categorizeTask(task: Task)
 }
 
@@ -43,13 +43,14 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func doneToggle(_ sender: Any) {
         
+        // for tasks that are in completed list
         if self.task.done == true {
             self.delegate?.categorizeTask(task: task)
-            self.delegate?.mark(task: task, asDone: task.done)
+            self.delegate?.mark(task: task)
             self.delegate?.removeDoneTask(task: task)
             
         } else if self.task.done == false {
-            self.delegate?.mark(task: task, asDone: task.done)
+            self.delegate?.mark(task: task)
             self.delegate?.removeTask(task: task)
         }
         print("\(task.done)")
@@ -58,11 +59,8 @@ class TaskCellTableViewCell: UITableViewCell {
     
     
     @IBAction func deleteButton(_ sender: Any) {
-        if self.task.done == true {
-            self.delegate?.removeTask(task: task)
-        } else {
-            self.delegate?.removeTask(task: task)
-        }
+        self.delegate?.removeTask(task: task)
+
     }
     
 }

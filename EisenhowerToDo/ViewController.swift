@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var allDoneTasks: [Task] = []
-    var selectedIndex = Int()
     var selectedTableView = UITableView()
     var selectedTask = Task()
     
@@ -99,7 +98,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
+        let selectedIndex = indexPath.row
         let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
         if tableView == self.importantUrgentTableView {
             vc.task = tasksTT[selectedIndex]
@@ -188,7 +187,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // appends a done task to allDoneTasks list
-    func mark(task: Task, asDone done: Bool) {
+    func mark(task: Task) {
         if task.done {
             task.done = false
         } else {
@@ -200,11 +199,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func categorizeTask(task: Task) {
         if task.urgency == true && task.importantness == true {
-            tasksTT.append(task)
-            importantUrgentTableView.reloadData()
+            if tasksTT.contains(task) == false {
+                tasksTT.append(task)
+                importantUrgentTableView.reloadData()
+            }
         } else if task.urgency == true && task.importantness == false {
-            tasksFT.append(task)
-            nImportantUrgentTableView.reloadData()
+            if tasksFT.contains(task) == false {
+                tasksFT.append(task)
+                nImportantUrgentTableView.reloadData()
+            }
         }
     }
     

@@ -20,38 +20,39 @@ class TaskCellTableViewCell: UITableViewCell {
     @IBOutlet weak var taskLabel: UILabel!
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
-    @IBOutlet weak var radioButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     weak var delegate: TaskCellDelegate?
     var task : Task!
     
-    func viewDidLoad() {
-        let radioButton = UIButton(type: .custom)
-        radioButton.isSelected = true
-    }
-    
-    func setup(task: Task) {
-        
-        self.task = task
-        
+    override func awakeFromNib() {
         // Radio button setup
-        radioButton.setImage(UIImage(named: "uncheckButton"), for: .normal)
-        radioButton.setImage(UIImage(named: "checkButton"), for: .selected)
-        taskLabel.text = task.name
-        radioButton.isSelected = task.done
+        doneButton.setImage(UIImage(named: "uncheckButton"), for: .normal)
+        doneButton.setImage(UIImage(named: "checkButton"), for: .selected)
         
         // Label box styling
         importantLabel.layer.borderColor = UIColor.black.cgColor
         importantLabel.layer.borderWidth = 1.0
         urgentLabel.layer.borderColor = UIColor.black.cgColor
         urgentLabel.layer.borderWidth = 1.0
+    }
+    
+    func setup(task: Task) {
         
+        self.task = task
+        taskLabel.text = task.name
+        doneButton.isSelected = task.done
         if task.importantness == true && task.urgency == true {
-            // insert other potential styling edits here
+            importantLabel.text = "Important"
+            importantLabel.isHidden = false
+            urgentLabel.isHidden = false
         } else if task.importantness == false && task.urgency == true {
             importantLabel.text = "Urgent"
+            importantLabel.isHidden = false
             urgentLabel.isHidden = true
         } else if task.importantness == true && task.urgency == false {
+            importantLabel.text = "Important"
+            importantLabel.isHidden = false
             urgentLabel.isHidden = true
         } else if task.importantness == false && task.urgency == false {
             urgentLabel.isHidden = true
@@ -59,8 +60,7 @@ class TaskCellTableViewCell: UITableViewCell {
         }
     }
     
-    
-    @IBAction func radioButton(_ sender: Any) {
+    @IBAction func doneButton(_ sender: Any) {
         if self.task.done == true {
             self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task)

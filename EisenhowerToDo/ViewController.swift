@@ -168,20 +168,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
-        let vc = segue.source as? ModifyTaskViewController
-        let task = vc?.task
-        
+        let vc = segue.source as! ModifyTaskViewController
+        let task : Task! = vc.task
+
         // if modified task has changed
-        if task?.importantness != (vc?.importantSwitch.isOn)! || (task?.urgency)! != (vc?.urgentSwitch.isOn)! {
+        if task.importantness != (vc.importantSwitch.isOn) || task.urgency != (vc.urgentSwitch.isOn) {
             removeTask(task: task!)
-            task?.importantness = (vc?.importantSwitch.isOn)!
-            task?.urgency = (vc?.urgentSwitch.isOn)!
-            task?.name = vc?.name.text
+            task.importantness = (vc.importantSwitch.isOn)
+            task.urgency = (vc.urgentSwitch.isOn)
+            task.name = vc.name.text
             categorizeTask(task: task!)
             
         // if it hasn't changed just update the text
         } else {
-            task?.name = vc?.name.text
+            task.name = vc.name.text
             didUpdate()
         }
     }

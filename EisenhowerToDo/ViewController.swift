@@ -207,7 +207,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     // appends a done task to allDoneTasks list
-    func mark(task: Task) {
+    func toggleDone(task: Task) {
         if task.done {
             task.done = false
         } else {

@@ -17,32 +17,51 @@ protocol TaskCellDelegate: class {
 }
 
 class TaskCellTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var taskLabel: UILabel!
-    @IBOutlet weak var doneButton: UISwitch!
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
     
     weak var delegate: TaskCellDelegate?
     var task : Task!
+    
+    override func awakeFromNib() {
+        // Radio button setup
+        doneButton.setImage(UIImage(named: "uncheckButton"), for: .normal)
+        doneButton.setImage(UIImage(named: "checkButton"), for: .selected)
+        
+        // Label box styling
+        importantLabel.layer.borderColor = UIColor.black.cgColor
+        importantLabel.layer.borderWidth = 1.0
+        urgentLabel.layer.borderColor = UIColor.black.cgColor
+        urgentLabel.layer.borderWidth = 1.0
+    }
     
     func setup(task: Task) {
         
         self.task = task
         taskLabel.text = task.name
-        doneButton.isOn = task.done
-        
+        doneButton.isSelected = task.done
         if task.importantness == true && task.urgency == true {
-            // insert other styling edits here later
-            
+            importantLabel.text = "Important"
+            importantLabel.isHidden = false
+            urgentLabel.isHidden = false
         } else if task.importantness == false && task.urgency == true {
+            importantLabel.text = "Urgent"
+            importantLabel.isHidden = false
+            urgentLabel.isHidden = true
+        } else if task.importantness == true && task.urgency == false {
+            importantLabel.text = "Important"
+            importantLabel.isHidden = false
+            urgentLabel.isHidden = true
+        } else if task.importantness == false && task.urgency == false {
+            urgentLabel.isHidden = true
             importantLabel.isHidden = true
         }
     }
     
-    @IBAction func doneToggle(_ sender: Any) {
-        
-        // for tasks that are in completed list
+    @IBAction func doneButton(_ sender: Any) {
         if self.task.done == true {
             self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task)
@@ -52,13 +71,12 @@ class TaskCellTableViewCell: UITableViewCell {
             self.delegate?.mark(task: task)
             self.delegate?.removeTask(task: task)
         }
-        print("\(task.done)")
-        
     }
     
     
     @IBAction func deleteButton(_ sender: Any) {
         self.delegate?.removeTask(task: task)
+        // temp: just to make deleting a donetask work this PR
+        self.delegate?.removeDoneTask(task: task)
     }
-    
 }

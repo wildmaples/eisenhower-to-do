@@ -8,14 +8,25 @@
 
 import UIKit
 
-class AddTaskViewController: UIViewController {
+class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var importantSwitch: UISwitch!
     @IBOutlet weak var urgentSwitch: UISwitch!
-    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.nameTextField.delegate = self
+    }
+
     // Cancel Action
     @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    // Make keyboard go away when Enter is pressed
+    func textFieldShouldReturn(_ name: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+        return true
     }
 }

@@ -81,7 +81,45 @@ final class SampleData {
         return [FT1, FT2, FT3]
     }
     
-    // To-Do: Add the other two lists
+    static func generateTF() -> [Task] {
+        let TF1 = Task()
+        TF1.urgency = false
+        TF1.importantness = true
+        TF1.name = "Call momma"
+        
+        let TF2 = Task()
+        TF2.urgency = false
+        TF2.importantness = true
+        TF2.name = "Make an appointment for an annual checkup"
+        
+        let TF3 = Task()
+        TF3.urgency = false
+        TF3.importantness = true
+        TF3.name = "Ask Fred about that one thing"
+        
+        return [TF1, TF2, TF3]
+        
+    }
+    
+    static func generateFF() -> [Task] {
+        let FF1 = Task()
+        FF1.urgency = false
+        FF1.importantness = false
+        FF1.name = "Watch Deadpool"
+        
+        let FF2 = Task()
+        FF2.urgency = false
+        FF2.importantness = false
+        FF2.name = "Do something dumb "
+        
+        let FF3 = Task()
+        FF3.urgency = false
+        FF3.importantness = false
+        FF3.name = "Ask Fred about that one thing"
+        
+        return [FF1, FF2, FF3]
+    }
+
 }
 
 

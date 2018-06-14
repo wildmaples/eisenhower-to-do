@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
     
     // MARK: - Outlets and sample data variables
-
+    
     var tasksTT = SampleData.generateTT()
     var tasksFT = SampleData.generateFT()
     var tasksTF = SampleData.generateTF()
@@ -178,9 +178,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - TableView Delegate Functions
     
-    // remove task for non-done tasks
+    // remove/delete task 
     func removeTask(task: Task) {
-        if task.urgency == true && task.importantness == true {
+        if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
+            allDoneTasks.remove(at: index)
+            completedTasksTableView.reloadData()
+        } else if task.urgency == true && task.importantness == true {
             if let index = tasksTT.index(of: task) {
                 tasksTT.remove(at: index)
                 importantUrgentTableView.reloadData()
@@ -200,14 +203,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 tasksFF.remove(at: index)
                 nImportantNUrgentTableView.reloadData()
             }
-        }
-    }
-    
-    // remove task for done tasks (to be removed in future)
-    func removeDoneTask(task: Task) {
-        if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
-            allDoneTasks.remove(at: index)
-            completedTasksTableView.reloadData()
         }
     }
     

@@ -78,7 +78,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
@@ -150,7 +150,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
-        createdTask.name = (vc?.name.text!)!
+        createdTask.name = (vc?.nameTextField.text!)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         categorizeTask(task: createdTask)
@@ -176,50 +176,49 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             removeTask(task: task!)
             task.importantness = vc.importantSwitch.isOn
             task.urgency = vc.urgentSwitch.isOn
-            task.name = vc.name.text
+            task.name = vc.nameTextField.text
             categorizeTask(task: task!)
             
         // if it hasn't changed just update the text
         } else {
-            task.name = vc.name.text
+            task.name = vc.nameTextField.text
             didUpdate()
         }
     }
     
     // MARK: - TableView Delegate Functions
     
-    // remove task for non-done tasks
+    // remove/delete task 
     func removeTask(task: Task) {
         if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
             allDoneTasks.remove(at: index)
             completedTasksTableView.reloadData()
+        } else if task.urgency == true && task.importantness == true {
+            if let index = importantUrgentList.index(of: task){
+                importantUrgentList.remove(at: index)
+                importantUrgentTableView.reloadData()
+            }
+        } else if task.urgency == true {
+            if let index = nImportantUrgentList.index(of: task) {
+                nImportantUrgentList.remove(at: index)
+                nImportantUrgentTableView.reloadData()
+            }
+        } else if task.importantness == true {
+            if let index = importantNUrgentList.index(of: task) {
+                importantNUrgentList.remove(at: index)
+                importantNUrgentTableView.reloadData()
+            }
         } else {
-            if task.urgency == true && task.importantness == true {
-                if let index = importantUrgentList.index(of: task){
-                    importantUrgentList.remove(at: index)
-                    importantUrgentTableView.reloadData()
-                }
-            } else if task.urgency == true {
-                if let index = nImportantUrgentList.index(of: task) {
-                    nImportantUrgentList.remove(at: index)
-                    nImportantUrgentTableView.reloadData()
-                }
-            } else if task.importantness == true {
-                if let index = importantNUrgentList.index(of: task) {
-                    importantNUrgentList.remove(at: index)
-                    importantNUrgentTableView.reloadData()
-                }
-            } else {
-                if let index = nImportantNUrgentList.index(of: task) {
-                    nImportantNUrgentList.remove(at: index)
-                    nImportantNUrgentTableView.reloadData()
-                }
+            if let index = nImportantNUrgentList.index(of: task) {
+                nImportantNUrgentList.remove(at: index)
+                nImportantNUrgentTableView.reloadData()
             }
         }
     }
-    
+
+
     // appends a done task to allDoneTasks list
-    func mark(task: Task) {
+    func toggleDone(task: Task) {
         if task.done {
             task.done = false
         } else {
@@ -228,37 +227,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             completedTasksTableView.reloadData()
         }
     }
-    
+
     func categorizeTask(task: Task) {
         if task.done == true {
             if allDoneTasks.contains(task) == false {
                 allDoneTasks.append(task)
                 completedTasksTableView.reloadData()
             }
+        } else if task.urgency == true && task.importantness == true {
+            if importantUrgentList.contains(task) == false {
+                importantUrgentList.append(task)
+                importantUrgentTableView.reloadData()
+            }
+        } else if task.urgency == true {
+            if nImportantUrgentList.contains(task) == false {
+                nImportantUrgentList.append(task)
+                nImportantUrgentTableView.reloadData()
+            }
+        } else if task.importantness == true {
+            if importantNUrgentList.contains(task) == false {
+                importantNUrgentList.append(task)
+                importantNUrgentTableView.reloadData()
+            }
         } else {
-            if task.urgency == true && task.importantness == true {
-                if importantUrgentList.contains(task) == false {
-                    importantUrgentList.append(task)
-                    importantUrgentTableView.reloadData()
-                }
-            } else if task.urgency == true {
-                if nImportantUrgentList.contains(task) == false {
-                    nImportantUrgentList.append(task)
-                    nImportantUrgentTableView.reloadData()
-                }
-            } else if task.importantness == true {
-                if importantNUrgentList.contains(task) == false {
-                    importantNUrgentList.append(task)
-                    importantNUrgentTableView.reloadData()
-                }
-            } else {
-                if nImportantNUrgentList.contains(task) == false {
-                    nImportantNUrgentList.append(task)
-                    nImportantNUrgentTableView.reloadData()
-                }
+            if nImportantNUrgentList.contains(task) == false {
+                nImportantNUrgentList.append(task)
+                nImportantNUrgentTableView.reloadData()
             }
         }
     }
+    
     
     // MARK: - Additional functions
     

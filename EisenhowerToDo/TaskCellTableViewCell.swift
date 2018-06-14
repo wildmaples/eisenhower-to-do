@@ -44,6 +44,7 @@ class TaskCellTableViewCell: UITableViewCell {
         taskLabel.text = task.name
         doneButton.isSelected = task.done
         if task.importantness == true && task.urgency == true {
+            importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = false
         } else if task.importantness == false && task.urgency == true {
@@ -51,6 +52,7 @@ class TaskCellTableViewCell: UITableViewCell {
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
         } else if task.importantness == true && task.urgency == false {
+            importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
         } else if task.importantness == false && task.urgency == false {

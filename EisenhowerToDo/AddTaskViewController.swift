@@ -12,11 +12,11 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var importantSwitch: UISwitch!
     @IBOutlet weak var urgentSwitch: UISwitch!
-    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.name.delegate = self
+        self.nameTextField.delegate = self
     }
 
     // Cancel Action
@@ -26,7 +26,7 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
 
     // Make keyboard go away when Enter is pressed
     func textFieldShouldReturn(_ name: UITextField) -> Bool {
-        name.resignFirstResponder()
+        nameTextField.resignFirstResponder()
         return true
     }
 }

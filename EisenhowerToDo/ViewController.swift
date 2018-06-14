@@ -148,7 +148,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
-        createdTask.name = (vc?.name.text!)!
+        createdTask.name = (vc?.nameTextField.text!)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         createdTask.done = false
@@ -172,7 +172,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         removeTask(task: task!)
         task?.importantness = (vc?.importantSwitch.isOn)!
         task?.urgency = (vc?.urgentSwitch.isOn)!
-        task?.name = vc?.name.text
+        task?.name = vc?.nameTextField.text
         categorizeTask(task: task!)
     }
     

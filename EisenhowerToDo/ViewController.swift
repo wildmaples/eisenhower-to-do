@@ -172,10 +172,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let task : Task! = vc.task
 
         // if modified task has changed
-        if task.importantness != (vc.importantSwitch.isOn) || task.urgency != (vc.urgentSwitch.isOn) {
+        if task.importantness != vc.importantSwitch.isOn || task.urgency != vc.urgentSwitch.isOn {
             removeTask(task: task!)
-            task.importantness = (vc.importantSwitch.isOn)
-            task.urgency = (vc.urgentSwitch.isOn)
+            task.importantness = vc.importantSwitch.isOn
+            task.urgency = vc.urgentSwitch.isOn
             task.name = vc.name.text
             categorizeTask(task: task!)
             

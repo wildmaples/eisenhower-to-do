@@ -62,8 +62,8 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func radioButton(_ sender: Any) {
         if self.task.done == true {
-            self.delegate?.categorizeTask(task: task)
             self.delegate?.mark(task: task)
+            self.delegate?.categorizeTask(task: task)
             self.delegate?.removeTask(task: task)
             
         } else {

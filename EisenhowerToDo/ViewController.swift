@@ -12,10 +12,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Outlets and sample data variables
     
-    var tasksTT = SampleData.generateTT()
-    var tasksFT = SampleData.generateFT()
-    var tasksTF = SampleData.generateTF()
-    var tasksFF = SampleData.generateFF()
+    var importantUrgentList = SampleData.generateTT()
+    var nImportantUrgentList = SampleData.generateFT()
+    var importantNUrgentList = SampleData.generateTF()
+    var nImportantNUrgentList = SampleData.generateFF()
     var allDoneTasks: [Task] = []
     
     // Outlets for the four table views
@@ -64,13 +64,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count = 0
         if tableView == self.importantUrgentTableView {
-            count = tasksTT.count
+            count = importantUrgentList.count
         } else if tableView == self.nImportantUrgentTableView {
-            count = tasksFT.count
+            count = nImportantUrgentList.count
         } else if tableView == self.importantNUrgentTableView {
-            count = tasksTF.count
+            count = importantNUrgentList.count
         } else if tableView == self.nImportantNUrgentTableView {
-            count = tasksFF.count
+            count = nImportantNUrgentList.count
         } else if tableView == self.completedTasksTableView {
             count = allDoneTasks.count
         }
@@ -78,11 +78,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksTT[indexPath.row]
+            let task = importantUrgentList[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x009E0F)
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksFT[indexPath.row]
+            let task = nImportantUrgentList[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0xFF9900)
@@ -98,7 +98,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.importantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksTF[indexPath.row]
+            let task = importantNUrgentList[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x2b78e4)
@@ -106,7 +106,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = tasksFF[indexPath.row]
+            let task = nImportantNUrgentList[indexPath.row]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x999999)
@@ -130,13 +130,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
         
         if tableView == self.importantUrgentTableView {
-            vc.task = tasksTT[selectedIndex]
+            vc.task = importantUrgentList[selectedIndex]
         } else if tableView == self.nImportantUrgentTableView {
-            vc.task = tasksFT[selectedIndex]
+            vc.task = nImportantUrgentList[selectedIndex]
         } else if tableView == self.importantNUrgentTableView {
-            vc.task = tasksTF[selectedIndex]
+            vc.task = importantNUrgentList[selectedIndex]
         } else if tableView == self.nImportantNUrgentTableView {
-            vc.task = tasksFF[selectedIndex]
+            vc.task = nImportantNUrgentList[selectedIndex]
         } else {
             vc.task = allDoneTasks[selectedIndex]
         }
@@ -150,7 +150,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
-        createdTask.name = (vc?.name.text!)!
+        createdTask.name = (vc?.nameTextField.text!)!
         createdTask.urgency = (vc?.urgentSwitch.isOn)!
         createdTask.importantness = (vc?.importantSwitch.isOn)!
         categorizeTask(task: createdTask)
@@ -168,49 +168,57 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
-        let vc = segue.source as? ModifyTaskViewController
-        let task = vc?.task
-        removeTask(task: task!)
-        task?.importantness = (vc?.importantSwitch.isOn)!
-        task?.urgency = (vc?.urgentSwitch.isOn)!
-        task?.name = vc?.name.text
-        categorizeTask(task: task!)
+        let vc = segue.source as! ModifyTaskViewController
+        let task : Task! = vc.task
+
+        // if modified task has changed
+        if task.importantness != vc.importantSwitch.isOn || task.urgency != vc.urgentSwitch.isOn {
+            removeTask(task: task!)
+            task.importantness = vc.importantSwitch.isOn
+            task.urgency = vc.urgentSwitch.isOn
+            task.name = vc.nameTextField.text
+            categorizeTask(task: task!)
+            
+        // if it hasn't changed just update the text
+        } else {
+            task.name = vc.nameTextField.text
+            didUpdate()
+        }
     }
     
     // MARK: - TableView Delegate Functions
     
-    // remove task for non-done tasks
+    // remove/delete task 
     func removeTask(task: Task) {
         if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
             allDoneTasks.remove(at: index)
             completedTasksTableView.reloadData()
+        } else if task.urgency == true && task.importantness == true {
+            if let index = importantUrgentList.index(of: task){
+                importantUrgentList.remove(at: index)
+                importantUrgentTableView.reloadData()
+            }
+        } else if task.urgency == true {
+            if let index = nImportantUrgentList.index(of: task) {
+                nImportantUrgentList.remove(at: index)
+                nImportantUrgentTableView.reloadData()
+            }
+        } else if task.importantness == true {
+            if let index = importantNUrgentList.index(of: task) {
+                importantNUrgentList.remove(at: index)
+                importantNUrgentTableView.reloadData()
+            }
         } else {
-            if task.urgency == true && task.importantness == true {
-                if let index = tasksTT.index(of: task) {
-                    tasksTT.remove(at: index)
-                    importantUrgentTableView.reloadData()
-                }
-            } else if task.urgency == true {
-                if let index = tasksFT.index(of: task) {
-                    tasksFT.remove(at: index)
-                    nImportantUrgentTableView.reloadData()
-                }
-            } else if task.importantness == true {
-                if let index = tasksTF.index(of: task) {
-                    tasksTF.remove(at: index)
-                    importantNUrgentTableView.reloadData()
-                }
-            } else {
-                if let index = tasksFF.index(of: task) {
-                    tasksFF.remove(at: index)
-                    nImportantNUrgentTableView.reloadData()
-                }
+            if let index = nImportantNUrgentList.index(of: task) {
+                nImportantNUrgentList.remove(at: index)
+                nImportantNUrgentTableView.reloadData()
             }
         }
     }
-    
+
+
     // appends a done task to allDoneTasks list
-    func mark(task: Task) {
+    func toggleDone(task: Task) {
         if task.done {
             task.done = false
         } else {
@@ -219,37 +227,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             completedTasksTableView.reloadData()
         }
     }
-    
+
     func categorizeTask(task: Task) {
         if task.done == true {
             if allDoneTasks.contains(task) == false {
                 allDoneTasks.append(task)
                 completedTasksTableView.reloadData()
             }
+        } else if task.urgency == true && task.importantness == true {
+            if importantUrgentList.contains(task) == false {
+                importantUrgentList.append(task)
+                importantUrgentTableView.reloadData()
+            }
+        } else if task.urgency == true {
+            if nImportantUrgentList.contains(task) == false {
+                nImportantUrgentList.append(task)
+                nImportantUrgentTableView.reloadData()
+            }
+        } else if task.importantness == true {
+            if importantNUrgentList.contains(task) == false {
+                importantNUrgentList.append(task)
+                importantNUrgentTableView.reloadData()
+            }
         } else {
-            if task.urgency == true && task.importantness == true {
-                if tasksTT.contains(task) == false {
-                    tasksTT.append(task)
-                    importantUrgentTableView.reloadData()
-                }
-            } else if task.urgency == true {
-                if tasksFT.contains(task) == false {
-                    tasksFT.append(task)
-                    nImportantUrgentTableView.reloadData()
-                }
-            } else if task.importantness == true {
-                if tasksTF.contains(task) == false {
-                    tasksTF.append(task)
-                    importantNUrgentTableView.reloadData()
-                }
-            } else {
-                if tasksFF.contains(task) == false {
-                    tasksFF.append(task)
-                    nImportantNUrgentTableView.reloadData()
-                }
+            if nImportantNUrgentList.contains(task) == false {
+                nImportantNUrgentList.append(task)
+                nImportantNUrgentTableView.reloadData()
             }
         }
     }
+    
     
     // MARK: - Additional functions
     
@@ -264,6 +271,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             return 0xcccccc
         }
+    }
+    
+    // refresh all tableviews
+    func didUpdate() {
+        importantUrgentTableView.reloadData()
+        nImportantUrgentTableView.reloadData()
+        importantNUrgentTableView.reloadData()
+        nImportantNUrgentTableView.reloadData()
+        completedTasksTableView.reloadData()
     }
     
 }

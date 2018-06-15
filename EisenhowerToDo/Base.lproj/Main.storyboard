@@ -88,7 +88,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="importantSwitch" destination="UVe-5w-iZe" id="XHW-5h-M3G"/>
-                        <outlet property="name" destination="iMa-Xd-cNG" id="vIz-H5-rwC"/>
+                        <outlet property="nameTextField" destination="iMa-Xd-cNG" id="1he-bY-Dds"/>
                         <outlet property="urgentSwitch" destination="y9m-1k-k7s" id="qY6-Vh-8xg"/>
                     </connections>
                 </viewController>
@@ -309,7 +309,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="importantSwitch" destination="bM8-mA-tae" id="ZEy-d6-4fO"/>
-                        <outlet property="name" destination="70A-Y9-Zg9" id="B7N-zK-e5f"/>
+                        <outlet property="nameTextField" destination="70A-Y9-Zg9" id="eo2-Bf-usM"/>
                         <outlet property="urgentSwitch" destination="C1Z-Xu-0j7" id="xej-1R-D9e"/>
                     </connections>
                 </viewController>

@@ -30,7 +30,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - VC Stuff
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
@@ -161,7 +160,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
-        
         let vc = segue.source as? AddTaskViewController
         let createdTask = Task()
         createdTask.name = (vc?.nameTextField.text!)!
@@ -271,7 +269,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
     // MARK: - Additional functions
     
     // returns muted color for completed tasks table based on task type
@@ -295,7 +292,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantNUrgentTableView.reloadData()
         completedTasksTableView.reloadData()
     }
-    
 }
 
 // Extension for UIColor
@@ -316,4 +312,3 @@ extension UIColor {
         )
     }
 }
-

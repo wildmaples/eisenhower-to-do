@@ -89,9 +89,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 5.0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
@@ -182,7 +182,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         let vc = segue.source as! ModifyTaskViewController
         let task : Task! = vc.task
-
+        
         // if modified task has changed
         if task.importantness != vc.importantSwitch.isOn || task.urgency != vc.urgentSwitch.isOn {
             removeTask(task: task!)
@@ -191,7 +191,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             task.name = vc.nameTextField.text
             categorizeTask(task: task!)
             
-        // if it hasn't changed just update the text
+            // if it hasn't changed just update the text
         } else {
             task.name = vc.nameTextField.text
             didUpdate()
@@ -227,8 +227,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-
-
+    
     // appends a done task to allDoneTasks list
     func toggleDone(task: Task) {
         if task.done {
@@ -239,7 +238,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             completedTasksTableView.reloadData()
         }
     }
-
+    
     func categorizeTask(task: Task) {
         if task.done == true {
             if allDoneTasks.contains(task) == false {
@@ -291,24 +290,5 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         importantNUrgentTableView.reloadData()
         nImportantNUrgentTableView.reloadData()
         completedTasksTableView.reloadData()
-    }
-}
-
-// Extension for UIColor
-extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert(red >= 0 && red <= 255, "Invalid red component")
-        assert(green >= 0 && green <= 255, "Invalid green component")
-        assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
-        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-    }
-    
-    convenience init(rgb: Int) {
-        self.init(
-            red: (rgb >> 16) & 0xFF,
-            green: (rgb >> 8) & 0xFF,
-            blue: rgb & 0xFF
-        )
     }
 }

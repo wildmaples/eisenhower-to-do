@@ -58,10 +58,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         completedTasksTableView?.reloadData()
     }
     
-    // MARK: - tableView for VC
+    // MARK: - TableView
     
-    // returns # of rows in each tableview
+    // Return one row for each section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    // Each Section has
+    func numberOfSections(in tableView: UITableView) -> Int {
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = importantUrgentList.count
@@ -77,12 +82,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return count
     }
     
+    // Set the spacing between sections
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 5.0
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // For each tableview, load cells
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = importantUrgentList[indexPath.row]
+            let task = importantUrgentList[indexPath.section]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x009E0F)
@@ -90,7 +104,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = nImportantUrgentList[indexPath.row]
+            let task = nImportantUrgentList[indexPath.section]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0xFF9900)
@@ -98,7 +112,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.importantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = importantNUrgentList[indexPath.row]
+            let task = importantNUrgentList[indexPath.section]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x2b78e4)
@@ -106,7 +120,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         } else if tableView == self.nImportantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = nImportantNUrgentList[indexPath.row]
+            let task = nImportantNUrgentList[indexPath.section]
             cell.setup(task: task)
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x999999)
@@ -115,7 +129,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             // Completed task tableview
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = allDoneTasks[indexPath.row]
+            let task = allDoneTasks[indexPath.section]
             cell.setup(task: task)
             cell.delegate = self
             let color = disabledColor(task: task)
@@ -126,7 +140,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // When a row is clicked
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedIndex = indexPath.row
+        let selectedIndex = indexPath.section
         let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
         
         if tableView == self.importantUrgentTableView {

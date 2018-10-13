@@ -35,6 +35,8 @@ class TaskCellTableViewCell: UITableViewCell {
         importantLabel.layer.borderWidth = 1.0
         urgentLabel.layer.borderColor = UIColor.black.cgColor
         urgentLabel.layer.borderWidth = 1.0
+        
+        taskLabel.sizeToFit()
     }
     
     func setup(task: Task) {

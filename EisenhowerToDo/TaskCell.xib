@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,76 +18,98 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="114.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just any task that is blagasd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
-                        <rect key="frame" x="55" y="14" width="298" height="29"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
+                        <rect key="frame" x="53" y="11" width="298" height="28"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Just any task that is \n blagasd">
+                                <attributes>
+                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <font key="NSFont" size="24" name=".SFNSDisplay"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-aY-FPA">
-                        <rect key="frame" x="12" y="14" width="35" height="35"/>
+                        <rect key="frame" x="26" y="15" width="19" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="5EC-sE-20N"/>
-                            <constraint firstAttribute="height" constant="35" id="PQQ-kM-rHe"/>
+                            <constraint firstAttribute="width" constant="19" id="5EC-sE-20N"/>
+                            <constraint firstAttribute="height" constant="20" id="PQQ-kM-rHe"/>
                         </constraints>
-                        <state key="normal" title="doneButton" image="uncheckButton"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="doneButton" image="uncheckButton">
+                            <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        </state>
                         <connections>
                             <action selector="doneButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="S2r-Ha-i31"/>
                         </connections>
                     </button>
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6n-yd-hom">
-                        <rect key="frame" x="55" y="57" width="100" height="32"/>
+                        <rect key="frame" x="55" y="76" width="100" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="437-gb-nCv"/>
-                            <constraint firstAttribute="height" constant="32" id="OI0-e4-evT"/>
+                            <constraint firstAttribute="height" constant="27" id="OI0-e4-evT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
+                        <rect key="frame" x="163" y="76" width="78" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="MGj-93-kDz"/>
+                            <constraint firstAttribute="width" constant="78" id="kb2-gv-QBR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MpJ-gv-NDg">
-                        <rect key="frame" x="364" y="57" width="36" height="35"/>
+                        <rect key="frame" x="364" y="68" width="36" height="35"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="36" id="SCC-d8-4tN"/>
                             <constraint firstAttribute="height" constant="35" id="ees-TA-ACQ"/>
                         </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="deleteButton" image="deletebutton"/>
                         <connections>
                             <action selector="deleteButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="X5j-l4-hQ7"/>
                         </connections>
                     </button>
-                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
-                        <rect key="frame" x="165" y="57" width="78" height="32"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="32" id="MGj-93-kDz"/>
-                            <constraint firstAttribute="width" constant="78" id="kb2-gv-QBR"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="55" id="0Oa-Tj-dg6"/>
+                    <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="11" id="1n3-nB-1PY"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="49" id="2hi-2a-3k5"/>
+                    <constraint firstAttribute="bottom" secondItem="J6n-yd-hom" secondAttribute="bottom" constant="11.5" id="5gi-c5-sKx"/>
                     <constraint firstAttribute="trailing" secondItem="MpJ-gv-NDg" secondAttribute="trailing" constant="20" id="A37-vI-AvJ"/>
-                    <constraint firstItem="nnM-dq-eHm" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="Apv-Bm-PPy"/>
-                    <constraint firstItem="t02-aY-FPA" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="12" id="G8I-gf-HTK"/>
-                    <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="22.5" id="WIE-j2-Mpr"/>
-                    <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="aYu-hU-MRe"/>
-                    <constraint firstItem="J6n-yd-hom" firstAttribute="top" secondItem="kMg-mc-2dU" secondAttribute="bottom" constant="14" id="cYQ-dD-8a4"/>
-                    <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="10" id="ctc-hu-cn4"/>
+                    <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="t02-aY-FPA" secondAttribute="trailing" constant="8" id="Cra-on-ybJ"/>
+                    <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="15" id="QbR-P7-2D6"/>
+                    <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="11.5" id="WIE-j2-Mpr"/>
+                    <constraint firstAttribute="bottom" secondItem="nnM-dq-eHm" secondAttribute="bottom" constant="11.5" id="YgD-Yf-F8m"/>
+                    <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="topMargin" id="bV6-Yt-Kb7"/>
+                    <constraint firstItem="nnM-dq-eHm" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="trailing" constant="8" id="ctc-hu-cn4"/>
+                    <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="J6n-yd-hom" secondAttribute="leading" constant="-2" id="kBD-Ne-2z1"/>
                     <constraint firstItem="J6n-yd-hom" firstAttribute="leading" secondItem="9hp-LI-DE2" secondAttribute="leading" constant="55" id="skE-ct-DFU"/>
-                    <constraint firstAttribute="trailing" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="67" id="tSM-st-vT7"/>
-                    <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="v3w-zo-45h"/>
                 </constraints>
             </tableViewCellContentView>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="30"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                    <integer key="value" value="2"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="doneButton" destination="t02-aY-FPA" id="AVq-3J-1gd"/>
                 <outlet property="importantLabel" destination="J6n-yd-hom" id="fkH-Lp-XEM"/>
                 <outlet property="taskLabel" destination="kMg-mc-2dU" id="VLa-pd-QTT"/>
                 <outlet property="urgentLabel" destination="nnM-dq-eHm" id="wJF-fu-hvU"/>
             </connections>
-            <point key="canvasLocation" x="-1983" y="338.5"/>
+            <point key="canvasLocation" x="-1984" y="337.78110944527737"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -11,7 +11,7 @@ import UIKit
 // Protocol for delegation
 protocol TaskCellDelegate: class {
     func removeTask(task: Task)
-    func mark(task: Task)
+    func toggleDone(task: Task)
     func categorizeTask(task: Task)
 }
 
@@ -35,6 +35,8 @@ class TaskCellTableViewCell: UITableViewCell {
         importantLabel.layer.borderWidth = 1.0
         urgentLabel.layer.borderColor = UIColor.black.cgColor
         urgentLabel.layer.borderWidth = 1.0
+        
+        taskLabel.sizeToFit()
     }
     
     func setup(task: Task) {
@@ -62,13 +64,13 @@ class TaskCellTableViewCell: UITableViewCell {
     
     @IBAction func doneButton(_ sender: Any) {
         if self.task.done == true {
+            self.delegate?.toggleDone(task: task)
             self.delegate?.categorizeTask(task: task)
-            self.delegate?.mark(task: task)
             self.delegate?.removeTask(task: task)
             
         } else {
             self.delegate?.removeTask(task: task)
-            self.delegate?.mark(task: task)
+            self.delegate?.toggleDone(task: task)
         }
     }
     

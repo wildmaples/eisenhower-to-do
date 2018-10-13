@@ -23,7 +23,7 @@
                         <attributedString key="attributedText">
                             <fragment content="Just any task that is \n blagasd">
                                 <attributes>
-                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <font key="NSFont" size="24" name=".SFNSDisplay"/>
                                     <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 </attributes>
@@ -31,11 +31,35 @@
                         </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-aY-FPA">
+                        <rect key="frame" x="26" y="15" width="19" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="19" id="5EC-sE-20N"/>
+                            <constraint firstAttribute="height" constant="20" id="PQQ-kM-rHe"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title="doneButton" image="uncheckButton">
+                            <color key="titleColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        </state>
+                        <connections>
+                            <action selector="doneButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="S2r-Ha-i31"/>
+                        </connections>
+                    </button>
                     <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6n-yd-hom">
                         <rect key="frame" x="55" y="76" width="100" height="27"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="437-gb-nCv"/>
                             <constraint firstAttribute="height" constant="27" id="OI0-e4-evT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
+                        <rect key="frame" x="163" y="76" width="78" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="MGj-93-kDz"/>
+                            <constraint firstAttribute="width" constant="78" id="kb2-gv-QBR"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
@@ -47,31 +71,10 @@
                             <constraint firstAttribute="width" constant="36" id="SCC-d8-4tN"/>
                             <constraint firstAttribute="height" constant="35" id="ees-TA-ACQ"/>
                         </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" title="deleteButton" image="deletebutton"/>
                         <connections>
                             <action selector="deleteButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="X5j-l4-hQ7"/>
-                        </connections>
-                    </button>
-                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Urgent" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnM-dq-eHm">
-                        <rect key="frame" x="163" y="76" width="78" height="27"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="27" id="MGj-93-kDz"/>
-                            <constraint firstAttribute="width" constant="78" id="kb2-gv-QBR"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t02-aY-FPA">
-                        <rect key="frame" x="23" y="14" width="22" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="22" id="5EC-sE-20N"/>
-                            <constraint firstAttribute="height" constant="22" id="PQQ-kM-rHe"/>
-                        </constraints>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" title="doneButton" image="uncheckButton"/>
-                        <connections>
-                            <action selector="doneButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="S2r-Ha-i31"/>
                         </connections>
                     </button>
                 </subviews>
@@ -81,7 +84,7 @@
                     <constraint firstAttribute="bottom" secondItem="J6n-yd-hom" secondAttribute="bottom" constant="11.5" id="5gi-c5-sKx"/>
                     <constraint firstAttribute="trailing" secondItem="MpJ-gv-NDg" secondAttribute="trailing" constant="20" id="A37-vI-AvJ"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="t02-aY-FPA" secondAttribute="trailing" constant="8" id="Cra-on-ybJ"/>
-                    <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="14" id="QbR-P7-2D6"/>
+                    <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="15" id="QbR-P7-2D6"/>
                     <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="11.5" id="WIE-j2-Mpr"/>
                     <constraint firstAttribute="bottom" secondItem="nnM-dq-eHm" secondAttribute="bottom" constant="11.5" id="YgD-Yf-F8m"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="topMargin" id="bV6-Yt-Kb7"/>

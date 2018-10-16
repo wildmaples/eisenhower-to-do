@@ -7,16 +7,16 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
-    
-    // MARK: - Outlets and sample data variables
-    
-    var importantUrgentList = SampleData.generateTT()
-    var nImportantUrgentList = SampleData.generateFT()
-    var importantNUrgentList = SampleData.generateTF()
-    var nImportantNUrgentList = SampleData.generateFF()
-    var allDoneTasks: [Task] = []
+
+
+    var importantUrgentList = [NSManagedObject]()
+    var nImportantUrgentList = [NSManagedObject]()
+    var importantNUrgentList = [NSManagedObject]()
+    var nImportantNUrgentList = [NSManagedObject]()
+    var allDoneTasks = [NSManagedObject]()
     
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
@@ -30,7 +30,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK: - VC Stuff
     
     override func viewDidLoad() {
+    
         super.viewDidLoad()
+        
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
         nImportantUrgentTableView.delegate = self
@@ -48,13 +50,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         
+        // To Generate Sample Data at first load
+//        SampleData.generateTT()
+//        SampleData.generateTF()
+//        SampleData.generateFT()
+//        SampleData.generateFF()
+        
+        fetchFromCoreData()
     }
     
+    func fetchFromCoreData() {
+        importantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: true)
+        nImportantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: false)
+        importantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: true)
+        nImportantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: false)
+        allDoneTasks = TaskManager.fetch(done: true)
+    }
+
     // Reload views to view newly created sample task
     override func viewDidAppear(_ animated: Bool) {
-        importantUrgentTableView?.reloadData()
-        nImportantUrgentTableView?.reloadData()
-        completedTasksTableView?.reloadData()
+        super.viewDidAppear(true)
+        didUpdate()
     }
     
     // MARK: - TableView
@@ -166,6 +182,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             vc.task = allDoneTasks[selectedIndex]
         }
+
         present(vc, animated: true, completion: nil)
     }
     
@@ -174,13 +191,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
         let vc = segue.source as? AddTaskViewController
-        let createdTask = Task()
-        createdTask.name = (vc?.nameTextField.text!)!
-        createdTask.urgency = (vc?.urgentSwitch.isOn)!
-        createdTask.importantness = (vc?.importantSwitch.isOn)!
-        categorizeTask(task: createdTask)
+        guard let name = vc?.nameTextField.text, let urgency = vc?.urgentSwitch.isOn, let importantness = vc?.importantSwitch.isOn else {
+            // TODO: Check for empty name strings
+            return
+        }
+        TaskManager.save(name: name, done: false, urgency: urgency, importantness: importantness)
+        didUpdate()
     }
-    
+
     // shows completed tasks tableview on click
     @IBAction func completedTasksButton(_ sender: Any) {
         if completedTasksTableView.isHidden {
@@ -194,41 +212,52 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         let vc = segue.source as! ModifyTaskViewController
-        let task : Task! = vc.task
+        
+        guard let task = vc.task,
+            let urgency = task.value(forKey: "urgency") as? Bool,
+            let importantness = task.value(forKey: "importantness") as? Bool,
+            let done = task.value(forKey: "done") as? Bool else {
+                return
+        }
         
         // if modified task has changed
-        if task.importantness != vc.importantSwitch.isOn || task.urgency != vc.urgentSwitch.isOn {
-            removeTask(task: task!)
-            task.importantness = vc.importantSwitch.isOn
-            task.urgency = vc.urgentSwitch.isOn
-            task.name = vc.nameTextField.text
-            categorizeTask(task: task!)
+        if importantness != vc.importantSwitch.isOn || urgency != vc.urgentSwitch.isOn, let name = vc.nameTextField.text {
+             removeTask(task: task)
+            TaskManager.save(name: name, done: done, urgency: vc.urgentSwitch.isOn, importantness: vc.importantSwitch.isOn)
             
-            // if it hasn't changed just update the text
         } else {
-            task.name = vc.nameTextField.text
-            didUpdate()
+            task.setValue(vc.nameTextField.text, forKey: "name")
+            TaskManager.willSave()
         }
+        
+        didUpdate()
     }
     
     // MARK: - TableView Delegate Functions
     
     // remove/delete task 
-    func removeTask(task: Task) {
+    func removeTask(task: NSManagedObject) {
         if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
             allDoneTasks.remove(at: index)
             completedTasksTableView.reloadData()
-        } else if task.urgency == true && task.importantness == true {
-            if let index = importantUrgentList.index(of: task){
+        }
+        
+        guard let urgency = task.value(forKey: "urgency") as? Bool,
+            let importantness = task.value(forKey: "importantness") as? Bool else {
+                return
+        }
+        
+        if urgency && importantness {
+            if let index = importantUrgentList.index(of: task) {
                 importantUrgentList.remove(at: index)
                 importantUrgentTableView.reloadData()
             }
-        } else if task.urgency == true {
+        } else if urgency {
             if let index = nImportantUrgentList.index(of: task) {
                 nImportantUrgentList.remove(at: index)
                 nImportantUrgentTableView.reloadData()
             }
-        } else if task.importantness == true {
+        } else if importantness {
             if let index = importantNUrgentList.index(of: task) {
                 importantNUrgentList.remove(at: index)
                 importantNUrgentTableView.reloadData()
@@ -239,58 +268,65 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 nImportantNUrgentTableView.reloadData()
             }
         }
+        TaskManager.delete(task: task)
+        didUpdate()
     }
     
-    // appends a done task to allDoneTasks list
-    func toggleDone(task: Task) {
-        if task.done {
-            task.done = false
-        } else {
-            task.done = true
-            allDoneTasks.append(task)
-            completedTasksTableView.reloadData()
-        }
+    // Toggle completed tasks 
+    func toggleDone(task: NSManagedObject) {
+        TaskManager.toggleDone(task: task)
+        categorize(tasks: [task])
+        didUpdate()
     }
     
-    func categorizeTask(task: Task) {
-        if task.done == true {
-            if allDoneTasks.contains(task) == false {
-                allDoneTasks.append(task)
-                completedTasksTableView.reloadData()
+    func categorize(tasks: [NSManagedObject]) {
+        for task in tasks {
+            guard let done = task.value(forKey: "done") as? Bool,
+                let urgency = task.value(forKey: "urgency") as? Bool,
+                let importantness = task.value(forKey: "importantness") as? Bool else {
+                    return
             }
-        } else if task.urgency == true && task.importantness == true {
-            if importantUrgentList.contains(task) == false {
-                importantUrgentList.append(task)
-                importantUrgentTableView.reloadData()
-            }
-        } else if task.urgency == true {
-            if nImportantUrgentList.contains(task) == false {
-                nImportantUrgentList.append(task)
-                nImportantUrgentTableView.reloadData()
-            }
-        } else if task.importantness == true {
-            if importantNUrgentList.contains(task) == false {
-                importantNUrgentList.append(task)
-                importantNUrgentTableView.reloadData()
-            }
-        } else {
-            if nImportantNUrgentList.contains(task) == false {
-                nImportantNUrgentList.append(task)
-                nImportantNUrgentTableView.reloadData()
+            
+            if done == true {
+                if allDoneTasks.contains(task) == false {
+                    allDoneTasks.append(task)
+                }
+            } else if urgency == true && importantness == true {
+                if importantUrgentList.contains(task) == false {
+                    importantUrgentList.append(task)
+                }
+            } else if urgency == true {
+                if nImportantUrgentList.contains(task) == false {
+                    nImportantUrgentList.append(task)
+                }
+            } else if importantness == true {
+                if importantNUrgentList.contains(task) == false {
+                    importantNUrgentList.append(task)
+                }
+            } else {
+                if nImportantNUrgentList.contains(task) == false {
+                    nImportantNUrgentList.append(task)
+                }
             }
         }
     }
+
     
     // MARK: - Additional functions
     
-    // returns muted color for completed tasks table based on task type
-    func disabledColor(task: Task) -> Int {
-        if task.importantness == true && task.urgency == true {
+    // Returns muted color for completed tasks table based on task type
+    func disabledColor(task: NSManagedObject) -> Int {
+        guard let importantness = task.value(forKey: "importantness") as? Bool,
+            let urgency = task.value(forKey: "urgency") as? Bool else {
+            return 0
+        }
+        
+        if importantness == true && urgency == true {
             return 0x6aa84f
-        } else if task.urgency == true {
+        } else if urgency == true {
             return 0xf6b26b
-        } else if task.importantness == true {
-            return 0x6fa8dc
+        } else if importantness == true {
+            return 0x6fa8d
         } else {
             return 0xcccccc
         }
@@ -298,6 +334,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // refresh all tableviews
     func didUpdate() {
+        fetchFromCoreData()
         importantUrgentTableView.reloadData()
         nImportantUrgentTableView.reloadData()
         importantNUrgentTableView.reloadData()

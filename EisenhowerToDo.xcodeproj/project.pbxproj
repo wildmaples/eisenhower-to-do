@@ -16,9 +16,12 @@
 		9A77DDD020BF56AB00B4361C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A77DDCF20BF56AB00B4361C /* Assets.xcassets */; };
 		9A77DDDE20BF56AC00B4361C /* EisenhowerToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */; };
 		9A77DDE920BF56AC00B4361C /* EisenhowerToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */; };
-		9A77DDF720BF585A00B4361C /* Tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDF620BF585A00B4361C /* Tasks.swift */; };
+		9A77DDF720BF585A00B4361C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDF620BF585A00B4361C /* TaskManager.swift */; };
 		9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */; };
 		F590E5B22172479E00C5A0EB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5B12172479E00C5A0EB /* UIColor+Extension.swift */; };
+		F590E5B82172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F590E5B62172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld */; };
+		F590E5BA2172AEB800C5A0EB /* TaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5B92172AEB800C5A0EB /* TaskGroup.swift */; };
+		F590E5BC217584F900C5A0EB /* SampleTaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5BB217584F900C5A0EB /* SampleTaskData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,9 +57,12 @@
 		9A77DDE420BF56AC00B4361C /* EisenhowerToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EisenhowerToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoUITests.swift; sourceTree = "<group>"; };
 		9A77DDEA20BF56AC00B4361C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A77DDF620BF585A00B4361C /* Tasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tasks.swift; sourceTree = "<group>"; };
+		9A77DDF620BF585A00B4361C /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		F590E5B12172479E00C5A0EB /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F590E5B72172929D00C5A0EB /* EisenhowerToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EisenhowerToDo.xcdatamodel; sourceTree = "<group>"; };
+		F590E5B92172AEB800C5A0EB /* TaskGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGroup.swift; sourceTree = "<group>"; };
+		F590E5BB217584F900C5A0EB /* SampleTaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTaskData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +113,9 @@
 		9A77DDC420BF56AA00B4361C /* EisenhowerToDo */ = {
 			isa = PBXGroup;
 			children = (
-				9A77DDF620BF585A00B4361C /* Tasks.swift */,
+				9A77DDF620BF585A00B4361C /* TaskManager.swift */,
+				F590E5BB217584F900C5A0EB /* SampleTaskData.swift */,
+				F590E5B92172AEB800C5A0EB /* TaskGroup.swift */,
 				9A77DDC520BF56AA00B4361C /* AppDelegate.swift */,
 				9A77DDC720BF56AA00B4361C /* ViewController.swift */,
 				9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */,
@@ -118,6 +126,7 @@
 				F590E5B12172479E00C5A0EB /* UIColor+Extension.swift */,
 				9A77DDCF20BF56AB00B4361C /* Assets.xcassets */,
 				9A77DDD420BF56AB00B4361C /* Info.plist */,
+				F590E5B62172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld */,
 			);
 			path = EisenhowerToDo;
 			sourceTree = "<group>";
@@ -273,10 +282,13 @@
 			files = (
 				F590E5B22172479E00C5A0EB /* UIColor+Extension.swift in Sources */,
 				9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */,
-				9A77DDF720BF585A00B4361C /* Tasks.swift in Sources */,
+				F590E5B82172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld in Sources */,
+				9A77DDF720BF585A00B4361C /* TaskManager.swift in Sources */,
+				F590E5BC217584F900C5A0EB /* SampleTaskData.swift in Sources */,
 				9A15936A20C9E857005936AF /* ModifyTaskViewController.swift in Sources */,
 				9A4169AC20C8AD4C00728829 /* TaskCellTableViewCell.swift in Sources */,
 				9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */,
+				F590E5BA2172AEB800C5A0EB /* TaskGroup.swift in Sources */,
 				9A77DDC620BF56AA00B4361C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,6 +604,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F590E5B62172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F590E5B72172929D00C5A0EB /* EisenhowerToDo.xcdatamodel */,
+			);
+			currentVersion = F590E5B72172929D00C5A0EB /* EisenhowerToDo.xcdatamodel */;
+			path = EisenhowerToDo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9A77DDBA20BF56AA00B4361C /* Project object */;
 }

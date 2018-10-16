@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 // Protocol for delegation
 protocol TaskCellDelegate: class {
-    func removeTask(task: Task)
-    func toggleDone(task: Task)
-    func categorizeTask(task: Task)
+    func removeTask(task: NSManagedObject)
+    func toggleDone(task: NSManagedObject)
 }
 
 class TaskCellTableViewCell: UITableViewCell {
@@ -23,7 +23,8 @@ class TaskCellTableViewCell: UITableViewCell {
     @IBOutlet weak var doneButton: UIButton!
     
     weak var delegate: TaskCellDelegate?
-    var task : Task!
+    var task : NSManagedObject!
+    var isTaskDone: Bool = false
     
     override func awakeFromNib() {
         // Radio button setup
@@ -39,41 +40,44 @@ class TaskCellTableViewCell: UITableViewCell {
         taskLabel.sizeToFit()
     }
     
-    func setup(task: Task) {
+    func setup(task: NSManagedObject) {
         
         self.task = task
-        taskLabel.text = task.name
-        doneButton.isSelected = task.done
-        if task.importantness == true && task.urgency == true {
+        guard let name = task.value(forKeyPath: "name") as? String,
+            let done = task.value(forKeyPath: "done") as? Bool else {
+            return
+        }
+        
+        taskLabel.text = name
+        isTaskDone = done
+        doneButton.isSelected = done
+        
+        guard let importantness = task.value(forKeyPath: "importantness") as? Bool,
+            let urgency = task.value(forKeyPath: "urgency") as? Bool else {
+                return
+        }
+        
+        if importantness && urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = false
-        } else if task.importantness == false && task.urgency == true {
+        } else if !importantness && urgency {
             importantLabel.text = "Urgent"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if task.importantness == true && task.urgency == false {
+        } else if importantness && !urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if task.importantness == false && task.urgency == false {
+        } else if !importantness && !urgency {
             urgentLabel.isHidden = true
             importantLabel.isHidden = true
         }
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        if self.task.done == true {
-            self.delegate?.toggleDone(task: task)
-            self.delegate?.categorizeTask(task: task)
-            self.delegate?.removeTask(task: task)
-            
-        } else {
-            self.delegate?.removeTask(task: task)
-            self.delegate?.toggleDone(task: task)
-        }
+        self.delegate?.toggleDone(task: task)
     }
-    
     
     @IBAction func deleteButton(_ sender: Any) {
         self.delegate?.removeTask(task: task)

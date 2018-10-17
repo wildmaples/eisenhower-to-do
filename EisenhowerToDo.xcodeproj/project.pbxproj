@@ -14,7 +14,6 @@
 		9A77DDC820BF56AA00B4361C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDC720BF56AA00B4361C /* ViewController.swift */; };
 		9A77DDCB20BF56AA00B4361C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A77DDC920BF56AA00B4361C /* Main.storyboard */; };
 		9A77DDD020BF56AB00B4361C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A77DDCF20BF56AB00B4361C /* Assets.xcassets */; };
-		9A77DDDE20BF56AC00B4361C /* EisenhowerToDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */; };
 		9A77DDE920BF56AC00B4361C /* EisenhowerToDoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */; };
 		9A77DDF720BF585A00B4361C /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DDF620BF585A00B4361C /* TaskManager.swift */; };
 		9A77DE0320C07A4900B4361C /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */; };
@@ -22,6 +21,7 @@
 		F590E5B82172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F590E5B62172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld */; };
 		F590E5BA2172AEB800C5A0EB /* TaskGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5B92172AEB800C5A0EB /* TaskGroup.swift */; };
 		F590E5BC217584F900C5A0EB /* SampleTaskData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5BB217584F900C5A0EB /* SampleTaskData.swift */; };
+		F590E5C32176B84F00C5A0EB /* EisenhowerToDoViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F590E5BF2176B70700C5A0EB /* EisenhowerToDoViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +63,7 @@
 		F590E5B72172929D00C5A0EB /* EisenhowerToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EisenhowerToDo.xcdatamodel; sourceTree = "<group>"; };
 		F590E5B92172AEB800C5A0EB /* TaskGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskGroup.swift; sourceTree = "<group>"; };
 		F590E5BB217584F900C5A0EB /* SampleTaskData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTaskData.swift; sourceTree = "<group>"; };
+		F590E5BF2176B70700C5A0EB /* EisenhowerToDoViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */,
+				F590E5BF2176B70700C5A0EB /* EisenhowerToDoViewControllerTests.swift */,
 				9A77DDDF20BF56AC00B4361C /* Info.plist */,
 			);
 			path = EisenhowerToDoTests;
@@ -297,7 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A77DDDE20BF56AC00B4361C /* EisenhowerToDoTests.swift in Sources */,
+				F590E5C32176B84F00C5A0EB /* EisenhowerToDoViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +494,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QD3RYVA9CK;
 				INFOPLIST_FILE = EisenhowerToDoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -512,6 +515,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QD3RYVA9CK;
 				INFOPLIST_FILE = EisenhowerToDoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

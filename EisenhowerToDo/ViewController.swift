@@ -25,12 +25,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var importantNUrgentList = [Task]()
     var nImportantNUrgentList = [Task]()
     var allDoneTasks = [Task]()
-    
-    // MARK: - VC Stuff
+    var taskManager: TaskManager!
     
     override func viewDidLoad() {
-    
         super.viewDidLoad()
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        self.taskManager = TaskManager(persistentContainer: appDelegate.persistentContainer)
         
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
@@ -50,10 +54,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         
         ///// To Generate Sample Data at first load
-//        SampleData.generateTT()
-//        SampleData.generateTF()
-//        SampleData.generateFT()
-//        SampleData.generateFF()
+//        SampleData.generateTT(taskManager: taskManager)
+//        SampleData.generateTF(taskManager: taskManager)
+//        SampleData.generateFT(taskManager: taskManager)
+//        SampleData.generateFF(taskManager: taskManager)
         
         fetchFromCoreData()
     }
@@ -188,7 +192,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let vc = segue.source as? AddTaskViewController else {
             return
         }
-        TaskManager.save(name: vc.nameTextField.text ?? " ", done: false, urgency: vc.urgentSwitch.isOn, importantness: vc.importantSwitch.isOn)
+        taskManager.save(name: vc.nameTextField.text ?? " ", done: false, urgency: vc.urgentSwitch.isOn, importantness: vc.importantSwitch.isOn)
         fetchAndRefreshAllTableViews()
     }
 
@@ -216,7 +220,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         task.setValue(vc.nameTextField.text, forKey: "name")
         task.setValue(done, forKey: "done")
         
-        TaskManager.saveContext()
+        taskManager.saveContext()
         fetchAndRefreshAllTableViews()
     }
     
@@ -251,13 +255,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-        TaskManager.delete(task: task)
+        taskManager.delete(task: task)
         fetchAndRefreshAllTableViews()
     }
     
     // Toggle completed tasks 
     func toggleDone(task: Task) {
-        TaskManager.toggleDone(task: task)
+        taskManager.toggleDone(task: task)
         fetchAndRefreshAllTableViews()
     }
 
@@ -282,11 +286,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func fetchFromCoreData() {
-        importantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: true)
-        nImportantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: false)
-        importantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: true)
-        nImportantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: false)
-        allDoneTasks = TaskManager.fetch(done: true)
+        importantUrgentList = taskManager.fetch(done: false, urgency: true, importantness: true)
+        nImportantUrgentList = taskManager.fetch(done: false, urgency: true, importantness: false)
+        importantNUrgentList = taskManager.fetch(done: false, urgency: false, importantness: true)
+        nImportantNUrgentList = taskManager.fetch(done: false, urgency: false, importantness: false)
+        allDoneTasks = taskManager.fetch(done: true)
     }
 
     // refresh all tableviews

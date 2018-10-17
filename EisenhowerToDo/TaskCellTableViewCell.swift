@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 // Protocol for delegation
 protocol TaskCellDelegate: class {
     func removeTask(task: Task)
     func toggleDone(task: Task)
-    func categorizeTask(task: Task)
 }
 
 class TaskCellTableViewCell: UITableViewCell {
@@ -24,6 +24,7 @@ class TaskCellTableViewCell: UITableViewCell {
     
     weak var delegate: TaskCellDelegate?
     var task : Task!
+    var isTaskDone: Bool = false
     
     override func awakeFromNib() {
         // Radio button setup
@@ -39,41 +40,36 @@ class TaskCellTableViewCell: UITableViewCell {
         taskLabel.sizeToFit()
     }
     
-    func setup(task: Task) {
-        
-        self.task = task
+    func setup() {
         taskLabel.text = task.name
+        isTaskDone = task.done
         doneButton.isSelected = task.done
-        if task.importantness == true && task.urgency == true {
+        
+        labelsSetUp()
+    }
+    
+    private func labelsSetUp() {
+        if task.importantness && task.urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = false
-        } else if task.importantness == false && task.urgency == true {
+        } else if !task.importantness && task.urgency {
             importantLabel.text = "Urgent"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if task.importantness == true && task.urgency == false {
+        } else if task.importantness && !task.urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if task.importantness == false && task.urgency == false {
+        } else if !task.importantness && !task.urgency {
             urgentLabel.isHidden = true
             importantLabel.isHidden = true
         }
     }
     
     @IBAction func doneButton(_ sender: Any) {
-        if self.task.done == true {
-            self.delegate?.toggleDone(task: task)
-            self.delegate?.categorizeTask(task: task)
-            self.delegate?.removeTask(task: task)
-            
-        } else {
-            self.delegate?.removeTask(task: task)
-            self.delegate?.toggleDone(task: task)
-        }
+        self.delegate?.toggleDone(task: task)
     }
-    
     
     @IBAction func deleteButton(_ sender: Any) {
         self.delegate?.removeTask(task: task)

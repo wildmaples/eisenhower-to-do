@@ -7,17 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskCellDelegate {
-    
-    // MARK: - Outlets and sample data variables
-    
-    var importantUrgentList = SampleData.generateTT()
-    var nImportantUrgentList = SampleData.generateFT()
-    var importantNUrgentList = SampleData.generateTF()
-    var nImportantNUrgentList = SampleData.generateFF()
-    var allDoneTasks: [Task] = []
-    
+
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
     @IBOutlet weak var newTaskButton: UIButton!
@@ -27,10 +20,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var importantNUrgentTableView: UITableView!
     @IBOutlet weak var arrowIcon: UIImageView!
     
+    var importantUrgentList = [Task]()
+    var nImportantUrgentList = [Task]()
+    var importantNUrgentList = [Task]()
+    var nImportantNUrgentList = [Task]()
+    var allDoneTasks = [Task]()
+    
     // MARK: - VC Stuff
     
     override func viewDidLoad() {
+    
         super.viewDidLoad()
+        
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
         nImportantUrgentTableView.delegate = self
@@ -48,13 +49,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nImportantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         
+        ///// To Generate Sample Data at first load
+//        SampleData.generateTT()
+//        SampleData.generateTF()
+//        SampleData.generateFT()
+//        SampleData.generateFF()
+        
+        fetchFromCoreData()
     }
-    
+
     // Reload views to view newly created sample task
     override func viewDidAppear(_ animated: Bool) {
-        importantUrgentTableView?.reloadData()
-        nImportantUrgentTableView?.reloadData()
-        completedTasksTableView?.reloadData()
+        super.viewDidAppear(true)
+//        didUpdate()
     }
     
     // MARK: - TableView
@@ -90,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 5.0
     }
     
-    // Make the background color show through
+    // Make the background color in header and footer show through
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = UIColor.clear
@@ -98,9 +105,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+        let footerView = UIView()
+        footerView.backgroundColor = UIColor.clear
+        return footerView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,7 +116,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if tableView == self.importantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = importantUrgentList[indexPath.section]
-            cell.setup(task: task)
+            cell.task = task
+            cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x009E0F)
             return cell
@@ -117,7 +125,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if tableView == self.nImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = nImportantUrgentList[indexPath.section]
-            cell.setup(task: task)
+            cell.task = task
+            cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0xFF9900)
             return cell
@@ -125,7 +134,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if tableView == self.importantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = importantNUrgentList[indexPath.section]
-            cell.setup(task: task)
+            cell.task = task
+            cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x2b78e4)
             return cell
@@ -133,7 +143,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if tableView == self.nImportantNUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = nImportantNUrgentList[indexPath.section]
-            cell.setup(task: task)
+            cell.task = task
+            cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x999999)
             return cell
@@ -142,15 +153,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = allDoneTasks[indexPath.section]
-            cell.setup(task: task)
+            cell.task = task
+            cell.setup()
             cell.delegate = self
             let color = disabledColor(task: task)
             cell.backgroundColor = UIColor(rgb: color)
             return cell
         }
     }
-    
-    // When a row is clicked
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedIndex = indexPath.section
         let vc = storyboard?.instantiateViewController(withIdentifier: "ModifyTaskViewController") as! ModifyTaskViewController
@@ -166,6 +177,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else {
             vc.task = allDoneTasks[selectedIndex]
         }
+
         present(vc, animated: true, completion: nil)
     }
     
@@ -173,14 +185,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Receiving newtask to categorize
     @IBAction func createTaskSegue(_ segue: UIStoryboardSegue) {
-        let vc = segue.source as? AddTaskViewController
-        let createdTask = Task()
-        createdTask.name = (vc?.nameTextField.text!)!
-        createdTask.urgency = (vc?.urgentSwitch.isOn)!
-        createdTask.importantness = (vc?.importantSwitch.isOn)!
-        categorizeTask(task: createdTask)
+        guard let vc = segue.source as? AddTaskViewController else {
+            return
+        }
+        TaskManager.save(name: vc.nameTextField.text ?? " ", done: false, urgency: vc.urgentSwitch.isOn, importantness: vc.importantSwitch.isOn)
+        fetchAndRefreshAllTableViews()
     }
-    
+
     // shows completed tasks tableview on click
     @IBAction func completedTasksButton(_ sender: Any) {
         if completedTasksTableView.isHidden {
@@ -194,21 +205,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func modifyTaskSegue(_ segue: UIStoryboardSegue) {
         let vc = segue.source as! ModifyTaskViewController
-        let task : Task! = vc.task
         
-        // if modified task has changed
-        if task.importantness != vc.importantSwitch.isOn || task.urgency != vc.urgentSwitch.isOn {
-            removeTask(task: task!)
-            task.importantness = vc.importantSwitch.isOn
-            task.urgency = vc.urgentSwitch.isOn
-            task.name = vc.nameTextField.text
-            categorizeTask(task: task!)
-            
-            // if it hasn't changed just update the text
-        } else {
-            task.name = vc.nameTextField.text
-            didUpdate()
+        guard let task = vc.task,
+            let done = task.value(forKey: "done") as? Bool else {
+                return
         }
+        
+        task.setValue(vc.urgentSwitch.isOn, forKey: "urgency")
+        task.setValue(vc.importantSwitch.isOn, forKey: "importantness")
+        task.setValue(vc.nameTextField.text, forKey: "name")
+        task.setValue(done, forKey: "done")
+        
+        TaskManager.saveContext()
+        fetchAndRefreshAllTableViews()
     }
     
     // MARK: - TableView Delegate Functions
@@ -218,17 +227,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
             allDoneTasks.remove(at: index)
             completedTasksTableView.reloadData()
-        } else if task.urgency == true && task.importantness == true {
-            if let index = importantUrgentList.index(of: task){
+        }
+        
+        if task.urgency && task.importantness {
+            if let index = importantUrgentList.index(of: task) {
                 importantUrgentList.remove(at: index)
                 importantUrgentTableView.reloadData()
             }
-        } else if task.urgency == true {
+        } else if task.urgency {
             if let index = nImportantUrgentList.index(of: task) {
                 nImportantUrgentList.remove(at: index)
                 nImportantUrgentTableView.reloadData()
             }
-        } else if task.importantness == true {
+        } else if task.importantness {
             if let index = importantNUrgentList.index(of: task) {
                 importantNUrgentList.remove(at: index)
                 importantNUrgentTableView.reloadData()
@@ -239,65 +250,48 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 nImportantNUrgentTableView.reloadData()
             }
         }
+        
+        TaskManager.delete(task: task)
+        fetchAndRefreshAllTableViews()
     }
     
-    // appends a done task to allDoneTasks list
+    // Toggle completed tasks 
     func toggleDone(task: Task) {
-        if task.done {
-            task.done = false
-        } else {
-            task.done = true
-            allDoneTasks.append(task)
-            completedTasksTableView.reloadData()
-        }
+        TaskManager.toggleDone(task: task)
+        fetchAndRefreshAllTableViews()
     }
-    
-    func categorizeTask(task: Task) {
-        if task.done == true {
-            if allDoneTasks.contains(task) == false {
-                allDoneTasks.append(task)
-                completedTasksTableView.reloadData()
-            }
-        } else if task.urgency == true && task.importantness == true {
-            if importantUrgentList.contains(task) == false {
-                importantUrgentList.append(task)
-                importantUrgentTableView.reloadData()
-            }
-        } else if task.urgency == true {
-            if nImportantUrgentList.contains(task) == false {
-                nImportantUrgentList.append(task)
-                nImportantUrgentTableView.reloadData()
-            }
-        } else if task.importantness == true {
-            if importantNUrgentList.contains(task) == false {
-                importantNUrgentList.append(task)
-                importantNUrgentTableView.reloadData()
-            }
-        } else {
-            if nImportantNUrgentList.contains(task) == false {
-                nImportantNUrgentList.append(task)
-                nImportantNUrgentTableView.reloadData()
-            }
-        }
-    }
-    
+
     // MARK: - Additional functions
     
-    // returns muted color for completed tasks table based on task type
-    func disabledColor(task: Task) -> Int {
-        if task.importantness == true && task.urgency == true {
+    // Returns muted color for completed tasks table based on task type
+    func disabledColor(task: NSManagedObject) -> Int {
+        guard let importantness = task.value(forKey: "importantness") as? Bool,
+            let urgency = task.value(forKey: "urgency") as? Bool else {
+            return 0
+        }
+        
+        if importantness == true && urgency == true {
             return 0x6aa84f
-        } else if task.urgency == true {
+        } else if urgency == true {
             return 0xf6b26b
-        } else if task.importantness == true {
-            return 0x6fa8dc
+        } else if importantness == true {
+            return 0x6fa8d
         } else {
             return 0xcccccc
         }
     }
     
+    func fetchFromCoreData() {
+        importantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: true)
+        nImportantUrgentList = TaskManager.fetch(done: false, urgency: true, importantness: false)
+        importantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: true)
+        nImportantNUrgentList = TaskManager.fetch(done: false, urgency: false, importantness: false)
+        allDoneTasks = TaskManager.fetch(done: true)
+    }
+
     // refresh all tableviews
-    func didUpdate() {
+    func fetchAndRefreshAllTableViews() {
+        fetchFromCoreData()
         importantUrgentTableView.reloadData()
         nImportantUrgentTableView.reloadData()
         importantNUrgentTableView.reloadData()

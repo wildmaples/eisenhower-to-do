@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     
@@ -19,6 +20,10 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.nameTextField.delegate = self
+        setUp()
+    }
+    
+    private func setUp() {
         nameTextField.text = task.name
         urgentSwitch.isOn = task.urgency
         importantSwitch.isOn = task.importantness
@@ -34,5 +39,4 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
         nameTextField.resignFirstResponder()
         return true
     }
-    
 }

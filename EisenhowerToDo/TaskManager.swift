@@ -11,7 +11,7 @@ import CoreData
 
 final class TaskManager {
         
-    static func willSave() {
+    static func saveContext() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -38,11 +38,11 @@ final class TaskManager {
         newTask.setValue(urgency, forKeyPath: "urgency")
         newTask.setValue(importantness, forKeyPath: "importantness")
 
-        willSave()
+        saveContext()
     }
     
-    static func fetch(done: Bool, urgency: Bool? = nil, importantness: Bool? = nil, name: String? = nil) -> [NSManagedObject] {
-        var tasks = [NSManagedObject]()
+    static func fetch(done: Bool, urgency: Bool? = nil, importantness: Bool? = nil, name: String? = nil) -> [Task] {
+        var tasks = [Task]()
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return tasks
@@ -73,34 +73,26 @@ final class TaskManager {
         fetchRequest.predicate = andPredicate
         
         do {
-            tasks = try managedContext.fetch(fetchRequest)
+            tasks = try managedContext.fetch(fetchRequest) as! [Task]
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
-        willSave()
         return tasks
     }
     
-    static func delete(task: NSManagedObject) {
+    static func delete(task: Task) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
-        }
-        
-        guard let done = task.value(forKey: "done") as? Bool,
-            let urgency = task.value(forKey: "urgency") as? Bool,
-            let importantness = task.value(forKey: "importantness") as? Bool,
-            let name = task.value(forKey: "name") as? String else {
-                return
         }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Task")
         let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and,
-                                               subpredicates: [NSPredicate(format: "done == %@", NSNumber(value: done)),
-                                                               NSPredicate(format: "urgency == %@", NSNumber(value: urgency)),
-                                                               NSPredicate(format: "importantness == %@", NSNumber(value: importantness)),
-                                                               NSPredicate(format: "name == %@", name) ])
+                                               subpredicates: [NSPredicate(format: "done == %@", NSNumber(value: task.done)),
+                                                               NSPredicate(format: "urgency == %@", NSNumber(value: task.urgency)),
+                                                               NSPredicate(format: "importantness == %@", NSNumber(value: task.importantness)),
+                                                               NSPredicate(format: "name == %@", task.name ?? " ") ])
         fetchRequest.predicate = andPredicate
         fetchRequest.fetchLimit = 1
         
@@ -113,16 +105,16 @@ final class TaskManager {
             print("Could not delete. \(error), \(error.userInfo)")
         }
         
-        willSave()
+        saveContext()
     }
     
-    static func toggleDone(task: NSManagedObject) {
-        if let currentStatus = task.value(forKey: "done") as? Bool, currentStatus {
+    static func toggleDone(task: Task) {
+        if task.done {
             task.setValue(false, forKey: "done")
         } else {
             task.setValue(true, forKey: "done")
         }
         
-        willSave()
+        saveContext()
     }
 }

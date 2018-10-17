@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="114.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
-                        <rect key="frame" x="53" y="11" width="298" height="28"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMg-mc-2dU">
+                        <rect key="frame" x="53" y="11" width="298" height="56"/>
                         <attributedString key="attributedText">
                             <fragment content="Just any task that is \n blagasd">
                                 <attributes>

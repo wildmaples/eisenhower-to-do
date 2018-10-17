@@ -11,8 +11,8 @@ import CoreData
 
 // Protocol for delegation
 protocol TaskCellDelegate: class {
-    func removeTask(task: NSManagedObject)
-    func toggleDone(task: NSManagedObject)
+    func removeTask(task: Task)
+    func toggleDone(task: Task)
 }
 
 class TaskCellTableViewCell: UITableViewCell {
@@ -23,7 +23,7 @@ class TaskCellTableViewCell: UITableViewCell {
     @IBOutlet weak var doneButton: UIButton!
     
     weak var delegate: TaskCellDelegate?
-    var task : NSManagedObject!
+    var task : Task!
     var isTaskDone: Bool = false
     
     override func awakeFromNib() {
@@ -40,36 +40,28 @@ class TaskCellTableViewCell: UITableViewCell {
         taskLabel.sizeToFit()
     }
     
-    func setup(task: NSManagedObject) {
+    func setup() {
+        taskLabel.text = task.name
+        isTaskDone = task.done
+        doneButton.isSelected = task.done
         
-        self.task = task
-        guard let name = task.value(forKeyPath: "name") as? String,
-            let done = task.value(forKeyPath: "done") as? Bool else {
-            return
-        }
-        
-        taskLabel.text = name
-        isTaskDone = done
-        doneButton.isSelected = done
-        
-        guard let importantness = task.value(forKeyPath: "importantness") as? Bool,
-            let urgency = task.value(forKeyPath: "urgency") as? Bool else {
-                return
-        }
-        
-        if importantness && urgency {
+        labelsSetUp()
+    }
+    
+    private func labelsSetUp() {
+        if task.importantness && task.urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = false
-        } else if !importantness && urgency {
+        } else if !task.importantness && task.urgency {
             importantLabel.text = "Urgent"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if importantness && !urgency {
+        } else if task.importantness && !task.urgency {
             importantLabel.text = "Important"
             importantLabel.isHidden = false
             urgentLabel.isHidden = true
-        } else if !importantness && !urgency {
+        } else if !task.importantness && !task.urgency {
             urgentLabel.isHidden = true
             importantLabel.isHidden = true
         }

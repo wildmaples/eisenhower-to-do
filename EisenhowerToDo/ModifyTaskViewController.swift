@@ -11,7 +11,7 @@ import CoreData
 
 class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     
-    var task: NSManagedObject!
+    var task: Task!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var urgentSwitch: UISwitch!
@@ -20,20 +20,13 @@ class ModifyTaskViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.nameTextField.delegate = self
-        setUp(task: task)
+        setUp()
     }
     
-    private func setUp(task: NSManagedObject) {
-        self.task = task
-        guard let name = task.value(forKeyPath: "name") as? String,
-            let importantness = task.value(forKeyPath: "importantness") as? Bool,
-            let urgency = task.value(forKeyPath: "urgency") as? Bool else {
-                return
-        }
-
-        nameTextField.text = name
-        urgentSwitch.isOn = urgency
-        importantSwitch.isOn = importantness
+    private func setUp() {
+        nameTextField.text = task.name
+        urgentSwitch.isOn = task.urgency
+        importantSwitch.isOn = task.importantness
     }
 
     // Cancel Action

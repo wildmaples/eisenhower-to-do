@@ -20,7 +20,7 @@ class AddTaskViewController: UIViewController, UITextFieldDelegate {
     }
 
     // Cancel Action
-    @IBAction func cancelToWorkoutViewController(_ segue: UIStoryboardSegue) {
+    @IBAction func cancelToTaskViewController(_ segue: UIStoryboardSegue) {
         self.dismiss(animated: true, completion: nil)
     }
 

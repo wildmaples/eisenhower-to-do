@@ -7,4 +7,6 @@ Watch John Green's vlog on [The EisenHower Matrix](https://www.youtube.com/watch
 Eisenhower To-Do Matrix Preview
 ======
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Eisenhower To-Do Main View" )
+![alt text](https://github.com/wildmaples/eisenhower-to-do/blob/master/EisenhowerToDoPreview.png "Eisenhower To-Do Main View" )
+
+![alt text](https://github.com/wildmaples/eisenhower-to-do/blob/master/EisenhowerToDoPreview2.png "Eisenhower To-Do Add Tasks" )

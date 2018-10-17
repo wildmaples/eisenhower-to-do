@@ -9,14 +9,16 @@
 import UIKit
 import CoreData
 
-final class TaskManager {
-        
-    static func saveContext() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+class TaskManager {
+    
+    var persistentContainer: NSPersistentContainer!
+    
+    init(persistentContainer: NSPersistentContainer) {
+        self.persistentContainer = persistentContainer
+    }
+    
+    func saveContext() {
+        let managedContext = persistentContainer.viewContext
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -24,12 +26,8 @@ final class TaskManager {
         }
     }
     
-    static func save(name: String, done: Bool, urgency: Bool, importantness: Bool) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+    func save(name: String, done: Bool, urgency: Bool, importantness: Bool) {
+        let managedContext = persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
         let newTask = NSManagedObject(entity: entity, insertInto: managedContext)
         
@@ -41,14 +39,10 @@ final class TaskManager {
         saveContext()
     }
     
-    static func fetch(done: Bool, urgency: Bool? = nil, importantness: Bool? = nil, name: String? = nil) -> [Task] {
+    func fetch(done: Bool, urgency: Bool? = nil, importantness: Bool? = nil, name: String? = nil) -> [Task] {
         var tasks = [Task]()
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return tasks
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+
+        let managedContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Task")
         
         let donePredicate = NSPredicate(format: "done == %@", NSNumber(value: done))
@@ -81,12 +75,8 @@ final class TaskManager {
         return tasks
     }
     
-    static func delete(task: Task) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
+    func delete(task: Task) {
+        let managedContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Task")
         let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and,
                                                subpredicates: [NSPredicate(format: "done == %@", NSNumber(value: task.done)),
@@ -108,7 +98,7 @@ final class TaskManager {
         saveContext()
     }
     
-    static func toggleDone(task: Task) {
+    func toggleDone(task: Task) {
         if task.done {
             task.setValue(false, forKey: "done")
         } else {

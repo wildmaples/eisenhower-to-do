@@ -65,7 +65,7 @@
                                             <navigationItem id="TRH-gR-rYT">
                                                 <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wBh-Lj-uMv">
                                                     <connections>
-                                                        <action selector="cancelToWorkoutViewController:" destination="hwD-ph-qO4" id="3D5-9p-qZL"/>
+                                                        <action selector="cancelToTaskViewController:" destination="aZ1-4h-0g8" id="iqd-dl-e8J"/>
                                                     </connections>
                                                 </barButtonItem>
                                                 <barButtonItem key="rightBarButtonItem" title="Create" id="S1B-Ix-3QX">
@@ -100,7 +100,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="EisenhowerToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

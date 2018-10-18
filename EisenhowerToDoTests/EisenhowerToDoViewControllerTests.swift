@@ -33,12 +33,12 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
 
     func initStubs() {
         func addTestTask(name: String, done: Bool, urgency: Bool, importantness: Bool) {
-            let testTask = NSEntityDescription.insertNewObject(forEntityName: "Task", into: mockPersistantContainer.viewContext)
+            let testTask = NSEntityDescription.insertNewObject(forEntityName: "Task", into: mockPersistantContainer.viewContext) as! Task
             
-            testTask.setValue(name, forKey: "name")
-            testTask.setValue(done, forKey: "done")
-            testTask.setValue(urgency, forKey: "urgency")
-            testTask.setValue(importantness, forKey: "importantness")
+            testTask.name = name
+            testTask.done = done
+            testTask.urgency = urgency
+            testTask.importantness = importantness
         }
         
         addTestTask(name: "1", done: false, urgency: true, importantness: true)
@@ -70,7 +70,6 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
     
         XCTAssertNotNil(sut.importantUrgentList)
         XCTAssertEqual(sut.importantUrgentList.count, 5+1) // 5 stubs + 1 created
-        deinitStubs()
     }
     
     func testToggleDone() {
@@ -84,7 +83,6 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
         sut.toggleDone(task: testTask as! Task)
 
         XCTAssertEqual(sut.allDoneTasks.count, 1) // After toggled, there will be one done task
-        deinitStubs()
     }
 
     func testRemoveTasks() {
@@ -96,6 +94,5 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
             sut.removeTask(task: task as! Task)
         }
         XCTAssertEqual(sut.importantUrgentList.count, 4)
-        deinitStubs()
     }
 }

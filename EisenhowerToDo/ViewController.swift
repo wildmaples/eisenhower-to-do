@@ -215,10 +215,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return
         }
         
-        task.setValue(vc.urgentSwitch.isOn, forKey: "urgency")
-        task.setValue(vc.importantSwitch.isOn, forKey: "importantness")
-        task.setValue(vc.nameTextField.text, forKey: "name")
-        task.setValue(done, forKey: "done")
+        task.name = vc.nameTextField.text
+        task.done = done
+        task.urgency = vc.urgentSwitch.isOn
+        task.importantness = vc.importantSwitch.isOn
         
         taskManager.saveContext()
         fetchAndRefreshAllTableViews()

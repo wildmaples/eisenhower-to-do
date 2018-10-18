@@ -267,6 +267,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     // MARK: - Additional functions
     
+    // TODO: Move this func somewhere else
     // Returns muted color for completed tasks table based on task type
     func disabledColor(task: NSManagedObject) -> Int {
         guard let importantness = task.value(forKey: "importantness") as? Bool,

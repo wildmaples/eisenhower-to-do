@@ -28,13 +28,12 @@ class TaskManager {
     
     func save(name: String, done: Bool, urgency: Bool, importantness: Bool) {
         let managedContext = persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
-        let newTask = NSManagedObject(entity: entity, insertInto: managedContext)
+        let newTask = NSEntityDescription.insertNewObject(forEntityName: "Task", into: managedContext) as! Task
         
-        newTask.setValue(name, forKeyPath: "name")
-        newTask.setValue(done, forKeyPath: "done")
-        newTask.setValue(urgency, forKeyPath: "urgency")
-        newTask.setValue(importantness, forKeyPath: "importantness")
+        newTask.name = name
+        newTask.done = done
+        newTask.urgency = urgency
+        newTask.importantness = importantness
 
         saveContext()
     }
@@ -100,11 +99,11 @@ class TaskManager {
     
     func toggleDone(task: Task) {
         if task.done {
-            task.setValue(false, forKey: "done")
+            task.done = false
         } else {
-            task.setValue(true, forKey: "done")
+            task.done = true
         }
-        
+
         saveContext()
     }
 }

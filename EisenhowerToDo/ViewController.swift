@@ -14,16 +14,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Outlets for the four table views
     @IBOutlet weak var completedTasksTableView: UITableView!
     @IBOutlet weak var newTaskButton: UIButton!
-    @IBOutlet weak var nImportantUrgentTableView: UITableView!
-    @IBOutlet weak var importantUrgentTableView: UITableView!
-    @IBOutlet weak var nImportantNUrgentTableView: UITableView!
-    @IBOutlet weak var importantNUrgentTableView: UITableView!
     @IBOutlet weak var arrowIcon: UIImageView!
+
+    @IBOutlet weak var importantUrgentTableView: UITableView!
+    @IBOutlet weak var notImportantUrgentTableView: UITableView!
+    @IBOutlet weak var notImportantNotUrgentTableView: UITableView!
+    @IBOutlet weak var importantNotUrgentTableView: UITableView!
     
     var importantUrgentList = [Task]()
-    var nImportantUrgentList = [Task]()
-    var importantNUrgentList = [Task]()
-    var nImportantNUrgentList = [Task]()
+    var notImportantUrgentList = [Task]()
+    var importantNotUrgentList = [Task]()
+    var notImportantNotUrgentList = [Task]()
     var allDoneTasks = [Task]()
     var taskManager: TaskManager!
     
@@ -38,19 +39,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         importantUrgentTableView.delegate = self
         importantUrgentTableView.dataSource = self
-        nImportantUrgentTableView.delegate = self
-        nImportantUrgentTableView.dataSource = self
-        nImportantNUrgentTableView.delegate = self
-        nImportantNUrgentTableView.dataSource = self
-        importantNUrgentTableView.delegate = self
-        importantNUrgentTableView.dataSource = self
+        notImportantUrgentTableView.delegate = self
+        notImportantUrgentTableView.dataSource = self
+        notImportantNotUrgentTableView.delegate = self
+        notImportantNotUrgentTableView.dataSource = self
+        importantNotUrgentTableView.delegate = self
+        importantNotUrgentTableView.dataSource = self
         completedTasksTableView.delegate = self
         completedTasksTableView.dataSource = self
         
         importantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
-        nImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
-        importantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
-        nImportantNUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        notImportantUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        importantNotUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+        notImportantNotUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         
         ///// To Generate Sample Data at first load
@@ -65,7 +66,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Reload views to view newly created sample task
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        didUpdate()
     }
     
     // MARK: - TableView
@@ -80,12 +80,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var count = 0
         if tableView == self.importantUrgentTableView {
             count = importantUrgentList.count
-        } else if tableView == self.nImportantUrgentTableView {
-            count = nImportantUrgentList.count
-        } else if tableView == self.importantNUrgentTableView {
-            count = importantNUrgentList.count
-        } else if tableView == self.nImportantNUrgentTableView {
-            count = nImportantNUrgentList.count
+        } else if tableView == self.notImportantUrgentTableView {
+            count = notImportantUrgentList.count
+        } else if tableView == self.importantNotUrgentTableView {
+            count = importantNotUrgentList.count
+        } else if tableView == self.notImportantNotUrgentTableView {
+            count = notImportantNotUrgentList.count
         } else if tableView == self.completedTasksTableView {
             count = allDoneTasks.count
         }
@@ -126,27 +126,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.backgroundColor = UIColor(rgb: 0x009E0F)
             return cell
             
-        } else if tableView == self.nImportantUrgentTableView {
+        } else if tableView == self.notImportantUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = nImportantUrgentList[indexPath.section]
+            let task = notImportantUrgentList[indexPath.section]
             cell.task = task
             cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0xFF9900)
             return cell
             
-        } else if tableView == self.importantNUrgentTableView {
+        } else if tableView == self.importantNotUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = importantNUrgentList[indexPath.section]
+            let task = importantNotUrgentList[indexPath.section]
             cell.task = task
             cell.setup()
             cell.delegate = self
             cell.backgroundColor = UIColor(rgb: 0x2b78e4)
             return cell
             
-        } else if tableView == self.nImportantNUrgentTableView {
+        } else if tableView == self.notImportantNotUrgentTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
-            let task = nImportantNUrgentList[indexPath.section]
+            let task = notImportantNotUrgentList[indexPath.section]
             cell.task = task
             cell.setup()
             cell.delegate = self
@@ -172,12 +172,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if tableView == self.importantUrgentTableView {
             vc.task = importantUrgentList[selectedIndex]
-        } else if tableView == self.nImportantUrgentTableView {
-            vc.task = nImportantUrgentList[selectedIndex]
-        } else if tableView == self.importantNUrgentTableView {
-            vc.task = importantNUrgentList[selectedIndex]
-        } else if tableView == self.nImportantNUrgentTableView {
-            vc.task = nImportantNUrgentList[selectedIndex]
+        } else if tableView == self.notImportantUrgentTableView {
+            vc.task = notImportantUrgentList[selectedIndex]
+        } else if tableView == self.importantNotUrgentTableView {
+            vc.task = importantNotUrgentList[selectedIndex]
+        } else if tableView == self.notImportantNotUrgentTableView {
+            vc.task = notImportantNotUrgentList[selectedIndex]
         } else {
             vc.task = allDoneTasks[selectedIndex]
         }
@@ -239,19 +239,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 importantUrgentTableView.reloadData()
             }
         } else if task.urgency {
-            if let index = nImportantUrgentList.index(of: task) {
-                nImportantUrgentList.remove(at: index)
-                nImportantUrgentTableView.reloadData()
+            if let index = notImportantUrgentList.index(of: task) {
+                notImportantUrgentList.remove(at: index)
+                notImportantUrgentTableView.reloadData()
             }
         } else if task.importantness {
-            if let index = importantNUrgentList.index(of: task) {
-                importantNUrgentList.remove(at: index)
-                importantNUrgentTableView.reloadData()
+            if let index = importantNotUrgentList.index(of: task) {
+                importantNotUrgentList.remove(at: index)
+                importantNotUrgentTableView.reloadData()
             }
         } else {
-            if let index = nImportantNUrgentList.index(of: task) {
-                nImportantNUrgentList.remove(at: index)
-                nImportantNUrgentTableView.reloadData()
+            if let index = notImportantNotUrgentList.index(of: task) {
+                notImportantNotUrgentList.remove(at: index)
+                notImportantNotUrgentTableView.reloadData()
             }
         }
         
@@ -280,7 +280,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if urgency == true {
             return 0xf6b26b
         } else if importantness == true {
-            return 0x6fa8d
+            return 0x5687d4
         } else {
             return 0xcccccc
         }
@@ -288,9 +288,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func fetchFromCoreData() {
         importantUrgentList = taskManager.fetch(done: false, urgency: true, importantness: true)
-        nImportantUrgentList = taskManager.fetch(done: false, urgency: true, importantness: false)
-        importantNUrgentList = taskManager.fetch(done: false, urgency: false, importantness: true)
-        nImportantNUrgentList = taskManager.fetch(done: false, urgency: false, importantness: false)
+        notImportantUrgentList = taskManager.fetch(done: false, urgency: true, importantness: false)
+        importantNotUrgentList = taskManager.fetch(done: false, urgency: false, importantness: true)
+        notImportantNotUrgentList = taskManager.fetch(done: false, urgency: false, importantness: false)
         allDoneTasks = taskManager.fetch(done: true)
     }
 
@@ -298,9 +298,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func fetchAndRefreshAllTableViews() {
         fetchFromCoreData()
         importantUrgentTableView.reloadData()
-        nImportantUrgentTableView.reloadData()
-        importantNUrgentTableView.reloadData()
-        nImportantNUrgentTableView.reloadData()
+        notImportantUrgentTableView.reloadData()
+        importantNotUrgentTableView.reloadData()
+        notImportantNotUrgentTableView.reloadData()
         completedTasksTableView.reloadData()
     }
 }

@@ -54,18 +54,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         notImportantNotUrgentTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         completedTasksTableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         
-        ///// To Generate Sample Data at first load
+        // To Generate Sample Data at first load
 //        SampleData.generateTT(taskManager: taskManager)
 //        SampleData.generateTF(taskManager: taskManager)
 //        SampleData.generateFT(taskManager: taskManager)
 //        SampleData.generateFF(taskManager: taskManager)
-        
-        fetchFromCoreData()
     }
 
     // Reload views to view newly created sample task
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        fetchAndRefreshAllTableViews()
     }
     
     // MARK: - TableView
@@ -75,7 +74,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return 1
     }
     
-    // Each Section has
     func numberOfSections(in tableView: UITableView) -> Int {
         var count = 0
         if tableView == self.importantUrgentTableView {
@@ -153,7 +151,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             cell.backgroundColor = UIColor(rgb: 0x999999)
             return cell
             
-            // Completed task tableview
+        // Completed task tableview
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
             let task = allDoneTasks[indexPath.section]
@@ -196,7 +194,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         fetchAndRefreshAllTableViews()
     }
 
-    // shows completed tasks tableview on click
+    // Shows completed tasks tableview on click
     @IBAction func completedTasksButton(_ sender: Any) {
         if completedTasksTableView.isHidden {
             completedTasksTableView.isHidden = false
@@ -226,35 +224,35 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - TableView Delegate Functions
     
-    // remove/delete task 
+    // Remove/delete task
     func removeTask(task: Task) {
-        if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
-            allDoneTasks.remove(at: index)
-            completedTasksTableView.reloadData()
-        }
-        
-        if task.urgency && task.importantness {
-            if let index = importantUrgentList.index(of: task) {
-                importantUrgentList.remove(at: index)
-                importantUrgentTableView.reloadData()
-            }
-        } else if task.urgency {
-            if let index = notImportantUrgentList.index(of: task) {
-                notImportantUrgentList.remove(at: index)
-                notImportantUrgentTableView.reloadData()
-            }
-        } else if task.importantness {
-            if let index = importantNotUrgentList.index(of: task) {
-                importantNotUrgentList.remove(at: index)
-                importantNotUrgentTableView.reloadData()
-            }
-        } else {
-            if let index = notImportantNotUrgentList.index(of: task) {
-                notImportantNotUrgentList.remove(at: index)
-                notImportantNotUrgentTableView.reloadData()
-            }
-        }
-        
+//        if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
+//            allDoneTasks.remove(at: index)
+//            completedTasksTableView.reloadData()
+//        }
+//        
+//        if task.urgency && task.importantness {
+//            if let index = importantUrgentList.index(of: task) {
+//                importantUrgentList.remove(at: index)
+//                importantUrgentTableView.reloadData()
+//            }
+//        } else if task.urgency {
+//            if let index = notImportantUrgentList.index(of: task) {
+//                notImportantUrgentList.remove(at: index)
+//                notImportantUrgentTableView.reloadData()
+//            }
+//        } else if task.importantness {
+//            if let index = importantNotUrgentList.index(of: task) {
+//                importantNotUrgentList.remove(at: index)
+//                importantNotUrgentTableView.reloadData()
+//            }
+//        } else {
+//            if let index = notImportantNotUrgentList.index(of: task) {
+//                notImportantNotUrgentList.remove(at: index)
+//                notImportantNotUrgentTableView.reloadData()
+//            }
+//        }
+//        
         taskManager.delete(task: task)
         fetchAndRefreshAllTableViews()
     }
@@ -294,7 +292,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         allDoneTasks = taskManager.fetch(done: true)
     }
 
-    // refresh all tableviews
+    // Refresh all tableviews
     func fetchAndRefreshAllTableViews() {
         fetchFromCoreData()
         importantUrgentTableView.reloadData()

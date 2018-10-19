@@ -75,25 +75,7 @@ class TaskManager {
     }
     
     func delete(task: Task) {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Task")
-        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and,
-                                               subpredicates: [NSPredicate(format: "done == %@", NSNumber(value: task.done)),
-                                                               NSPredicate(format: "urgency == %@", NSNumber(value: task.urgency)),
-                                                               NSPredicate(format: "importantness == %@", NSNumber(value: task.importantness)),
-                                                               NSPredicate(format: "name == %@", task.name ?? " ") ])
-        fetchRequest.predicate = andPredicate
-        fetchRequest.fetchLimit = 1
-        
-        do {
-            let fetchedResults =  try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            if let fetchedResults = fetchedResults, fetchedResults.count == 1 {
-                managedContext.delete(fetchedResults[0])
-            }
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
-        
+        task.managedObjectContext?.delete(task)
         saveContext()
     }
     

@@ -39,6 +39,7 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
             testTask.setValue(done, forKey: "done")
             testTask.setValue(urgency, forKey: "urgency")
             testTask.setValue(importantness, forKey: "importantness")
+            testTask.setValue(NSDate(), forKey: "createdAt")
         }
         
         addTestTask(name: "1", done: false, urgency: true, importantness: true)
@@ -80,6 +81,7 @@ class EisenhowerToDoViewControllerTests: XCTestCase {
         testTask.setValue(false, forKey: "done")
         testTask.setValue(true, forKey: "urgency")
         testTask.setValue(true, forKey: "importantness")
+        testTask.setValue(NSDate(), forKey: "createdAt")
 
         sut.toggleDone(task: testTask as! Task)
 

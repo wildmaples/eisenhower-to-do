@@ -77,14 +77,26 @@
                             <action selector="deleteButton:" destination="0nm-2Z-hsN" eventType="touchUpInside" id="X5j-l4-hQ7"/>
                         </connections>
                     </button>
+                    <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18/12/12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djG-za-5NT">
+                        <rect key="frame" x="249" y="76" width="78" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="UWn-CO-s10"/>
+                            <constraint firstAttribute="width" constant="78" id="jLm-7A-1iS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="11" id="1n3-nB-1PY"/>
                     <constraint firstAttribute="trailingMargin" secondItem="kMg-mc-2dU" secondAttribute="trailing" constant="49" id="2hi-2a-3k5"/>
                     <constraint firstAttribute="bottom" secondItem="J6n-yd-hom" secondAttribute="bottom" constant="11.5" id="5gi-c5-sKx"/>
+                    <constraint firstItem="djG-za-5NT" firstAttribute="leading" secondItem="nnM-dq-eHm" secondAttribute="trailing" constant="8" id="9DJ-Jy-cQ9"/>
                     <constraint firstAttribute="trailing" secondItem="MpJ-gv-NDg" secondAttribute="trailing" constant="20" id="A37-vI-AvJ"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="leading" secondItem="t02-aY-FPA" secondAttribute="trailing" constant="8" id="Cra-on-ybJ"/>
                     <constraint firstItem="t02-aY-FPA" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="top" constant="15" id="QbR-P7-2D6"/>
+                    <constraint firstItem="djG-za-5NT" firstAttribute="firstBaseline" secondItem="nnM-dq-eHm" secondAttribute="firstBaseline" id="Qja-3K-M5W"/>
                     <constraint firstAttribute="bottom" secondItem="MpJ-gv-NDg" secondAttribute="bottom" constant="11.5" id="WIE-j2-Mpr"/>
                     <constraint firstAttribute="bottom" secondItem="nnM-dq-eHm" secondAttribute="bottom" constant="11.5" id="YgD-Yf-F8m"/>
                     <constraint firstItem="kMg-mc-2dU" firstAttribute="top" secondItem="9hp-LI-DE2" secondAttribute="topMargin" id="bV6-Yt-Kb7"/>
@@ -104,6 +116,7 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="dateLabel" destination="djG-za-5NT" id="5vx-wl-xWb"/>
                 <outlet property="doneButton" destination="t02-aY-FPA" id="AVq-3J-1gd"/>
                 <outlet property="importantLabel" destination="J6n-yd-hom" id="fkH-Lp-XEM"/>
                 <outlet property="taskLabel" destination="kMg-mc-2dU" id="VLa-pd-QTT"/>

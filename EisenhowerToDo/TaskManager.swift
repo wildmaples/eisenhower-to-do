@@ -30,11 +30,13 @@ class TaskManager {
         let managedContext = persistentContainer.viewContext
         let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
         let newTask = NSManagedObject(entity: entity, insertInto: managedContext)
+        let createdAt = NSDate()
         
         newTask.setValue(name, forKeyPath: "name")
         newTask.setValue(done, forKeyPath: "done")
         newTask.setValue(urgency, forKeyPath: "urgency")
         newTask.setValue(importantness, forKeyPath: "importantness")
+        newTask.setValue(createdAt, forKeyPath: "createdAt")
 
         saveContext()
     }

@@ -21,6 +21,7 @@ class TaskCellTableViewCell: UITableViewCell {
     @IBOutlet weak var urgentLabel: UILabel!
     @IBOutlet weak var importantLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var dateLabel: UILabel!
     
     weak var delegate: TaskCellDelegate?
     var task : Task!
@@ -44,6 +45,15 @@ class TaskCellTableViewCell: UITableViewCell {
         taskLabel.text = task.name
         isTaskDone = task.done
         doneButton.isSelected = task.done
+        
+        // set up the date label
+        if let createdAt = task.createdAt {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            dateLabel.text = formatter.string(from: createdAt)
+        } else {
+            dateLabel.text = ""
+        }
         
         labelsSetUp()
     }

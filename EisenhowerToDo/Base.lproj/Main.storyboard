@@ -217,11 +217,11 @@
                     <connections>
                         <outlet property="arrowIcon" destination="EVp-Zo-0n6" id="veD-O3-hGL"/>
                         <outlet property="completedTasksTableView" destination="ck2-4k-c1N" id="HpC-yy-Qad"/>
-                        <outlet property="importantNUrgentTableView" destination="pUD-ra-0gk" id="Wow-ap-Sy4"/>
+                        <outlet property="importantNotUrgentTableView" destination="pUD-ra-0gk" id="p28-RY-cVY"/>
                         <outlet property="importantUrgentTableView" destination="UPP-E4-jJm" id="6Ya-wt-e9z"/>
-                        <outlet property="nImportantNUrgentTableView" destination="qIn-RV-TbG" id="QmA-hI-zdy"/>
-                        <outlet property="nImportantUrgentTableView" destination="ie6-pX-iTx" id="qwC-hr-br1"/>
                         <outlet property="newTaskButton" destination="CjQ-Ho-DqY" id="yGT-71-Bqe"/>
+                        <outlet property="notImportantNotUrgentTableView" destination="qIn-RV-TbG" id="QrU-da-tHF"/>
+                        <outlet property="notImportantUrgentTableView" destination="ie6-pX-iTx" id="dfA-a5-GhE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

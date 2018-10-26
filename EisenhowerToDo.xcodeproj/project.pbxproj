@@ -52,7 +52,6 @@
 		9A77DDCF20BF56AB00B4361C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A77DDD420BF56AB00B4361C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A77DDD920BF56AB00B4361C /* EisenhowerToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EisenhowerToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoTests.swift; sourceTree = "<group>"; };
 		9A77DDDF20BF56AC00B4361C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A77DDE420BF56AC00B4361C /* EisenhowerToDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EisenhowerToDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A77DDE820BF56AC00B4361C /* EisenhowerToDoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EisenhowerToDoUITests.swift; sourceTree = "<group>"; };
@@ -114,20 +113,20 @@
 		9A77DDC420BF56AA00B4361C /* EisenhowerToDo */ = {
 			isa = PBXGroup;
 			children = (
-				9A77DDF620BF585A00B4361C /* TaskManager.swift */,
-				F590E5BB217584F900C5A0EB /* SampleTaskData.swift */,
-				F590E5B92172AEB800C5A0EB /* TaskGroup.swift */,
 				9A77DDC520BF56AA00B4361C /* AppDelegate.swift */,
+				9A77DDF620BF585A00B4361C /* TaskManager.swift */,
 				9A77DDC720BF56AA00B4361C /* ViewController.swift */,
-				9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */,
 				9A15936920C9E857005936AF /* ModifyTaskViewController.swift */,
 				9A77DE0220C07A4900B4361C /* AddTaskViewController.swift */,
+				9A4169AB20C8AD4C00728829 /* TaskCellTableViewCell.swift */,
+				F590E5BB217584F900C5A0EB /* SampleTaskData.swift */,
+				F590E5B92172AEB800C5A0EB /* TaskGroup.swift */,
 				9A77DDC920BF56AA00B4361C /* Main.storyboard */,
 				9A4169A920C8AC8900728829 /* TaskCell.xib */,
-				F590E5B12172479E00C5A0EB /* UIColor+Extension.swift */,
 				9A77DDCF20BF56AB00B4361C /* Assets.xcassets */,
 				9A77DDD420BF56AB00B4361C /* Info.plist */,
 				F590E5B62172929D00C5A0EB /* EisenhowerToDo.xcdatamodeld */,
+				F590E5B12172479E00C5A0EB /* UIColor+Extension.swift */,
 			);
 			path = EisenhowerToDo;
 			sourceTree = "<group>";
@@ -135,7 +134,6 @@
 		9A77DDDC20BF56AB00B4361C /* EisenhowerToDoTests */ = {
 			isa = PBXGroup;
 			children = (
-				9A77DDDD20BF56AB00B4361C /* EisenhowerToDoTests.swift */,
 				F590E5BF2176B70700C5A0EB /* EisenhowerToDoViewControllerTests.swift */,
 				9A77DDDF20BF56AC00B4361C /* Info.plist */,
 			);

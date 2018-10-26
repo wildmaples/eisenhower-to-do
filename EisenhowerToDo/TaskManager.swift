@@ -28,13 +28,12 @@ class TaskManager {
     
     func save(name: String, done: Bool, urgency: Bool, importantness: Bool) {
         let managedContext = persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Task", in: managedContext)!
-        let newTask = NSManagedObject(entity: entity, insertInto: managedContext)
+        let newTask = NSEntityDescription.insertNewObject(forEntityName: "Task", into: managedContext) as! Task
         
-        newTask.setValue(name, forKeyPath: "name")
-        newTask.setValue(done, forKeyPath: "done")
-        newTask.setValue(urgency, forKeyPath: "urgency")
-        newTask.setValue(importantness, forKeyPath: "importantness")
+        newTask.name = name
+        newTask.done = done
+        newTask.urgency = urgency
+        newTask.importantness = importantness
 
         saveContext()
     }
@@ -76,35 +75,17 @@ class TaskManager {
     }
     
     func delete(task: Task) {
-        let managedContext = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName:"Task")
-        let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and,
-                                               subpredicates: [NSPredicate(format: "done == %@", NSNumber(value: task.done)),
-                                                               NSPredicate(format: "urgency == %@", NSNumber(value: task.urgency)),
-                                                               NSPredicate(format: "importantness == %@", NSNumber(value: task.importantness)),
-                                                               NSPredicate(format: "name == %@", task.name ?? " ") ])
-        fetchRequest.predicate = andPredicate
-        fetchRequest.fetchLimit = 1
-        
-        do {
-            let fetchedResults =  try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            if let fetchedResults = fetchedResults, fetchedResults.count == 1 {
-                managedContext.delete(fetchedResults[0])
-            }
-        } catch let error as NSError {
-            print("Could not delete. \(error), \(error.userInfo)")
-        }
-        
+        task.managedObjectContext?.delete(task)
         saveContext()
     }
     
     func toggleDone(task: Task) {
         if task.done {
-            task.setValue(false, forKey: "done")
+            task.done = false
         } else {
-            task.setValue(true, forKey: "done")
+            task.done = true
         }
-        
+
         saveContext()
     }
 }

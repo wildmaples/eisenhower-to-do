@@ -226,33 +226,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Remove/delete task
     func removeTask(task: Task) {
-//        if let index = allDoneTasks.index(of: task), allDoneTasks.contains(task) {
-//            allDoneTasks.remove(at: index)
-//            completedTasksTableView.reloadData()
-//        }
-//        
-//        if task.urgency && task.importantness {
-//            if let index = importantUrgentList.index(of: task) {
-//                importantUrgentList.remove(at: index)
-//                importantUrgentTableView.reloadData()
-//            }
-//        } else if task.urgency {
-//            if let index = notImportantUrgentList.index(of: task) {
-//                notImportantUrgentList.remove(at: index)
-//                notImportantUrgentTableView.reloadData()
-//            }
-//        } else if task.importantness {
-//            if let index = importantNotUrgentList.index(of: task) {
-//                importantNotUrgentList.remove(at: index)
-//                importantNotUrgentTableView.reloadData()
-//            }
-//        } else {
-//            if let index = notImportantNotUrgentList.index(of: task) {
-//                notImportantNotUrgentList.remove(at: index)
-//                notImportantNotUrgentTableView.reloadData()
-//            }
-//        }
-//        
         taskManager.delete(task: task)
         fetchAndRefreshAllTableViews()
     }

@@ -34,6 +34,7 @@ class TaskManager {
         newTask.done = done
         newTask.urgency = urgency
         newTask.importantness = importantness
+        newTask.createdAt = Date()
 
         saveContext()
     }
@@ -62,8 +63,12 @@ class TaskManager {
             allSubPredicates.append(namePredicate)
         }
         
+        // Order by date of creation
+        let sort = NSSortDescriptor(key: #keyPath(Task.createdAt), ascending: true)
+
         let andPredicate = NSCompoundPredicate(type: NSCompoundPredicate.LogicalType.and, subpredicates: allSubPredicates)
         fetchRequest.predicate = andPredicate
+        fetchRequest.sortDescriptors = [sort]
         
         do {
             tasks = try managedContext.fetch(fetchRequest) as! [Task]
